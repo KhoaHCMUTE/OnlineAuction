@@ -11,17 +11,18 @@
 <div class="container-fluid h-100">
     <div class="row h-100  align-items-center">
         <div class="col-sm-12">
-            <div class="card w-50 mx-auto">
+            <div class="card bot w-50 mx-auto">
                 <div class="card-body">
-                    <h4 class="card-title text-danger">404 error: Page not found </h4>
-                    <p class="card-text">Sorry, the error has occured. The request page not found</p>
+                    <h1 class="card-title text-danger">Oh noooo!!</h1>
+                    <h4 class="card-text text-danger">404 error: Page not found </h4>
+                    <p class="card-text text-md text-dark">Sorry, the error has occured. The request page not found</p>
                 </div>
-               <div>
-                    <a class="btn btn-success w-50 float-sm-left" href="#" role="button">
+               <div class="d-flex float-sm-left">
+                    <a class="btn btn-success vw-20 float-sm-left" href="${pageContext.request.contextPath}/home/index" role="button">
                         <i class="fa fa-home fa-lg" aria-hidden="true"></i>
                         Back to Home
                     </a>
-                    <a class="btn btn-primary w-50 flex-sm-right" href="#" role="button">
+                    <a class="btn btn-primary vw-20 flex-sm-right" href="#" role="button">
                         <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
                         Contract Support
                     </a>
