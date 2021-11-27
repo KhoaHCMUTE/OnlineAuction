@@ -17,7 +17,7 @@
                     <h4 class="card-text text-danger">404 error: Page not found </h4>
                     <p class="card-text text-md text-dark">Sorry, the error has occured. The request page not found</p>
                 </div>
-               <div class="d-flex float-sm-left">
+               <div class="d-flex align-content-lg-start">
                     <a class="btn btn-success vw-20 float-sm-left" href="${pageContext.request.contextPath}/home/index" role="button">
                         <i class="fa fa-home fa-lg" aria-hidden="true"></i>
                         Back to Home
