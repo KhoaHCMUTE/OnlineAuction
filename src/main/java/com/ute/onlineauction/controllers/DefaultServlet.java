@@ -7,19 +7,13 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "HomeServlet", value = "/home/*")
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "DefaultServlet", value = "/")
+public class DefaultServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getPathInfo();
-        switch (path) {
-            case "/index":
-                ServletUtils.forward("/views/home/index.jsp",request,response);
-                break;
-            default:
-                ServletUtils.forward("/views/404.jsp",request,response);
-                break;
-        }
+        ServletUtils.forward("/views/404.jsp",request,response);
+
+
     }
 
     @Override
