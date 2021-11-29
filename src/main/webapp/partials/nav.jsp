@@ -35,9 +35,14 @@
             </ul>
 
             <form class="form-inline mt-2 mr-4 mb-4 ml-auto">
-                <i class= "fa fa-shopping-cart car2x" aria-hidden="true"></i>
+                <i class= "fa fa-shopping-cart car2x fa-2x" aria-hidden="true"></i>
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    </li>
+                </ul>
             </form>
         </div>
     </div>
