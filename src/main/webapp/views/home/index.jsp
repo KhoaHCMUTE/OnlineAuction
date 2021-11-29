@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-<P> h1 </P>
+
     <jsp:include page="../../partials/nav.jsp"/>
     <div class="container-fluid mt-3">
         <div class="row">
@@ -86,4 +86,3 @@
 </body>
 
 </html>
-<%--khanh test--%>
