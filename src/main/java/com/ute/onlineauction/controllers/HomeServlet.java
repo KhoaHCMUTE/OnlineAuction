@@ -16,6 +16,12 @@ public class HomeServlet extends HttpServlet {
             case "/index":
                 ServletUtils.forward("/views/home/index.jsp",request,response);
                 break;
+            case "/login":
+                ServletUtils.forward("/views/login/login.jsp",request,response);
+                break;
+            case "/register":
+                ServletUtils.forward("/views/login/register.jsp",request,response);
+                break;
             case "/product":
                 ServletUtils.forward("/views/product/index.jsp",request,response);
                 break;

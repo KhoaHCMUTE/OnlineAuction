@@ -18,7 +18,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Link
+                        Option
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                         <li><a class="dropdown-item" href="#">Action</a></li>
@@ -36,11 +36,12 @@
 
             <form class="form-inline mt-2 mr-4 mb-4 ml-auto">
                 <i class= "fa fa-shopping-cart car2x fa-2x" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                        <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/home/login">Login</a>
                     </li>
                 </ul>
             </form>
