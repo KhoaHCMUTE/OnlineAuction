@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>>
-
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:main>
     <jsp:body>
+        <div class="d-flex container-fluid">
         <div class="col-sm-3">
             <div class="card">
                 <div class="list-group" id="list-tab1" role="tablist">
@@ -39,6 +39,11 @@
                 </div>
             </div>
         </div>
+       </div>
+
+
+
+
     </jsp:body>
 
 </t:main>
