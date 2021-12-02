@@ -4,8 +4,8 @@
             <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
                 Category
             </button>
-            <button type="button" class="list-group-item list-group-item-action">Iphone</button>
-            <button type="button" class="list-group-item list-group-item-action">Laptop</button>
+            <a href="${pageContext.request.contextPath}/home/category"><button type="button" class="list-group-item list-group-item-action" >Iphone</button></a>
+            <a href="${pageContext.request.contextPath}/home/product"><button type="button" class="list-group-item list-group-item-action">Laptop</button></a>
             <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button
                 item
             </button>
