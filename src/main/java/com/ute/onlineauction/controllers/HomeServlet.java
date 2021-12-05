@@ -1,14 +1,19 @@
 package com.ute.onlineauction.controllers;
 
+import com.ute.onlineauction.beans.Category;
+import com.ute.onlineauction.models.CategoryModel;
 import com.ute.onlineauction.utils.ServletUtils;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
+
 
 @WebServlet(name = "HomeServlet", value = "/home/*")
 public class HomeServlet extends HttpServlet {
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
@@ -26,6 +31,8 @@ public class HomeServlet extends HttpServlet {
                 ServletUtils.forward("/views/product/index.jsp",request,response);
                 break;
             case "/category":
+               List<Category> list = CategoryModel.finAll();
+               request.setAttribute("categories",list);
                 ServletUtils.forward("/views/category/index.jsp",request,response);
                 break;
             default:

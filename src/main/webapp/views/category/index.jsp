@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="categories" scope="request"  type="java.util.List<com.ute.onlineauction.beans.Category>"/>
 <t:main>
     <jsp:body>
         <div class="card-body">
@@ -11,14 +13,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${categories}" var="c">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Phone</td>
+                    <th scope="row">${c.catID}</th>
+                    <td>${c.catName}</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Laptop</td>
-                </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

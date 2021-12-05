@@ -5,13 +5,13 @@
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th scope="col" class="vw-5">#</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Starting Price</th>
-                        <th scope="col">Current Price</th>
-                    </tr>
+                <tr>
+                    <th scope="col" class="vw-5">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Starting Price</th>
+                    <th scope="col">Current Price</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>

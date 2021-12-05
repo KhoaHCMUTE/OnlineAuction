@@ -112,6 +112,7 @@
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Account</h1>
         <input type="text" id="user-name" class="form-control" placeholder="Full name" required="" autofocus="">
         <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="">
+        <input type="text" id="user-address" class="form-control" placeholder="Residential address" required autofocus="">
         <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
         <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
 

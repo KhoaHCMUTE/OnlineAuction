@@ -1,7 +1,6 @@
 package com.ute.onlineauction.controllers;
 
 import com.ute.onlineauction.utils.ServletUtils;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
