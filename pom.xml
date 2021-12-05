@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ute</groupId>
-    <artifactId>ecWebApp</artifactId>
+    <artifactId>OnlineAuction</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ecWebApp</name>
+    <name>OnlineAuction</name>
     <packaging>war</packaging>
 
     <properties>
