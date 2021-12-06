@@ -9,7 +9,7 @@
         <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
-    <root id="archive" name="ecWebApp-1.0-SNAPSHOT.war">
+    <root id="archive" name="OnlineAuction-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="OnlineAuction:war exploded" />
     </root>
   </artifact>
