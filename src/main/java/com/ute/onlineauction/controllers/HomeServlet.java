@@ -30,11 +30,11 @@ public class HomeServlet extends HttpServlet {
             case "/product":
                 ServletUtils.forward("/views/product/index.jsp",request,response);
                 break;
-            case "/category":
-               List<Category> list = CategoryModel.finAll();
-               request.setAttribute("categories",list);
-                ServletUtils.forward("/views/category/index.jsp",request,response);
-                break;
+//            case "/category":
+//               List<Category> list = CategoryModel.findAll();
+//               request.setAttribute("categories",list);
+//                ServletUtils.forward("/views/category/index.jsp",request,response);
+//                break;
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;

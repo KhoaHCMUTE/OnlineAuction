@@ -1,25 +1,27 @@
 package com.ute.onlineauction.beans;
 
 import java.util.Date;
+import java.util.Calendar;
+
 
 public class Product {
     private int ProID;
     private String ProName, TinyDes, FullDes;
-    private int Price, CatID , PrinceDifference;
-    private Date StartDate , EndDate;
+    private int Price, CatID , PriceDifference;
+    private Calendar  StartDate , EndDate;
     public Product() {
     }
 
-    public Product(int proID, String proName, String tinyDes, String fullDes, int price, int catID,Date startdate , Date enddate, int pricedifference) {
+    public Product(int proID, String proName, String tinyDes, String fullDes, int price, int catID, Calendar startDate , Calendar endDate, int priceDifference) {
         ProID = proID;
         ProName = proName;
         TinyDes = tinyDes;
         FullDes = fullDes;
         Price = price;
         CatID = catID;
-        PrinceDifference = pricedifference;
-        StartDate = startdate;
-        EndDate = enddate;
+        PriceDifference = priceDifference;
+        StartDate = startDate;
+        EndDate = endDate;
     }
 
     public int getProID() {
@@ -46,13 +48,12 @@ public class Product {
     public int getCatID() {
         return CatID;
     }
-    public int getPrinceDifference() {
-        return PrinceDifference;
+
+    public int getPriceDifference() {
+        return PriceDifference;
     }
-    public Date getStartDate() {
-        return StartDate;
-    }
-    public Date getEndDate() {
-        return EndDate;
-    }
+
+//    public Date getStartDate() { return StartDate; }
+//
+//    public Date getEndDate() { return EndDate; }
 }
