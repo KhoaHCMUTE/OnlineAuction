@@ -13,7 +13,6 @@
             background-color:#f3f3f3;
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-            background-image: url("img/a.jpeg");
         }
         #logreg-forms form {
             width: 100%;
@@ -65,6 +64,10 @@
 
         #logreg-forms button[type="submit"]{ margin-top:10px; }
 
+        #logreg-forms .facebook-btn{  background-color:#3C589C; }
+
+        #logreg-forms .google-btn{ background-color: #DF4B3B; }
+
         #logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
 
         #logreg-forms .form-signup .social-btn{ width:210px; }
@@ -76,7 +79,7 @@
             margin: 0 auto;
         }
 
-
+        /* Mobile */
 
         @media screen and (max-width:500px){
             #logreg-forms{
@@ -102,6 +105,13 @@
             #logreg-forms .social-btn span{
                 display: none;
             }
+            #logreg-forms  .facebook-btn:after{
+                content:'Facebook';
+            }
+
+            #logreg-forms  .google-btn:after{
+                content:'Google+';
+            }
 
         }
     </style>
@@ -111,6 +121,11 @@
 <div id="logreg-forms">
     <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+        <div class="social-login">
+            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+        </div>
+        <p style="text-align:center"> OR  </p>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
