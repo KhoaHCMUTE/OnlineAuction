@@ -1,26 +1,48 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="products" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <t:main>
     <jsp:body>
         <div class="card-body">
-            <div class="d-flex inline">
-                <c:forEach items="${products}" var="c">
-                    <div class="card " style="width: 220px;">
-                        <div class="card-body">
-                            <h5 class="card-title">${c.proName}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${c.price}</h6>
-                            <p class="card-text">${c.tinyDes}</p>
-                            <a  class="btn btn-primary" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Detail</a>
-                            <a class="btn btn-success" href="#" role="button"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Bid</a>
-                        </div>
-                    </div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">TinyDes</th>
+                    <th scope="col">FullDes</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">PriceDifference</th>
+                    <th scope="col">CatID</th>
+                    <th scope="col">
+                        <a  id="" class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/home/product/add" role="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Product
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${product}" var="p">
+                    <tr>
+                        <th scope="row">${p.proID}</th>
+                        <td>${p.proName}</td>
+                        <td>${p.tinyDes}</td>
+                        <td>${p.fullDes}</td>
+                        <td><fmt:formatNumber value="${p.price}" type="number"/></td>
+                        <td>${p.priceDifference}</td>
+                        <td>${p.catID}</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/home/product/edit?id=${p.proID}" role="button">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
                 </c:forEach>
-            </div>
-
-
-        </div>
+                </tbody>
+            </table>
         </div>
     </jsp:body>
 </t:main>
