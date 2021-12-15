@@ -132,7 +132,7 @@
         <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
         <a href="#" id="forgot_pswd">Forgot password?</a>
         <hr>
-        <a class="btn btn-success btn-block" style="color: white" type="submit" href="${pageContext.request.contextPath}/home/register" role="button">
+        <a class="btn btn-success btn-block" style="color: white" type="submit" href="${pageContext.request.contextPath}/account/register" role="button">
             <i class="fas fa-user-plus" style="color: white"></i>
             Sign up New Account
         </a>

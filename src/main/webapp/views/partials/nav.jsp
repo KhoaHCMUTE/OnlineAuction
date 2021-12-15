@@ -24,7 +24,7 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/home/login">Login</a>
+                        <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/account/login">Login</a>
                     </li>
                 </ul>
             </form>
