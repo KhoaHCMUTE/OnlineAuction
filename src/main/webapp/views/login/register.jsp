@@ -120,7 +120,7 @@
 </head>
 <body>
 <div id="logreg-forms">
-    <form method="post" class="form-signin">
+    <form method="post" class="form-signin" >
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Account</h1>
         <div class="social-login">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
@@ -144,6 +144,23 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $('#logreg-forms').on('submit', function (e) {
+        e.preventDefault();
+
+        const UserName = $('#txtUsername').val();
+        if (UserName.length === 0) {
+            alert('Invalid username.');
+            return;
+        }
+
+        $.getJSON('${pageContext.request.contextPath}/account/isavailable?User=' + UserName,function (data){
+          if(data === true){
+              $('#logreg-forms').off('submit').submit();
+          } else {
+              alert('Username is not available');
+          }
+        });
+    });
     $('#txtDOB').datetimepicker({
         format: 'd/m/Y',
         timepicker: false,

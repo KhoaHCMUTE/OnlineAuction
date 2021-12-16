@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -29,6 +30,18 @@ public class Account extends HttpServlet {
                 break;
             case "/login":
                 ServletUtils.forward("/views/login/login.jsp", request, response);
+                break;
+            case "/isavailable":
+                String UserName = request.getParameter("User");
+                User User = UserModel.findByUserName(UserName);
+                boolean false1 = (User == null);
+                PrintWriter out = response.getWriter();
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                out.print(false1);
+                out.flush();
                 break;
 //            case "/Profile":
 //                ServletUtils.forward("/views/category/index.jsp", request, response);
