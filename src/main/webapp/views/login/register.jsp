@@ -119,8 +119,8 @@
     <title>Account</title>
 </head>
 <body>
-<div method="post" id="logreg-forms">
-    <form class="form-signin">
+<div id="logreg-forms">
+    <form method="post" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Account</h1>
         <div class="social-login">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
@@ -128,10 +128,10 @@
         </div>
         <p style="text-align:center">OR</p>
         <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
-        <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" required autofocus="">
-        <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" required autofocus="">
         <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="rawpwd" required autofocus="">
         <input type="password" id="txtConfirm" class="form-control" placeholder="Repeat Password" required autofocus="">
+        <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" required autofocus="">
+        <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" required autofocus="">
         <input type="text" id="txtDOB" class="form-control" placeholder="Date Of Birth" name="Dob" required autofocus="">
 
         <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
@@ -140,22 +140,12 @@
     </form>
     <br>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    // $('#logreg-forms').on('submit',function (e){
-    //     e.preventDefault();
-    //     const UserName = $('#txtUsername').val();
-    //     if(UserName.length===0) {
-    //         alert('Invalid Username');
-    //         return;
-    //     }
-    //     $('#logreg-forms').off('submit').submit();
-    // });
-    jQuery('#txtDOB').datetimepicker({
-        format: 'd.m.Y',
+    $('#txtDOB').datetimepicker({
+        format: 'd/m/Y',
         timepicker: false,
         mask: true
     });

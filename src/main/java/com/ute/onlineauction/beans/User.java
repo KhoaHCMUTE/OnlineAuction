@@ -8,10 +8,6 @@ public class User {
     private LocalDate Dob;
     private int Permission;
 
-    public  User(String UserName) {
-
-    }
-
     public User(int ID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission) {
         this.ID = ID;
         this.UserName = UserName;

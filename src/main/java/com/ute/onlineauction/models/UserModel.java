@@ -6,20 +6,6 @@ import org.sql2o.Connection;
 
 public class UserModel {
 
-//
-//    public static Category findById(int id) {
-//        final String query = "select * from category where CatID = :CatID";
-//        try (Connection con = DbUtils.getConnection()) {
-//            List<Category> list = con.createQuery(query)
-//                    .addParameter("CatID", id)
-//                    .executeAndFetch(Category.class);
-//            if (list.size() == 0) {
-//                return null;
-//            }
-//            return list.get(0);
-//        }
-//    }
-
     public static void add(User c) {
         String Sql = "INSERT INTO users (UserName, PassWord, Name, Email, Dob, Permission) VALUES (:UserName,:PassWord,:Name,:Email,:Dob,:Permission)";
         try (Connection con = DbUtils.getConnection()) {

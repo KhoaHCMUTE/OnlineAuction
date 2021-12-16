@@ -43,10 +43,10 @@ public class Account extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path) {
-            case "/Register":
+            case "/register":
                 register(request, response);
                 break;
-            case "/Login":
+            case "/login":
                 login(request, response);
                 break;
             default:
@@ -70,14 +70,11 @@ public class Account extends HttpServlet {
 
         int Permission = 0;
 
-        User = new User(0, UserName, bcryptHashString, Name, Email, Dob, Permission);
+        User c = new User(0, UserName, bcryptHashString, Name, Email, Dob, Permission);
         UserModel.add(c);
         ServletUtils.forward("/views/login/register.jsp", request, response);
     }
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String name = request.getParameter("CatName");
-//        Category c = new Category(name);
-//        CategoryModel.add(c);
-//        ServletUtils.redirect("/home/category/index", request, response);
+
     }
 }
