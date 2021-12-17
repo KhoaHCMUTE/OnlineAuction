@@ -56,6 +56,26 @@ public class AdminProductServlet extends HttpServlet {
                     ServletUtils.redirect("/views/product/index.jsp", request, response);
                 }
                 break;
+            case "/vwAll":
+                List<Product> products = ProductModel.findAll();
+                request.setAttribute("product",products);
+                ServletUtils.forward("/views/product/vwAll.jsp",request,response);
+                break;
+            case "/byProID":
+                int ProId = 0;
+                try {
+                    ProId = Integer.parseInt(request.getParameter("ProId"));
+                } catch (NumberFormatException e) {
+                }
+
+                Product c = ProductModel.findById(ProId);
+                if (c != null) {
+                    request.setAttribute("product", c);
+                    ServletUtils.forward("/views/product/byProID.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
+                }
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;

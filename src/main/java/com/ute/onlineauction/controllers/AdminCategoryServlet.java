@@ -42,6 +42,7 @@ public class AdminCategoryServlet extends HttpServlet {
                     ServletUtils.redirect("/views/category/index.jsp", request, response);
                 }
                 break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
