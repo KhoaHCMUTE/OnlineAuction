@@ -16,6 +16,7 @@
                     <th scope="col">Price</th>
                     <th scope="col">PriceDifference</th>
                     <th scope="col">CatID</th>
+                    <th scope="col">PerID</th>
                     <th scope="col">
                         <a  id="" class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/home/product/add" role="button">
                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -34,6 +35,7 @@
                         <td><fmt:formatNumber value="${p.price}" type="number"/></td>
                         <td>${p.priceDifference}</td>
                         <td>${p.catID}</td>
+                        <td>${p.perID}</td>
                         <td>
                             <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/home/product/edit?id=${p.proID}" role="button">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>

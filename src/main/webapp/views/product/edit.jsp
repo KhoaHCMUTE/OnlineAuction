@@ -10,19 +10,35 @@
                 <h4 class="card-header">Edit #${product.proID} - ${product.proName}</h4>
                 <div class="form-group">
                     <label for="txtProID"># ID</label>
-                    <input type="text" class="form-control" id="txtProID" name="CatID" readonly value="${product.proID}">
+                    <input type="number" class="form-control" id="txtProID" name="CatID" readonly value="${product.proID}">
+                </div>
+                <div class="form-group">
                     <label for="txtProName">Product</label>
                     <input type="text" class="form-control" id="txtProName" name="ProName" autofocus value="${product.proName}">
+                </div>
+                <div class="form-group">
                     <label for="txtTinyDes">TinyDes</label>
                     <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" autofocus value="${product.tinyDes}">
+                </div>
+                <div class="form-group">
                     <label for="txtFullDes">FullDes</label>
                     <input type="text" class="form-control" id="txtFullDes" name="FullDes" autofocus value="${product.fullDes}">
+                </div>
+                <div class="form-group">
                     <label for="txtPrice">Price</label>
-                    <input type="text" class="form-control" id="txtPrice" name="Price" autofocus value="${product.price}">
+                    <input type="number" class="form-control" id="txtPrice" name="Price" autofocus value="${product.price}">
+                </div>
+                <div class="form-group">
                     <label for="txtPriceDifference">PriceDifference</label>
-                    <input type="text" class="form-control" id="txtPriceDifference" name="PriceDifference" autofocus value="${product.priceDifference}">
+                    <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference" autofocus value="${product.priceDifference}">
+                </div>
+                <div class="form-group">
                     <label for="txtCatID">CatID</label>
-                    <input type="text" class="form-control" id="txtCatID" name="CatID" autofocus value="${product.catID}">
+                    <input type="number" class="form-control" id="txtCatID" name="CatID" autofocus value="${product.catID}">
+                </div>
+                <div class="form-group">
+                    <label for="txtPerID">CatID</label>
+                    <input type="text" class="form-control" id="txtPerID" name="PerID" autofocus value="${product.catID}">
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/home/product" role="button">

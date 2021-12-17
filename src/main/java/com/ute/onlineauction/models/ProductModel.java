@@ -27,7 +27,7 @@ public class ProductModel {
         }
     }
     public static void add(Product p) {
-        String Sql = "  INSERT INTO products ( ProName, TinyDes, FullDes, Price, PriceDifference, CatID) VALUES (:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID)";
+        String Sql = " INSERT INTO products (ProName, TinyDes, FullDes, Price, PriceDifference, CatID, PerID) VALUES (:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:PerID)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProName", p.getProName())
@@ -36,28 +36,30 @@ public class ProductModel {
                     .addParameter("Price", p.getPrice())
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
+                    .addParameter("PerID", p.getPerID())
                     .executeUpdate();
         }
     }
 
     public static void update(Product p) {
-        String sql = "UPDATE products SET  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :Pricedifference, CatID = :Catid WHERE ProID = :ProID  ";
+        String sql = "UPDATE products SET  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID, PerID = :PerID WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
-                    .addParameter("ProID",p.getProID())
                     .addParameter("ProName", p.getProName())
                     .addParameter("TinyDes", p.getTinyDes())
                     .addParameter("FullDes", p.getFullDes())
                     .addParameter("Price", p.getPrice())
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
+                    .addParameter("PerID", p.getPerID())
+                    .addParameter("ProID",p.getProID())
                     .executeUpdate();
         }
 
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM products WHERE ProID = :ProID ";
+        String sql = "DELETE FROM products WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProID",id)

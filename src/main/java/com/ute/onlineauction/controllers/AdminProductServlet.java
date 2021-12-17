@@ -107,7 +107,8 @@ public class AdminProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
-        Product p = new Product(name,tiny,full,price,priceDifference,catID);
+        String perID = request.getParameter("PerID");
+        Product p = new Product(name,tiny,full,price,priceDifference,catID,perID);
         ProductModel.add(p);
         ServletUtils.redirect("/home/product/index", request, response);
     }
@@ -119,7 +120,8 @@ public class AdminProductServlet extends HttpServlet {
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID);
+        String perID = request.getParameter("PerID");
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,perID);
         ProductModel.update(p);
         ServletUtils.redirect("/home/product/index", request, response);
     }
