@@ -18,6 +18,10 @@ public class User {
         this.Permission = Permission;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return ID;
     }

@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
     <div class="container-fluid">
         <a  class="navbar-brand" href="${pageContext.request.contextPath}/home/index">
@@ -23,9 +26,35 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/account/login">Login</a>
-                    </li>
+                    <c:choose>
+                        <c:when test="${Auth}">
+                            <form id="flogout" method="post" href="${pageContext.request.contextPath}/account/logout"></form>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown">
+                                        <b>${AuthUser.name}</b>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDrop">
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            Profile
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript: $('#flogout').submit()">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            Sign Out
+                                        </a>
+                                    </div>
+                                </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/account/register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="font-weight: bold" aria-current="page" href="${pageContext.request.contextPath}/account/login">Login</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </form>
         </div>

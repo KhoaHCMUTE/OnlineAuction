@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -62,6 +63,9 @@ public class Account extends HttpServlet {
             case "/login":
                 login(request, response);
                 break;
+            case "/logout":
+                Logout(request, response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -88,6 +92,36 @@ public class Account extends HttpServlet {
         ServletUtils.forward("/views/login/register.jsp", request, response);
     }
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String UserName = request.getParameter("UserName");
+        String PassWord = request.getParameter("PassWord");
 
+        User User = UserModel.findByUserName(UserName);
+        if(User != null) {
+            BCrypt.Result result = BCrypt.verifyer().verify(PassWord.toCharArray(), User.getPassWord());
+            if(result.verified) {
+                HttpSession Session = request.getSession();
+                Session.setAttribute("Auth", true);
+                Session.setAttribute("AuthUser", User);
+                String url = "/home/index";
+                ServletUtils.redirect(url,request,response);
+            } else {
+                request.setAttribute("HasError", true);
+                request.setAttribute("ErrorMessage","Invalid Login");
+                ServletUtils.forward("/views/login/login.jsp",request,response);
+            }
+        } else {
+            request.setAttribute("HasError", true);
+            request.setAttribute("ErrorMessage","Invalid Login");
+            ServletUtils.forward("/views/login/login.jsp",request,response);
+        }
     }
+    private void Logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                HttpSession Session = request.getSession();
+                Session.setAttribute("Auth", false);
+                Session.setAttribute("AuthUser", new User());
+
+                String url = "/home/index";
+                ServletUtils.redirect(url,request,response);
+    }
+
 }
