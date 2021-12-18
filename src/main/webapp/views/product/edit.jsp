@@ -10,7 +10,7 @@
                 <h4 class="card-header">Edit #${product.proID} - ${product.proName}</h4>
                 <div class="form-group">
                     <label for="txtProID"># ID</label>
-                    <input type="number" class="form-control" id="txtProID" name="CatID" readonly value="${product.proID}">
+                    <input type="number" class="form-control" id="txtProID" name="ProID" readonly value="${product.proID}">
                 </div>
                 <div class="form-group">
                     <label for="txtProName">Product</label>

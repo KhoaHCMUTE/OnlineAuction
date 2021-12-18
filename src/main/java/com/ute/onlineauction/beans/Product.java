@@ -3,8 +3,9 @@ package com.ute.onlineauction.beans;
 
 
 public class Product {
+    private int ProID;
     private String ProName, TinyDes, FullDes, PerID;
-    private int ProID,Price, CatID , PriceDifference;
+    private int Price, CatID , PriceDifference;
 
     public Product(int proID, String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID) {
         this.ProID = proID;

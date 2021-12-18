@@ -6,10 +6,8 @@
 <t:main>
     <jsp:body>
         <div class="card-body">
-
             <div class="card">
                 <div class="card-body">
-                    <div class="card-img"></div>
                     <h4>${product.proName}</h4>
                     <p>${product.fullDes}</p>
                     <p>${product.price}</p>

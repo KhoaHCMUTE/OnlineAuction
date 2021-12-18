@@ -42,7 +42,7 @@ public class ProductModel {
     }
 
     public static void update(Product p) {
-        String sql = "UPDATE products SET  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID, PerID = :PerID WHERE ProID = :ProID  ";
+        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID, PerID = :PerID WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProName", p.getProName())
@@ -59,7 +59,7 @@ public class ProductModel {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM products WHERE ProID = :ProID  ";
+        String sql = "delete from products where ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProID",id)
