@@ -9,7 +9,7 @@
           <label for="txtCatName">Category</label>
           <input type="text" class="form-control" id="txtCatName" name="CatName" autofocus>
         </div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/home/category/index" role="button">
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/category/index" role="button">
           << List
         </a>
         <button type="submit" class="btn btn-outline-success">Submit</button>

@@ -140,7 +140,7 @@ public class AdminProductServlet extends HttpServlet {
         int proID = Integer.parseInt(request.getParameter("ProID"));
         Bidding b = new Bidding(proID,price);
         BiddingModel.addBid(b);
-        ServletUtils.forward("/admin/product",request,response);
+        ServletUtils.redirect("/admin/product/vwAll",request,response);
 
     }
 }

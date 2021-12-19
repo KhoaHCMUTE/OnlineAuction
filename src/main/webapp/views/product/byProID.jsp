@@ -16,7 +16,7 @@
                         <input type="number" class="form-control" id="ID" name="ProID" readonly value="${product.proID}">
                         <label for="newprice">PriceDifference</label>
                         <input type="number" class="form-control" id="newprice" name="NewPrice" autofocus>
-                        <input type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/home/product/addBid" role="button">Bid</button>
+                        <input type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
                     </form>
                 </div>
             </div>

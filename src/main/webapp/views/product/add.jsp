@@ -33,7 +33,7 @@
                     <label for="txtPerID">CatID</label>
                     <input type="text" class="form-control" id="txtPerID" name="PerID" autofocus>
                 </div>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/home/product/index" role="button">
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/index" role="button">
                     << List
                 </a>
                 <button type="submit" class="btn btn-outline-success">Submit</button>

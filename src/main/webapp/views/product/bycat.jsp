@@ -26,6 +26,7 @@
                                             <h5 class="card-title">${c.proName}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">${c.price}</h6>
                                             <p class="card-text">${c.tinyDes}</p>
+                                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Detail</a>
                                         </div>
                                     </div>
                                 </div>
