@@ -2,7 +2,9 @@ package com.ute.onlineauction.controllers;
 
 
 
+import com.ute.onlineauction.beans.Bidding;
 import com.ute.onlineauction.beans.Product;
+import com.ute.onlineauction.models.BiddingModel;
 import com.ute.onlineauction.models.ProductModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
@@ -95,6 +97,9 @@ public class AdminProductServlet extends HttpServlet {
             case "/Update":
                 updateProduct(request,response);
                 break;
+            case "/addBid":
+                addBidding(request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -129,5 +134,13 @@ public class AdminProductServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("ProID"));
         ProductModel.delete(id);
         ServletUtils.redirect("/home/product/index", request, response);
+    }
+    private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int price = Integer.parseInt(request.getParameter("NewPrice"));
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        Bidding b = new Bidding(proID,price);
+        BiddingModel.addBid(b);
+        ServletUtils.forward("/home/product",request,response);
+
     }
 }

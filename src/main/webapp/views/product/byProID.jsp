@@ -11,6 +11,13 @@
                     <h4>${product.proName}</h4>
                     <p>${product.fullDes}</p>
                     <p>${product.price}</p>
+                    <form action="" method="post">
+                        <label for="ID">ID</label>
+                        <input type="number" class="form-control" id="ID" name="ProID" readonly value="${product.proID}">
+                        <label for="newprice">PriceDifference</label>
+                        <input type="number" class="form-control" id="newprice" name="NewPrice" autofocus>
+                        <input type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/home/product/addBid" role="button">Bid</button>
+                    </form>
                 </div>
             </div>
 
