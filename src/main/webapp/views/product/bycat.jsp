@@ -1,55 +1,39 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <t:main>
     <jsp:body>
         <div class="card-body">
-            <div class="d-flex container-fluid">
-                <div class="col-sm-3 mb-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Iphone XS Max</h5>
-                            <p class="card-text">6.7 Inch OLED Display, A12 processor, Long day battery, dual 12 megapixel camera</p>
-                            <p>10.000.000</p>
-                            <a href="#" class="btn btn-primary">Bidding</a>
+            <h4 class="card-header">
+                Products
+            </h4>
+            <c:choose>
+                <c:when test="${product.size() == 0}">
+                    <div class="card-body">
+                        <p class="card-text">No Data.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="card-body">
+                        <div class="row ">
+                            <c:forEach items="${product}" var="c">
+                                <div class="col-sm-4 mb-3 ">
+                                    <div class="card h-100">
+                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${c.proName}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">${c.price}</h6>
+                                            <p class="card-text">${c.tinyDes}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-3 mb-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Iphone XS Max</h5>
-                            <p class="card-text">6.7 Inch OLED Display, A12 processor, Long day battery, dual 12 megapixel camera</p>
-                            <p>10.000.000</p>
-                            <a href="#" class="btn btn-primary">Bidding</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 mb-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Iphone XS Max</h5>
-                            <p class="card-text">6.7 Inch OLED Display, A12 processor, Long day battery, dual 12 megapixel camera</p>
-                            <p>10.000.000</p>
-                            <a href="#" class="btn btn-primary">Bidding</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 mb-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Iphone XS Max</h5>
-                            <p class="card-text">6.7 Inch OLED Display, A12 processor, Long day battery, dual 12 megapixel camera</p>
-                            <p>10.000.000</p>
-                            <a href="#" class="btn btn-primary">Bidding</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </jsp:body>
 </t:main>

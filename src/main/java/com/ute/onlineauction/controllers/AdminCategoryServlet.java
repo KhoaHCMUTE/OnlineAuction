@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminCategoryServlet", value = "/home/category/*")
+@WebServlet(name = "AdminCategoryServlet", value = "/admin/category/*")
 public class AdminCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +72,7 @@ public class AdminCategoryServlet extends HttpServlet {
         String name = request.getParameter("CatName");
         Category c = new Category(name);
         CategoryModel.add(c);
-        ServletUtils.redirect("/home/category/index", request, response);
+        ServletUtils.redirect("/admin/category/index", request, response);
     }
 
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,12 +80,12 @@ public class AdminCategoryServlet extends HttpServlet {
         String name = request.getParameter("CatName");
         Category c = new Category(id, name);
         CategoryModel.update(c);
-        ServletUtils.redirect("/home/category/index", request, response);
+        ServletUtils.redirect("/admin/category/index", request, response);
     }
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("CatID"));
         CategoryModel.delete(id);
-        ServletUtils.redirect("/home/category/index", request, response);
+        ServletUtils.redirect("/admin/category/index", request, response);
     }
 }

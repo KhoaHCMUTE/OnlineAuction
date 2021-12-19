@@ -13,6 +13,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/partials/nav.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/product/ByCat.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/product" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/product/add.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/product" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/product/byProID.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/product" />
       </map>
     </option>
   </component>

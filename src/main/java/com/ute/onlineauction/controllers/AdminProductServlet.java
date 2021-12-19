@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminProductServlet", value = "/home/product/*")
+@WebServlet(name = "AdminProductServlet", value = "/admin/product/*")
 public class AdminProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,7 +115,7 @@ public class AdminProductServlet extends HttpServlet {
         String perID = request.getParameter("PerID");
         Product p = new Product(name,tiny,full,price,priceDifference,catID,perID);
         ProductModel.add(p);
-        ServletUtils.redirect("/home/product/index", request, response);
+        ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));
@@ -128,19 +128,19 @@ public class AdminProductServlet extends HttpServlet {
         String perID = request.getParameter("PerID");
         Product p = new Product(id,name,tiny,full,price,priceDifference,catID,perID);
         ProductModel.update(p);
-        ServletUtils.redirect("/home/product/index", request, response);
+        ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));
         ProductModel.delete(id);
-        ServletUtils.redirect("/home/product/index", request, response);
+        ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int price = Integer.parseInt(request.getParameter("NewPrice"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
         Bidding b = new Bidding(proID,price);
         BiddingModel.addBid(b);
-        ServletUtils.forward("/home/product",request,response);
+        ServletUtils.forward("/admin/product",request,response);
 
     }
 }
