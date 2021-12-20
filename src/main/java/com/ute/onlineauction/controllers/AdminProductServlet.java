@@ -3,8 +3,10 @@ package com.ute.onlineauction.controllers;
 
 
 import com.ute.onlineauction.beans.Bidding;
+import com.ute.onlineauction.beans.CommentPro;
 import com.ute.onlineauction.beans.Product;
 import com.ute.onlineauction.models.BiddingModel;
+import com.ute.onlineauction.models.CommentProModel;
 import com.ute.onlineauction.models.ProductModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
@@ -71,8 +73,13 @@ public class AdminProductServlet extends HttpServlet {
                 }
 
                 Product c = ProductModel.findById(ProId);
-                if (c != null) {
+                Bidding n = BiddingModel.getNewestPriceByID(ProId);
+                List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
+
+                if (c != null || n != null || m != null) {
                     request.setAttribute("product", c);
+                    request.setAttribute("newestPrice", n);
+                    request.setAttribute("comment", m);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
                     ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
@@ -99,6 +106,9 @@ public class AdminProductServlet extends HttpServlet {
                 break;
             case "/addBid":
                 addBidding(request,response);
+                break;
+            case "/addCommentPro":
+                addCommentPro(request,response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -141,6 +151,12 @@ public class AdminProductServlet extends HttpServlet {
         Bidding b = new Bidding(proID,price);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/vwAll",request,response);
-
+    }
+    private void addCommentPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        String text = request.getParameter("comment");
+        CommentPro c = new CommentPro(proID, text);
+        CommentProModel.addCommentPro(c);
+        ServletUtils.redirect("/admin/product/vwAll", request, response);
     }
 }

@@ -10,6 +10,7 @@ public class Bidding {
         this.ProID = proID;
         this.Price = price;
     }
+
     public Bidding  (int proID, int price){
         this.ID = -1;
         this.ProID = proID;
