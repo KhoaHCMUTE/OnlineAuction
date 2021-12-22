@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <style>
         body{
-            background-image: url("https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-image: url(https://wallpaperaccess.com/full/3915815.jpg);
         }
         #logreg-forms{
             width:412px;
@@ -119,32 +120,30 @@
 
         }
     </style>
-    <title>Login</title>
+    <title>New Password</title>
 </head>
 <body>
 <div id="logreg-forms">
     <c:if test="${HasError}">
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Login Failed!</strong> ${ErrorMessage}
+            <strong>Change Failed!</strong> ${ErrorMessage}
         </div>
     </c:if>
     <form action="" method="post" class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-        <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
-        <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="PassWord" required="">
-
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button><br>
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Password</h1>
+        <p class="form-control" autofocus="">${AuthUser.userName}</p>
+        <input type="password" id="txtPassword" class="form-control" placeholder="OldPassword" name="PassWord" required="" autofocus>
+        <input type="password" id="txtNewPassword" class="form-control" placeholder="NewPassword" name="NewPassWord" required="">
+        <input type="password" id="txtConfirmNewPassword" class="form-control" placeholder="NewConfirmPassword" name="NewPassWord" required="">
+        <br><br>
+        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>Change Password</button><br>
         <hr>
-        <a class="btn btn-success btn-block" style="color: white" type="submit" href="${pageContext.request.contextPath}/account/register" role="button">
-            <i class="fas fa-user-plus" style="color: white"></i>
-            Sign up New Account
-        </a>
-        <a href="${pageContext.request.contextPath}/home/index" id="cancel_signup"><i class="fas fa-angle-left"></i> Home</a>
+        <a href="${pageContext.request.contextPath}/account/profile" id="cancel_signup"><i class="fas fa-angle-left"></i>Profile</a>
     </form>
     <br>
 </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

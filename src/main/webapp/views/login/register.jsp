@@ -125,11 +125,7 @@
 <div id="logreg-forms">
     <form method="post" class="form-signin" >
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Account</h1>
-        <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
-        </div>
-        <p style="text-align:center">OR</p>
+
         <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
         <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="rawpwd" required autofocus="">
         <input type="password" id="txtConfirm" class="form-control" placeholder="Repeat Password" required autofocus="">
@@ -139,7 +135,7 @@
 
         <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
         <hr>
-        <a href="${pageContext.request.contextPath}/account/login" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+        <a href="${pageContext.request.contextPath}/account/login" id="cancel_signup"><i class="fas fa-angle-left"></i> Login</a>
     </form>
     <br>
 </div>

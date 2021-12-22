@@ -28,13 +28,13 @@
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <c:choose>
                         <c:when test="${Auth}">
-                            <form id="flogout" method="post" href="${pageContext.request.contextPath}/account/logout"></form>
+                            <form id="flogout" method="post" action="${pageContext.request.contextPath}/account/logout"></form>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown">
-                                        <b>${AuthUser.name}</b>
+                                        <b>${AuthUser.userName}</b>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDrop">
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/account/profile">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             Profile
                                         </a>

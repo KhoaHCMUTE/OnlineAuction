@@ -32,6 +32,12 @@ public class Account extends HttpServlet {
             case "/login":
                 ServletUtils.forward("/views/login/login.jsp", request, response);
                 break;
+            case "/profile":
+                ServletUtils.forward("/views/login/profile.jsp", request, response);
+                break;
+            case "/changepw":
+                ServletUtils.forward("/views/login/cpassword.jsp", request, response);
+                break;
             case "/isavailable":
                 String UserName = request.getParameter("User");
                 User User = UserModel.findByUserName(UserName);
@@ -44,9 +50,6 @@ public class Account extends HttpServlet {
                 out.print(false1);
                 out.flush();
                 break;
-//            case "/Profile":
-//                ServletUtils.forward("/views/category/index.jsp", request, response);
-//                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -102,7 +105,9 @@ public class Account extends HttpServlet {
                 HttpSession Session = request.getSession();
                 Session.setAttribute("Auth", true);
                 Session.setAttribute("AuthUser", User);
-                String url = "/home/index";
+                String url = String.valueOf(Session.getAttribute("retUrl"));
+                if(url==null)
+                    url = "/home/index";
                 ServletUtils.redirect(url,request,response);
             } else {
                 request.setAttribute("HasError", true);
@@ -120,7 +125,9 @@ public class Account extends HttpServlet {
                 Session.setAttribute("Auth", false);
                 Session.setAttribute("AuthUser", new User());
 
-                String url = "/home/index";
+                String url = request.getHeader("referer");
+                if(url == null)
+                    url = "/home/index";
                 ServletUtils.redirect(url,request,response);
     }
 
