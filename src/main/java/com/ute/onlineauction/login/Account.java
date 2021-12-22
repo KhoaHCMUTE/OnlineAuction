@@ -30,7 +30,10 @@ public class Account extends HttpServlet {
                 ServletUtils.forward("/views/login/register.jsp", request, response);
                 break;
             case "/login":
-                ServletUtils.forward("/views/login/login.jsp", request, response);
+                HttpSession Session = request.getSession();
+                if((boolean) Session.getAttribute("Auth")) {
+                    ServletUtils.redirect("/home/index",request,response);
+                } else ServletUtils.forward("/views/login/login.jsp", request, response);
                 break;
             case "/profile":
                 ServletUtils.forward("/views/login/profile.jsp", request, response);
@@ -105,20 +108,21 @@ public class Account extends HttpServlet {
                 HttpSession Session = request.getSession();
                 Session.setAttribute("Auth", true);
                 Session.setAttribute("AuthUser", User);
-                String url = String.valueOf(Session.getAttribute("retUrl"));
-                if(url==null)
+
+                String url = (String) Session.getAttribute("retUrl");
+                if(url == null)
                     url = "/home/index";
-                ServletUtils.redirect(url,request,response);
-            } else {
-                request.setAttribute("HasError", true);
-                request.setAttribute("ErrorMessage","Invalid Login");
-                ServletUtils.forward("/views/login/login.jsp",request,response);
-            }
-        } else {
-            request.setAttribute("HasError", true);
-            request.setAttribute("ErrorMessage","Invalid Login");
-            ServletUtils.forward("/views/login/login.jsp",request,response);
-        }
+                    ServletUtils.redirect(url,request,response);
+                } else {
+                    request.setAttribute("HasError", true);
+                    request.setAttribute("ErrorMessage","Invalid Login");
+                    ServletUtils.forward("/views/login/login.jsp",request,response);
+                }
+                    } else {
+                        request.setAttribute("HasError", true);
+                        request.setAttribute("ErrorMessage","Invalid Login");
+                        ServletUtils.forward("/views/login/login.jsp",request,response);
+                    }
     }
     private void Logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 HttpSession Session = request.getSession();
