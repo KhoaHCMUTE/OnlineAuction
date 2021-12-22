@@ -3,11 +3,11 @@ package com.ute.onlineauction.beans;
 
 
 public class Product {
-    private int ProID;
+    private int ProID,UserID;
     private String ProName, TinyDes, FullDes, PerID;
     private int Price, CatID , PriceDifference;
 
-    public Product(int proID, String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID) {
+    public Product(int proID, String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID,int userID) {
         this.ProID = proID;
        this.ProName = proName;
        this.TinyDes = tinyDes;
@@ -16,8 +16,9 @@ public class Product {
        this.PriceDifference = priceDifference;
        this.CatID = catID;
         this.PerID = perID;
+        this.UserID = userID;
     }
-    public Product( String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID) {
+    public Product( String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID, int userID) {
         this.ProID=-1;
         this.ProName = proName;
         this.TinyDes = tinyDes;
@@ -26,6 +27,7 @@ public class Product {
         this.PriceDifference = priceDifference;
         this.CatID = catID;
         this.PerID = perID;
+        this.UserID = userID;
 
     }
 
@@ -60,6 +62,8 @@ public class Product {
     public String getPerID() {
         return PerID;
     }
+
+    public int getUserID(){return  UserID;}
 
 //    public Date getStartDate() { return StartDate; }
 //

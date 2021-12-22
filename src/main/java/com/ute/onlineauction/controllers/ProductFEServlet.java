@@ -25,6 +25,27 @@ public class ProductFEServlet extends HttpServlet {
                 request.setAttribute("product",list);
                 ServletUtils.forward("/views/product/bycat.jsp",request,response);
                 break;
+            case "/byUserID":
+                int userid = Integer.parseInt(request.getParameter("userid"));
+                List<Product> listuser = ProductModel.findByUserId(userid);
+                request.setAttribute("product",listuser);
+                ServletUtils.forward("/views/product/byUserID.jsp",request,response);
+                break;
+            case "/edit":
+                int id = 0;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                }
+
+                Product p = ProductModel.findById(id);
+                if (p != null) {
+                    request.setAttribute("product", p);
+                    ServletUtils.forward("/views/product/edit.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/views/product/index.jsp", request, response);
+                }
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;

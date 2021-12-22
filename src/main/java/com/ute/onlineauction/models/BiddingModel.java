@@ -9,10 +9,11 @@ import java.util.List;
 
 public class BiddingModel {
     public static void addBid(Bidding b) {
-        String Sql = " INSERT INTO auctionhistory (ProID, Price) VALUES (:ProID,:Price)";
+        String Sql = " INSERT INTO auctionhistory (ProID, UserID, Price) VALUES (:ProID,:UserID,:Price)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProID", b.getProID())
+                    .addParameter("UserID",b.getUserID())
                     .addParameter("Price", b.getPrice())
                     .executeUpdate();
         }

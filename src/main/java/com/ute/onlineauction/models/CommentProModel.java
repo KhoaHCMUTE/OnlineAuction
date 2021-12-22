@@ -11,10 +11,11 @@ import java.util.List;
 
 public class CommentProModel {
     public static void addCommentPro(CommentPro c) {
-        String Sql = "INSERT INTO commentpro(ProID,text) VALUES (:ProID,:text)";
+        String Sql = "INSERT INTO commentpro(ProID,UserID,text) VALUES (:ProID,:UserID,:text)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProID", c.getProID())
+                    .addParameter("UserID", c.getUserID())
                     .addParameter("text", c.getText())
                     .executeUpdate();
         }

@@ -22,6 +22,14 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+    public static List<Product> findByUserId (int id) {
+        final String query = "select * from products where UserID = :UserID";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("UserID",id)
+                    .executeAndFetch(Product.class);
+        }
+    }
     public static Product findById (int id) {
         final String query = "select * from products where ProID = :ProID";
         try (Connection con = DbUtils.getConnection()) {

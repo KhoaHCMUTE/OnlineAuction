@@ -78,7 +78,7 @@ public class AdminProductServlet extends HttpServlet {
 
                 if (c != null || n != null || m != null) {
                     request.setAttribute("product", c);
-                    request.setAttribute("newestPrice", n);
+                    request.setAttribute("newPrice", n);
                     request.setAttribute("comment", m);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
@@ -122,8 +122,9 @@ public class AdminProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
+        int userID = Integer.parseInt(request.getParameter("UserID"));
         String perID = request.getParameter("PerID");
-        Product p = new Product(name,tiny,full,price,priceDifference,catID,perID);
+        Product p = new Product(name,tiny,full,price,priceDifference,catID,perID,userID);
         ProductModel.add(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -132,11 +133,12 @@ public class AdminProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
+        int userID = Integer.parseInt(request.getParameter("UserID"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
         String perID = request.getParameter("PerID");
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,perID);
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,perID,userID);
         ProductModel.update(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -148,14 +150,16 @@ public class AdminProductServlet extends HttpServlet {
     private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int price = Integer.parseInt(request.getParameter("NewPrice"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
-        Bidding b = new Bidding(proID,price);
+        int userID = Integer.parseInt(request.getParameter("UserID"));
+        Bidding b = new Bidding(proID,userID,price);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/vwAll",request,response);
     }
     private void addCommentPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int proID = Integer.parseInt(request.getParameter("ProID"));
+        int userID = Integer.parseInt(request.getParameter("ComUserID"));
         String text = request.getParameter("comment");
-        CommentPro c = new CommentPro(proID, text);
+        CommentPro c = new CommentPro(proID, userID, text);
         CommentProModel.addCommentPro(c);
         ServletUtils.redirect("/admin/product/vwAll", request, response);
     }
