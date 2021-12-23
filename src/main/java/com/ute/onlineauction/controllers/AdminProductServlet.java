@@ -5,9 +5,11 @@ package com.ute.onlineauction.controllers;
 import com.ute.onlineauction.beans.Bidding;
 import com.ute.onlineauction.beans.CommentPro;
 import com.ute.onlineauction.beans.Product;
+import com.ute.onlineauction.beans.User;
 import com.ute.onlineauction.models.BiddingModel;
 import com.ute.onlineauction.models.CommentProModel;
 import com.ute.onlineauction.models.ProductModel;
+import com.ute.onlineauction.models.UserModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
 import javax.servlet.*;
@@ -43,6 +45,10 @@ public class AdminProductServlet extends HttpServlet {
                 ServletUtils.forward("/views/product/index.jsp",request,response);
                 break;
             case "/add":
+                List<User> users = UserModel.findAll();
+                request.setAttribute("user",users);
+                List<Product> products = ProductModel.findAll();
+                request.setAttribute("product",products);
                 ServletUtils.forward("/views/product/add.jsp", request, response);
                 break;
             case "/edit":
@@ -61,8 +67,12 @@ public class AdminProductServlet extends HttpServlet {
                 }
                 break;
             case "/vwAll":
-                List<Product> products = ProductModel.findAll();
-                request.setAttribute("product",products);
+                List<Product> productss = ProductModel.findAll();
+                request.setAttribute("product",productss);
+                List<Bidding> listbidding = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbidding);
+                List<User> userss = UserModel.findAll();
+                request.setAttribute("user",userss);
                 ServletUtils.forward("/views/product/vwAll.jsp",request,response);
                 break;
             case "/byProID":
@@ -72,12 +82,13 @@ public class AdminProductServlet extends HttpServlet {
                 } catch (NumberFormatException e) {
                 }
                 Product c = ProductModel.findById(ProId);
-                Bidding n = BiddingModel.getNewestPriceByID(ProId);
                 List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
-
-                if (c != null || n != null || m != null) {
+                List<Bidding> listbiddings = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbiddings);
+                List<User> usersss = UserModel.findAll();
+                request.setAttribute("user",usersss);
+                if (c != null || m != null ) {
                     request.setAttribute("product", c);
-                    request.setAttribute("newPrice", n);
                     request.setAttribute("comment", m);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
@@ -123,10 +134,11 @@ public class AdminProductServlet extends HttpServlet {
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         String perID = request.getParameter("PerID");
-        Product p = new Product(name,tiny,full,price,priceDifference,catID,perID,userID);
-        ProductModel.add(p);
         int proID = Integer.parseInt(request.getParameter("ProID"));
-        Bidding b = new Bidding(proID,userID,price);
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,perID,userID);
+        ProductModel.add(p);
+        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        Bidding b = new Bidding(proID,sellerID,price,sellerID);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -150,10 +162,11 @@ public class AdminProductServlet extends HttpServlet {
         ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int price = Integer.parseInt(request.getParameter("NewPrice"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
-        int price = Integer.parseInt(request.getParameter("NewPrice"));
-        Bidding b = new Bidding(proID,userID,price);
+        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        Bidding b = new Bidding(proID,userID,price,sellerID);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/vwAll",request,response);
     }

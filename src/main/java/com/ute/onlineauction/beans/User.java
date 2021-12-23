@@ -3,13 +3,13 @@ package com.ute.onlineauction.beans;
 import java.time.LocalDate;
 
 public class User {
-    private int UserID;
+    private int ID;
     private String UserName, PassWord, Name, Email;
     private LocalDate Dob;
     private int Permission;
 
-    public User(int UserID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission) {
-        this.UserID = UserID;
+    public User(int ID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission) {
+        this.ID = ID;
         this.UserName = UserName;
         this.PassWord = PassWord;
         this.Name = Name;
@@ -23,7 +23,7 @@ public class User {
     }
 
     public int getId() {
-        return UserID;
+        return ID;
     }
 
     public String getUserName() {

@@ -19,8 +19,8 @@ public class CommentPro {
         this.ProID = proID;
         this.UserID = userID;
         this.Text = text;
-
     }
+
     public int getID() {return ID;}
     public int getProID() {return ProID;}
     public int getUserID() {return UserID;}

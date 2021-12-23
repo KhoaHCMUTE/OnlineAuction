@@ -1,5 +1,6 @@
 package com.ute.onlineauction.models;
 
+import com.ute.onlineauction.beans.Bidding;
 import com.ute.onlineauction.beans.Category;
 import com.ute.onlineauction.beans.User;
 import com.ute.onlineauction.utils.DbUtils;
@@ -31,6 +32,13 @@ public class UserModel {
                     .addParameter("Dob", c.getDob())
                     .addParameter("Permission", c.getPermission())
                     .executeUpdate();
+        }
+    }
+    public static List<User> findAll () {
+        final String query = "select * from users";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(User.class);
         }
     }
 }

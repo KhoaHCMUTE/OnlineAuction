@@ -18,18 +18,7 @@ public class Product {
         this.PerID = perID;
         this.UserID = userID;
     }
-    public Product( String proName, String tinyDes, String fullDes,int price,  int priceDifference, int catID, String perID, int userID) {
-        this.ProID=-1;
-        this.ProName = proName;
-        this.TinyDes = tinyDes;
-        this.FullDes = fullDes;
-        this.Price = price;
-        this.PriceDifference = priceDifference;
-        this.CatID = catID;
-        this.PerID = perID;
-        this.UserID = userID;
 
-    }
 
     public int getProID() {
         return ProID;

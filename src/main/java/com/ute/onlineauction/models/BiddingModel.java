@@ -9,25 +9,22 @@ import java.util.List;
 
 public class BiddingModel {
     public static void addBid(Bidding b) {
-        String Sql = " INSERT INTO auctionhistory (ProID, UserID, Price) VALUES (:ProID,:UserID,:Price)";
+        String Sql = " INSERT INTO auctionhistory (ProID, UserID, Price , SellerID) VALUES (:ProID,:UserID,:Price,:SellerID)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProID", b.getProID())
                     .addParameter("UserID",b.getUserID())
                     .addParameter("Price", b.getPrice())
+                    .addParameter("SellerID", b.getSellerID())
                     .executeUpdate();
         }
     }
-    public static Bidding getNewestPriceByID(int id) {
-    final String Sql = "SELECT * FROM auctionhistory WHERE Price=(SELECT Max(Price) FROM auctionhistory WHERE ProID = :ProID)";
+
+    public static List<Bidding> findAll () {
+        final String query = "select * from auctionhistory ";
         try (Connection con = DbUtils.getConnection()) {
-            List<Bidding> list = con.createQuery(Sql)
-                    .addParameter("ProID", id)
+            return con.createQuery(query)
                     .executeAndFetch(Bidding.class);
-            if (list.size() == 0) {
-                return null;
-            }
-            return list.get(0);
         }
     }
 }
