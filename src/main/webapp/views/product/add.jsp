@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
-<jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
+<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <t:main>
     <jsp:body>
         <div class="card-body">
@@ -49,16 +49,7 @@
                     <input type="number" class="form-control" id="txtCatID" name="CatID" autofocus>
                 </div>
                 <div class="form-group">
-                    <label for="txtPerID">PerID</label>
-                    <input type="number" class="form-control" id="txtPerID" name="PerID" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="txtUserID">UserID</label>
-                    <input type="number" class="form-control" id="txtUserID" name="UserID" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="txtSellerID">SellerID</label>
-                    <input type="number" class="form-control" id="txtSellerID" name="SellerID" autofocus>
+                    <input type="hidden" class="form-control" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
                 </div>
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/index" role="button">
                     << List

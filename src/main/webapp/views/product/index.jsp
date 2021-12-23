@@ -3,48 +3,49 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
+<jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
+<jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <t:main>
     <jsp:body>
+        <a  id="" class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/admin/product/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Product
+        </a>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">TinyDes</th>
-                    <th scope="col">FullDes</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">PriceDifference</th>
-                    <th scope="col">CatID</th>
-                    <th scope="col">PerID</th>
-                    <th scope="col">
-                        <a  id="" class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/admin/product/add" role="button">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Add Product
-                        </a>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${product}" var="p">
-                    <tr>
-                        <th scope="row">${p.proID}</th>
-                        <td>${p.proName}</td>
-                        <td>${p.tinyDes}</td>
-                        <td>${p.fullDes}</td>
-                        <td><fmt:formatNumber value="${p.price}" type="number"/></td>
-                        <td>${p.priceDifference}</td>
-                        <td>${p.catID}</td>
-                        <td>${p.perID}</td>
-                        <td>
-                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/product/edit?id=${p.proID}" role="button">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+            <div class="row ">
+                <c:forEach items="${product}" var="c">
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="card">
+                            <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">${c.proName}</h5>
+                                <c:set var = "Max" scope = "session" value = "${0}"/>
+                                <c:forEach items="${listbidding}" var="b">
+                                    <c:if test="${b.proID == c.proID}">
+                                        <c:if test="${Max < b.price}">
+                                            <c:set var = "Max" scope = "session" value = "${b.price}"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                                <h6 class="card-subtitle mb-2 text-muted">${Max}</h6>
+                                <c:forEach items="${listbidding}" var="b">
+                                    <c:forEach items="${user}" var="u">
+                                        <c:if test="${b.price == Max}">
+                                            <c:if test="${b.proID == c.proID}" >
+                                                <c:if test="${u.id == b.userID}">
+                                                    <p>Name Bidder: ${u.userName}</p>
+                                                </c:if>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                <p class="card-text">${c.tinyDes}</p>
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/edit?id=${c.proID}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit</a>
+                            </div>
+                        </div>
+                    </div>
                 </c:forEach>
-                </tbody>
-            </table>
+            </div>
         </div>
     </jsp:body>
 </t:main>

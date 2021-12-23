@@ -27,26 +27,18 @@ public class AdminProductServlet extends HttpServlet {
             path = "/index";
         }
         switch (path) {
-            //            case "/index":
-//                ServletUtils.forward("/views/home/index.jsp",request,response);
-//                break;
-//            case "/login":
-//                ServletUtils.forward("/views/login/login.jsp",request,response);
-//                break;
-//            case "/register":
-//                ServletUtils.forward("/views/login/register.jsp",request,response);
-//                break;
-//            case "/product":
-//                ServletUtils.forward("/views/product/index.jsp",request,response);
-//                break;
             case "/index":
                 List<Product> list = ProductModel.findAll();
                 request.setAttribute("product",list);
+                List<Bidding> listbidding = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbidding);
+                List<User> users = UserModel.findAll();
+                request.setAttribute("user",users);
                 ServletUtils.forward("/views/product/index.jsp",request,response);
                 break;
             case "/add":
-                List<User> users = UserModel.findAll();
-                request.setAttribute("user",users);
+                List<User> users2 = UserModel.findAll();
+                request.setAttribute("user",users2);
                 List<Product> products = ProductModel.findAll();
                 request.setAttribute("product",products);
                 ServletUtils.forward("/views/product/add.jsp", request, response);
@@ -67,12 +59,12 @@ public class AdminProductServlet extends HttpServlet {
                 }
                 break;
             case "/vwAll":
-                List<Product> productss = ProductModel.findAll();
-                request.setAttribute("product",productss);
-                List<Bidding> listbidding = BiddingModel.findAll();
-                request.setAttribute("listbidding",listbidding);
-                List<User> userss = UserModel.findAll();
-                request.setAttribute("user",userss);
+                List<Product> products2 = ProductModel.findAll();
+                request.setAttribute("product",products2);
+                List<Bidding> listbidding2 = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbidding2);
+                List<User> users3 = UserModel.findAll();
+                request.setAttribute("user",users3);
                 ServletUtils.forward("/views/product/vwAll.jsp",request,response);
                 break;
             case "/byProID":
@@ -132,12 +124,10 @@ public class AdminProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
-        int userID = Integer.parseInt(request.getParameter("UserID"));
-        String perID = request.getParameter("PerID");
-        int proID = Integer.parseInt(request.getParameter("ProID"));
-        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,perID,userID);
-        ProductModel.add(p);
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID);
+        ProductModel.add(p);
         Bidding b = new Bidding(proID,sellerID,price,sellerID);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/index", request, response);
@@ -147,12 +137,11 @@ public class AdminProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
-        int userID = Integer.parseInt(request.getParameter("UserID"));
+        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        String perID = request.getParameter("PerID");
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,perID,userID);
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID);
         ProductModel.update(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -162,13 +151,20 @@ public class AdminProductServlet extends HttpServlet {
         ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int price = Integer.parseInt(request.getParameter("NewPrice"));
+        int newPrice = Integer.parseInt(request.getParameter("NewPrice"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        Bidding b = new Bidding(proID,userID,price,sellerID);
-        BiddingModel.addBid(b);
-        ServletUtils.redirect("/admin/product/vwAll",request,response);
+        int price = Integer.parseInt(request.getParameter("Price"));
+        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        if ((price + priceDifference) > newPrice ){
+            ServletUtils.redirect("/views/ErrorPrice.jsp",request,response);
+        }
+        else {
+            Bidding b = new Bidding(proID, userID, newPrice, sellerID);
+            BiddingModel.addBid(b);
+            ServletUtils.redirect("/admin/product/vwAll", request, response);
+        }
     }
     private void addCommentPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int proID = Integer.parseInt(request.getParameter("ProID"));

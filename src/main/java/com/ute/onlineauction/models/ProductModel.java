@@ -43,7 +43,7 @@ public class ProductModel {
         }
     }
     public static void add(Product p) {
-        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID, PerID,UserID) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:PerID,:UserID)";
+        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProName", p.getProName())
@@ -52,7 +52,6 @@ public class ProductModel {
                     .addParameter("Price", p.getPrice())
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
-                    .addParameter("PerID", p.getPerID())
                     .addParameter("UserID", p.getUserID())
                     .addParameter("ProID", p.getProID())
                     .executeUpdate();
@@ -60,7 +59,7 @@ public class ProductModel {
     }
 
     public static void update(Product p) {
-        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID, PerID = :PerID WHERE ProID = :ProID  ";
+        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProName", p.getProName())
@@ -69,7 +68,6 @@ public class ProductModel {
                     .addParameter("Price", p.getPrice())
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
-                    .addParameter("PerID", p.getPerID())
                     .addParameter("ProID",p.getProID())
                     .executeUpdate();
         }

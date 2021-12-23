@@ -44,6 +44,5 @@
         </c:forEach>
       </div>
     </div>
-
   </jsp:body>
 </t:main>

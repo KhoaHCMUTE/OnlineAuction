@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="product" scope="request" type="com.ute.onlineauction.beans.Product"/>
-
+<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <t:main>
     <jsp:body>
         <div class="card-body">
@@ -25,11 +25,11 @@
                     <input type="text" class="form-control" id="txtFullDes" name="FullDes" autofocus value="${product.fullDes}">
                 </div>
                 <div class="form-group">
-                    <label for="txtPrice">Price</label>
+                    <label for="txtPrice">Start Price</label>
                     <input type="number" class="form-control" id="txtPrice" name="Price" autofocus value="${product.price}">
                 </div>
                 <div class="form-group">
-                    <label for="txtPriceDifference">PriceDifference</label>
+                    <label for="txtPriceDifference">Difference Price</label>
                     <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference" autofocus value="${product.priceDifference}">
                 </div>
                 <div class="form-group">
@@ -37,8 +37,7 @@
                     <input type="number" class="form-control" id="txtCatID" name="CatID" autofocus value="${product.catID}">
                 </div>
                 <div class="form-group">
-                    <label for="txtPerID">CatID</label>
-                    <input type="text" class="form-control" id="txtPerID" name="PerID" autofocus value="${product.catID}">
+                    <input type="hidden" class="form-control" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/product" role="button">

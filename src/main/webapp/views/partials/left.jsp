@@ -10,17 +10,14 @@
       Category
     </button>
     <a href="${pageContext.request.contextPath}/admin/category/index">
-      <button type="button" class="list-group-item list-group-item-action">Iphone</button>
+      <button type="button" class="list-group-item list-group-item-action">Admin Category</button>
     </a>
     <a href="${pageContext.request.contextPath}/admin/product/index">
-      <button type="button" class="list-group-item list-group-item-action">Laptop</button>
+      <button type="button" class="list-group-item list-group-item-action">Admin Product</button>
     </a>
     <a href="${pageContext.request.contextPath}/admin/product/vwAll">
-      <button type="button" class="list-group-item list-group-item-action">Laptop</button>
+      <button type="button" class="list-group-item list-group-item-action">View All Product</button>
     </a>
-    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button
-      item
-    </button>
   </div>
   <div class="list-group list-group-flush">
     <c:forEach items="${categoriesWithDetails}" var="c">
