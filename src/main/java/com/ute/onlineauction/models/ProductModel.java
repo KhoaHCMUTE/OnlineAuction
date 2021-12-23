@@ -43,7 +43,7 @@ public class ProductModel {
         }
     }
     public static void add(Product p) {
-        String Sql = " INSERT INTO products (ProName, TinyDes, FullDes, Price, PriceDifference, CatID, PerID) VALUES (:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:PerID)";
+        String Sql = " INSERT INTO products (ProName, TinyDes, FullDes, Price, PriceDifference, CatID, PerID,UserID) VALUES (:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:PerID,:UserID)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProName", p.getProName())
@@ -53,6 +53,7 @@ public class ProductModel {
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
                     .addParameter("PerID", p.getPerID())
+                    .addParameter("UserID", p.getUserID())
                     .executeUpdate();
         }
     }

@@ -71,7 +71,6 @@ public class AdminProductServlet extends HttpServlet {
                     ProId = Integer.parseInt(request.getParameter("ProId"));
                 } catch (NumberFormatException e) {
                 }
-
                 Product c = ProductModel.findById(ProId);
                 Bidding n = BiddingModel.getNewestPriceByID(ProId);
                 List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
@@ -126,6 +125,9 @@ public class AdminProductServlet extends HttpServlet {
         String perID = request.getParameter("PerID");
         Product p = new Product(name,tiny,full,price,priceDifference,catID,perID,userID);
         ProductModel.add(p);
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        Bidding b = new Bidding(proID,userID,price);
+        BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -148,9 +150,9 @@ public class AdminProductServlet extends HttpServlet {
         ServletUtils.redirect("/admin/product/index", request, response);
     }
     private void addBidding(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int price = Integer.parseInt(request.getParameter("NewPrice"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
+        int price = Integer.parseInt(request.getParameter("NewPrice"));
         Bidding b = new Bidding(proID,userID,price);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/vwAll",request,response);

@@ -24,7 +24,7 @@
                         <input type="number" class="form-inline" id="newprice" name="NewPrice" autofocus>
                         <button type="submit" class="btn btn-outline-success btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
                         <br>
-                        <input type="number" class="form-control" id="ComUserID" name="ComUserID" readonly value="${AuthUser.id}">
+                        <input type="number" class="form-control" id="NameUser" name="NameUser" readonly value="${AuthUser.id}">
                         <label for="CommentID">Comment</label>
                         <input type="text" class="form-control" id="CommentID" name="comment">
                         <button type="submit" class="btn btn-outline-primary btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addCommentPro" role="button">Comment</button>
