@@ -16,6 +16,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet(name = "AdminProductServlet", value = "/admin/product/*")
@@ -126,7 +129,14 @@ public class AdminProductServlet extends HttpServlet {
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
-        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID);
+
+        String strSD = request.getParameter("StartDay");
+        String strED = request.getParameter("EndDay");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime startDay = LocalDateTime.parse(strSD, df);
+        LocalDateTime endDay = LocalDateTime.parse(strED, df);
+
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay);
         ProductModel.add(p);
         Bidding b = new Bidding(proID,sellerID,price,sellerID);
         BiddingModel.addBid(b);
@@ -141,7 +151,14 @@ public class AdminProductServlet extends HttpServlet {
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID);
+
+        String strSD = request.getParameter("StartDay");
+        String strED = request.getParameter("EndDay");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime startDay = LocalDateTime.parse(strSD, df);
+        LocalDateTime endDay = LocalDateTime.parse(strED, df);
+
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay);
         ProductModel.update(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -170,6 +187,11 @@ public class AdminProductServlet extends HttpServlet {
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("ComUserID"));
         String text = request.getParameter("comment");
+
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
         CommentPro c = new CommentPro(proID, userID, text);
         CommentProModel.addCommentPro(c);
         ServletUtils.redirect("/admin/product/vwAll", request, response);

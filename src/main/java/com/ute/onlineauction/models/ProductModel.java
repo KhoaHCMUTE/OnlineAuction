@@ -71,7 +71,7 @@ public class ProductModel {
     }
 
     public static void add(Product p) {
-        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID)";
+        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProName", p.getProName())
@@ -82,6 +82,8 @@ public class ProductModel {
                     .addParameter("CatID", p.getCatID())
                     .addParameter("UserID", p.getUserID())
                     .addParameter("ProID", p.getProID())
+                    .addParameter("StartDay", p.getStartDay())
+                    .addParameter("EndDay", p.getEndDay())
                     .executeUpdate();
         }
     }
