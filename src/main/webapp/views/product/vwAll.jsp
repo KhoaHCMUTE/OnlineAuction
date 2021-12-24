@@ -25,17 +25,37 @@
                         </c:if>
                     </c:forEach>
                     <h6 class="card-subtitle mb-2 text-muted">${Max}</h6>
+                    <c:choose>
+                        <c:when test="${c.currentPrice != 0}">
+                            <p class="card-text">Current Price: ${c.currentPrice}</p>
+                        </c:when>
+                    </c:choose>
+                    <c:set var = "Number" scope = "session" value = "${-1}"/>
                     <c:forEach items="${listbidding}" var="b">
-                        <c:forEach items="${user}" var="u">
-                            <c:if test="${b.price == Max}">
-                            <c:if test="${b.proID == c.proID}" >
-                                   <c:if test="${u.id == b.userID}">
-                                            <p>Name Bidder: ${u.userName}</p>
-                                   </c:if>
-                            </c:if>
-                            </c:if>
-                        </c:forEach>
+                        <c:if test="${b.proID == c.proID}">
+                            <c:set var = "Number" scope = "session" value ="${Number+1}"/>
+                        </c:if>
                     </c:forEach>
+                    <c:choose>
+                        <c:when test="${Number != 0}">
+                            <p class="card-text">Number Of Bids: ${Number}</p>
+                            <c:forEach items="${listbidding}" var="b">
+                                <c:forEach items="${user}" var="u">
+                                    <c:if test="${b.price == Max}">
+                                        <c:if test="${b.proID == c.proID}" >
+                                            <c:if test="${u.id == b.userID}">
+                                                <p>Name Bidder With The Highest Bid: ${u.userName}</p>
+                                            </c:if>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="card-text">No One Bid Yet</p>
+                        </c:otherwise>
+                    </c:choose>
+                    <p class="card-text">Start Day: ${c.startDay}</p>
                     <p class="card-text">${c.tinyDes}</p>
                     <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Detail</a>
                 </div>

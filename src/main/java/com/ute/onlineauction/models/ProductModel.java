@@ -71,7 +71,7 @@ public class ProductModel {
     }
 
     public static void add(Product p) {
-        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay)";
+        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay,CurrentPrice) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay,:CurrentPrice)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProName", p.getProName())
@@ -84,12 +84,13 @@ public class ProductModel {
                     .addParameter("ProID", p.getProID())
                     .addParameter("StartDay", p.getStartDay())
                     .addParameter("EndDay", p.getEndDay())
+                    .addParameter("CurrentPrice", p.getCurrentPrice())
                     .executeUpdate();
         }
     }
 
     public static void update(Product p) {
-        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID WHERE ProID = :ProID  ";
+        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID ,StartDay = :StartDay,EndDay = :EndDay,CurrentPrice = :CurrentPrice WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProName", p.getProName())
@@ -99,6 +100,8 @@ public class ProductModel {
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
                     .addParameter("ProID",p.getProID())
+                    .addParameter("StartDay",p.getStartDay())
+                    .addParameter("EndDay",p.getEndDay())
                     .executeUpdate();
         }
 

@@ -4,9 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
-<jsp:useBean id="bindding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
+<jsp:useBean id="bidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="HighestBidCountByCat" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="HighestPriceByCat" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
+
 <t:main>
   <jsp:body>
     <div class="card-body">
@@ -29,7 +30,7 @@
                         href="#list-Top" role="tab" aria-controls="list-home">Top 5 Highest Price</h4>
                     <c:forEach items="${HighestPriceByCat}" var="c">
                       <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list"
-                         href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="tab"
+                         href="${pageContext.request.contextPath}/admin/prcoduct/byProID?ProId=${c.proID}" role="tab"
                          aria-controls="list-profile">${c.proName}</a>
                     </c:forEach>
                   </div>
@@ -41,9 +42,13 @@
                     <h4 class="list-group-item list-group-item-action active" id="list-Top-list2" data-bs-toggle="list"
                         href="#list-Top" role="tab" aria-controls="list-home">Top 5 Famous Bid</h4>
                     <c:forEach items="${HighestBidCountByCat}" var="b">
-                      <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list"
+                    <c:forEach items="${HighestPriceByCat}" var="c">
+                      <c:if test="${b.proID == c.proID}">
+                         <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list"
                          href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${b.proID}" role="tab"
-                         aria-controls="list-profile">${b.proID}</a>
+                         aria-controls="list-profile">${c.proName}</a>
+                      </c:if>
+                    </c:forEach>
                     </c:forEach>
                   </div>
                 </div>
@@ -70,20 +75,46 @@
                          title="${c.proName}" class="card-img-top">
                     <div class="card-body">
                       <h5 class="card-title">${c.proName}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">${c.price}</h6>
-                      <c:forEach items="${bindding}" var="b">
-                        <c:forEach items="${user}" var="u">
-                          <c:choose>
-                            <c:when test="${b.proID == c.proID}">
-                              <c:choose>
-                                <c:when test="${u.id == b.userID}">
-                                  <p>Name Bidder: ${u.userName}</p>
-                                </c:when>
-                              </c:choose>
-                            </c:when>
-                          </c:choose>
-                        </c:forEach>
+                      <c:set var = "Max" scope = "session" value = "${0}"/>
+                      <c:forEach items="${bidding}" var="b">
+                        <c:if test="${b.proID == c.proID}">
+                          <c:if test="${Max < b.price}">
+                            <c:set var = "Max" scope = "session" value = "${b.price}"/>
+                          </c:if>
+                        </c:if>
                       </c:forEach>
+                      <h6 class="card-subtitle mb-2 text-muted">${Max}</h6>
+                      <c:choose>
+                        <c:when test="${c.currentPrice != 0}">
+                      <p class="card-text">Current Price: ${c.currentPrice}</p>
+                        </c:when>
+                      </c:choose>
+                      <c:set var = "Number" scope = "session" value = "${-1}"/>
+                      <c:forEach items="${bidding}" var="b">
+                        <c:if test="${b.proID == c.proID}">
+                          <c:set var = "Number" scope = "session" value ="${Number+1}"/>
+                        </c:if>
+                      </c:forEach>
+                      <c:choose>
+                        <c:when test="${Number != 0}">
+                          <p class="card-text">Number Of Bids: ${Number}</p>
+                          <c:forEach items="${bidding}" var="b">
+                            <c:forEach items="${user}" var="u">
+                              <c:if test="${b.price == Max}">
+                                <c:if test="${b.proID == c.proID}" >
+                                  <c:if test="${u.id == b.userID}">
+                                    <p>Name Bidder With The Highest Bid: ${u.userName}</p>
+                                  </c:if>
+                                </c:if>
+                              </c:if>
+                            </c:forEach>
+                          </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                          <p class="card-text">No One Bid Yet</p>
+                        </c:otherwise>
+                      </c:choose>
+                      <p class="card-text">Start Day: ${c.startDay}</p>
                       <p class="card-text">${c.tinyDes}</p>
                       <a class="btn btn-primary"
                          href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="button"><i

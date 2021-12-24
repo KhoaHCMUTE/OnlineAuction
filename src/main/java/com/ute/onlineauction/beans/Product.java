@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class Product {
     private int ProID, UserID;
     private String ProName, TinyDes, FullDes;
-    private int Price, CatID, PriceDifference;
+    private int Price, CatID, PriceDifference,CurrentPrice;
     private LocalDateTime StartDay, EndDay;
 
-    public Product(int proID, String proName, String tinyDes, String fullDes, int price, int priceDifference, int catID, int userID, LocalDateTime startDay, LocalDateTime endDay) {
+    public Product(int proID, String proName, String tinyDes, String fullDes, int price, int priceDifference, int catID, int userID, LocalDateTime startDay, LocalDateTime endDay,int currentPrice) {
         this.ProID = proID;
         this.ProName = proName;
         this.TinyDes = tinyDes;
@@ -19,7 +19,9 @@ public class Product {
         this.UserID = userID;
         this.StartDay = startDay;
         this.EndDay = endDay;
+        this.CurrentPrice = currentPrice;
     }
+
 
 
     public int getProID() {
@@ -60,5 +62,9 @@ public class Product {
 
     public LocalDateTime getEndDay() {
         return EndDay;
+    }
+
+    public int getCurrentPrice() {
+        return CurrentPrice;
     }
 }

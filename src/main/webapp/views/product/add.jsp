@@ -27,27 +27,31 @@
         </div>
         <div class="form-group">
           <label for="txtProName">Product</label>
-          <input type="text" class="form-control" id="txtProName" name="ProName" autofocus>
+          <input type="text" class="form-control" id="txtProName" name="ProName" >
         </div>
         <div class="form-group">
           <label for="txtTinyDes">TinyDes</label>
-          <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" autofocus>
+          <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" >
         </div>
         <div class="form-group">
           <label for="txtFullDes">FullDes</label>
-          <input type="text" class="form-control" id="txtFullDes" name="FullDes" autofocus>
+          <input type="text" class="form-control" id="txtFullDes" name="FullDes" >
         </div>
         <div class="form-group">
           <label for="txtPrice">Price</label>
-          <input type="number" class="form-control" id="txtPrice" name="Price" autofocus>
+          <input type="number" class="form-control" id="txtPrice" name="Price" >
+        </div>
+        <div class="form-group">
+          <label for="txtCurrentPrice">CurrentPrice (optional)</label>
+          <input type="number" class="form-control" id="txtCurrentPrice" name="CurrentPrice" >
         </div>
         <div class="form-group">
           <label for="txtPriceDifference">PriceDifference</label>
-          <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference" autofocus>
+          <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference" >
         </div>
         <div class="form-group">
           <label for="txtCatID">CatID</label>
-          <input type="number" class="form-control" id="txtCatID" name="CatID" autofocus>
+          <input type="number" class="form-control" id="txtCatID" name="CatID" >
         </div>
         <div class="form-group">
           <input type="hidden" class="form-control" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">

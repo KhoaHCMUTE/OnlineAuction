@@ -25,18 +25,31 @@
                             </c:if>
                         </c:forEach>
                         <p>Current Price: ${Max}</p>
+                        <p class="card-text">Start Day: ${product.startDay}</p>
+                        <p class="card-text">End Day: ${product.endDay}</p>
                         <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
+                        <c:set var = "Number" scope = "session" value = "${-1}"/>
                         <c:forEach items="${listbidding}" var="b">
-                            <c:forEach items="${user}" var="u">
-                                <c:if test="${b.price == Max}">
-                                      <c:if test="${b.proID == product.proID}">
-                                            <c:if test="${u.id == b.userID}">
-                                              <p>Name Bidder: ${u.userName}</p>
-                                            </c:if>
-                                     </c:if>
-                                </c:if>
-                            </c:forEach>
+                            <c:if test="${b.proID == product.proID}">
+                                <c:set var = "Number" scope = "session" value ="${Number+1}"/>
+                            </c:if>
                         </c:forEach>
+                        <c:choose>
+                            <c:when test="${Number != 0}">
+                                <c:forEach items="${listbidding}" var="b">
+                                    <c:forEach items="${user}" var="u">
+                                        <c:if test="${b.price == Max}">
+                                            <c:if test="${b.proID == product.proID}">
+                                                <c:if test="${u.id == b.userID}">
+                                                    <p>Name Bidder With The Highest Bid: ${u.userName}</p>
+                                                </c:if>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
+
                         <c:set var = "InSeller" scope = "session" value = "${0}"/>
                         <c:forEach items="${listbidding}" var="b">
                             <c:forEach items="${user}" var="u">
@@ -51,21 +64,37 @@
                                 </c:if>
                             </c:forEach>
                         </c:forEach>
+                        <c:set var = "BienThu" scope = "session" value = "${0}"/>
                         <p>Auction History</p>
-                        <c:forEach items="${listbidding}" var="b">
-                        <c:forEach items="${user}" var="u">
-                            <c:if test="${b.proID == product.proID}">
-                            <c:if test="${u.id == b.userID}">
-                                <p>Name Bidder: ${u.userName} - Price: ${b.price}</p>
-                            </c:if>
-                            </c:if>
-                        </c:forEach>
-                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${Number != 0}">
+                                <c:forEach items="${listbidding}" var="b">
+                                        <c:forEach items="${user}" var="u">
+                                            <c:if test="${b.proID == product.proID}">
+                                                <c:if test="${u.id == b.userID}">
+                                                    <c:choose>
+                                                        <c:when test="${BienThu != 0}">
+                                                            <p>Name Bidder: ${u.userName} - Price: ${b.price}</p>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:set var = "BienThu" scope = "session" value = "${1}"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:if>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="card-text">No One Bid Yet</p>
+                            </c:otherwise>
+                        </c:choose>
+
                         <input type="hidden" class="form-control" id="ProID" name="ProID" readonly value="${product.proID}">
                         <input type="hidden" class="form-control" id="UserID" name="UserID" readonly value="${AuthUser.id}">
                         <input type="hidden" class="form-control" id="PriceDifference" name="PriceDifference" readonly value="${product.priceDifference}">
                         <label for="NewPrice">Enter Price for Bidding</label>
-                        <input type="number" class="form-inline" id="NewPrice" name="NewPrice"  autofocus>
+                        <input type="number" class="form-inline" id="NewPrice" name="NewPrice"  >
                         <button type="submit" class="btn btn-outline-success btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
                         <br>
                         <br>

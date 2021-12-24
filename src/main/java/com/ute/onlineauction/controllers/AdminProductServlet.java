@@ -129,6 +129,7 @@ public class AdminProductServlet extends HttpServlet {
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
+        int curretnPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
 
         String strSD = request.getParameter("StartDay");
         String strED = request.getParameter("EndDay");
@@ -136,7 +137,7 @@ public class AdminProductServlet extends HttpServlet {
         LocalDateTime startDay = LocalDateTime.parse(strSD, df);
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
 
-        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay);
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,curretnPrice);
         ProductModel.add(p);
         Bidding b = new Bidding(proID,sellerID,price,sellerID);
         BiddingModel.addBid(b);
@@ -148,6 +149,7 @@ public class AdminProductServlet extends HttpServlet {
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        int curretnPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
@@ -158,7 +160,7 @@ public class AdminProductServlet extends HttpServlet {
         LocalDateTime startDay = LocalDateTime.parse(strSD, df);
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
 
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay);
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,curretnPrice);
         ProductModel.update(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }

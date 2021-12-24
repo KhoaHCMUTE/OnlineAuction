@@ -29,6 +29,8 @@ public class ProductFEServlet extends HttpServlet {
                 request.setAttribute("HighestPriceByCat",HighestPrice);
                 List<Bidding> HighestBidding = BiddingModel.findByHighestBidCountByCat(catId);
                 request.setAttribute("HighestBidCountByCat",HighestBidding);
+                List<Bidding> bidding = BiddingModel.findAll();
+                request.setAttribute("bidding",bidding);
                 ServletUtils.forward("/views/product/bycat.jsp",request,response);
                 break;
             case "/byUserID":

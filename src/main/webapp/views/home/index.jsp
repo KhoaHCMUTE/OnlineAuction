@@ -23,7 +23,11 @@
                 <div class="list-group" id="list-tab2" role="tablist">
                     <h4 class="list-group-item list-group-item-action active" id="list-Top-list2" data-bs-toggle="list" href="#list-Top" role="tab" aria-controls="list-home">Top 5 Famous Bid</h4>
                     <c:forEach items="${HighestBidCount}" var="b">
-                        <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list" href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${b.proID}" role="tab" aria-controls="list-profile">${b.proID}</a>
+                    <c:forEach items="${Top5HighestPrice}" var="c">
+                        <c:if test="${b.proID == c.proID}">
+                        <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list" href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${b.proID}" role="tab" aria-controls="list-profile">${c.proName}</a>
+                        </c:if>
+                    </c:forEach>
                     </c:forEach>
                 </div>
             </div>

@@ -13,28 +13,40 @@
                     <input type="number" class="form-control" id="txtProID" name="ProID" readonly value="${product.proID}">
                 </div>
                 <div class="form-group">
+                    <label for="txtCatID">CatID</label>
+                    <input type="number" class="form-control" id="txtCatID" name="CatID"  value="${product.catID}">
+                </div>
+                <div class="form-group">
                     <label for="txtProName">Product</label>
-                    <input type="text" class="form-control" id="txtProName" name="ProName" autofocus value="${product.proName}">
+                    <input type="text" class="form-control" id="txtProName" name="ProName"  value="${product.proName}">
                 </div>
                 <div class="form-group">
                     <label for="txtTinyDes">TinyDes</label>
-                    <input type="text" class="form-control" id="txtTinyDes" name="TinyDes" autofocus value="${product.tinyDes}">
+                    <input type="text" class="form-control" id="txtTinyDes" name="TinyDes"  value="${product.tinyDes}">
                 </div>
                 <div class="form-group">
                     <label for="txtFullDes">FullDes</label>
-                    <input type="text" class="form-control" id="txtFullDes" name="FullDes" autofocus value="${product.fullDes}">
+                    <input type="text" class="form-control" id="txtFullDes" name="FullDes"  value="${product.fullDes}">
                 </div>
                 <div class="form-group">
                     <label for="txtPrice">Start Price</label>
-                    <input type="number" class="form-control" id="txtPrice" name="Price" autofocus value="${product.price}">
+                    <input type="number" class="form-control" id="txtPrice" name="Price"  value="${product.price}">
+                </div>
+                <div class="form-group">
+                    <label for="txtCurrentPrice">CurrentPrice </label>
+                    <input type="number" class="form-control" id="txtCurrentPrice" name="CurrentPrice"  value="${product.currentPrice}">
                 </div>
                 <div class="form-group">
                     <label for="txtPriceDifference">Difference Price</label>
-                    <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference" autofocus value="${product.priceDifference}">
+                    <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference"  value="${product.priceDifference}">
                 </div>
                 <div class="form-group">
-                    <label for="txtCatID">CatID</label>
-                    <input type="number" class="form-control" id="txtCatID" name="CatID" autofocus value="${product.catID}">
+                    <label for="txtStartDay">Start Day</label>
+                    <input type="text" class="form-control" id="txtStartDay" name="StartDay" value="${product.startDay}">
+                </div>
+                <div class="form-group">
+                    <label for="txtEndDay">End Day</label>
+                    <input type="text" class="form-control" id="txtEndDay" name="EndDay" value="${product.endDay}">
                 </div>
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
