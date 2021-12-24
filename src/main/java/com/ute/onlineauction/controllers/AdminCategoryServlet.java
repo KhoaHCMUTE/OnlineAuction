@@ -1,7 +1,9 @@
 package com.ute.onlineauction.controllers;
 
 import com.ute.onlineauction.beans.Category;
+import com.ute.onlineauction.beans.Product;
 import com.ute.onlineauction.models.CategoryModel;
+import com.ute.onlineauction.models.ProductModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
 import javax.servlet.*;
@@ -35,7 +37,9 @@ public class AdminCategoryServlet extends HttpServlet {
                 }
 
                 Category c = CategoryModel.findById(id);
-                if (c != null) {
+                List<Product> p = ProductModel.findByCatId(id);
+                if (c != null || p != null) {
+                    request.setAttribute("product",p);
                     request.setAttribute("category", c);
                     ServletUtils.forward("/views/category/edit.jsp", request, response);
                 } else {

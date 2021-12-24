@@ -27,4 +27,27 @@ public class BiddingModel {
                     .executeAndFetch(Bidding.class);
         }
     }
+    public static List<Bidding> findByHighestBidCount () {
+        final String query = "select * FROM auctionhistory group by ProID order by count(ProID) desc limit 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Bidding.class);
+        }
+    }
+    public static List<Bidding> findByHighestBidCountByCat (int id ) {
+        final String query = "select a.* FROM auctionhistory as a,products as b where a.ProID = b.ProID and b.CatID = :CatID group by a.ProID order by count(a.ProID) desc limit 5\n";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("CatID",id)
+                    .executeAndFetch(Bidding.class);
+        }
+    }
+    public static List<Bidding> findByHighestBidCountByUser (int id ) {
+        final String query = "select a.* FROM auctionhistory as a,products as b where a.ProID = b.ProID and b.UserID = :UserID group by a.ProID order by count(a.ProID) desc limit 5\n";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("UserID",id)
+                    .executeAndFetch(Bidding.class);
+        }
+    }
 }

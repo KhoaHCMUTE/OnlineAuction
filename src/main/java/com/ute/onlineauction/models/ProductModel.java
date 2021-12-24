@@ -22,6 +22,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static List<Product> findByUserId (int id) {
         final String query = "select * from products where UserID = :UserID";
         try (Connection con = DbUtils.getConnection()) {
@@ -42,6 +43,33 @@ public class ProductModel {
             return list.get(0);
         }
     }
+
+    public static List<Product> findTop5HighestPrice () {
+        final String query = "SELECT * FROM products order by Price desc limit 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+
+                    .executeAndFetch(Product.class);
+        }
+    }
+
+    public static List<Product> findTop5HighestPriceByCat (int catId) {
+        final String query = "SELECT * FROM products where CatID = :CatID order by Price desc limit 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("CatID",catId)
+                    .executeAndFetch(Product.class);
+        }
+    }
+    public static List<Product> findTop5HighestPriceByUser (int UserID) {
+        final String query = "SELECT * FROM products where UserID = :UserID order by Price desc limit 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("UserID",UserID)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
     public static void add(Product p) {
         String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID)";
         try (Connection con = DbUtils.getConnection()) {

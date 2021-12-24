@@ -1,7 +1,9 @@
 package com.ute.onlineauction.controllers;
 
 
+import com.ute.onlineauction.beans.Bidding;
 import com.ute.onlineauction.beans.Product;
+import com.ute.onlineauction.models.BiddingModel;
 import com.ute.onlineauction.models.ProductModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
@@ -21,14 +23,23 @@ public class ProductFEServlet extends HttpServlet {
         switch (path) {
             case "/bycat":
                 int catId = Integer.parseInt(request.getParameter("id"));
-               List<Product> list = ProductModel.findByCatId(catId);
+                List<Product> list = ProductModel.findByCatId(catId);
                 request.setAttribute("product",list);
+                List<Product> HighestPrice = ProductModel.findTop5HighestPriceByCat(catId);
+                request.setAttribute("HighestPriceByCat",HighestPrice);
+                List<Bidding> HighestBidding = BiddingModel.findByHighestBidCountByCat(catId);
+                request.setAttribute("HighestBidCountByCat",HighestBidding);
                 ServletUtils.forward("/views/product/bycat.jsp",request,response);
                 break;
             case "/byUserID":
                 int userid = Integer.parseInt(request.getParameter("userid"));
                 List<Product> listuser = ProductModel.findByUserId(userid);
                 request.setAttribute("product",listuser);
+                List<Product> PriceByUser = ProductModel.findTop5HighestPriceByUser(userid);
+                request.setAttribute("HighestPriceByUser",PriceByUser);
+                List<Bidding> BidCountByUser = BiddingModel.findByHighestBidCountByUser(userid);
+                request.setAttribute("HighestBidCountByUser",BidCountByUser);
+
                 ServletUtils.forward("/views/product/byUserID.jsp",request,response);
                 break;
             case "/edit":
