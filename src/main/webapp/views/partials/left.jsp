@@ -3,12 +3,9 @@
 <jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.ute.onlineauction.beans.Category>"/>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 
-<div class="card">
-  <h4 class="card-header">OPTION</h4>
+<div class="card text-white bg-info border border-dark">
+  <h4 class="card-header">Category</h4>
   <div class="list-group">
-    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-      Category
-    </button>
     <a href="${pageContext.request.contextPath}/admin/category/index">
       <button type="button" class="list-group-item list-group-item-action">Admin Category</button>
     </a>
@@ -18,8 +15,6 @@
     <a href="${pageContext.request.contextPath}/admin/product/vwAll">
       <button type="button" class="list-group-item list-group-item-action">View All Product</button>
     </a>
-  </div>
-  <div class="list-group list-group-flush">
     <c:forEach items="${categoriesWithDetails}" var="c">
       <a href="${pageContext.request.contextPath}/product/bycat?id=${c.catID}"
          class="list-group-item list-group-item-action">

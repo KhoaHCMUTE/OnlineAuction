@@ -9,47 +9,46 @@
             <form action="" method="post">
                 <h4 class="card-header">Edit #${product.proID} - ${product.proName}</h4>
                 <div class="form-group">
-                    <label for="txtProID"># ID</label>
-                    <input type="number" class="form-control" id="txtProID" name="ProID" readonly value="${product.proID}">
+                    <input type="hidden" class="form-control border border-dark" id="txtProID" name="ProID" readonly value="${product.proID}">
                 </div>
                 <div class="form-group">
-                    <label for="txtCatID">CatID</label>
-                    <input type="number" class="form-control" id="txtCatID" name="CatID"  value="${product.catID}">
+                    <label for="txtCatID"><b>CatID</b></label>
+                    <input type="number" class="form-control border border-dark" id="txtCatID" name="CatID"  value="${product.catID}">
                 </div>
                 <div class="form-group">
-                    <label for="txtProName">Product</label>
-                    <input type="text" class="form-control" id="txtProName" name="ProName"  value="${product.proName}">
+                    <label for="txtProName"><b>Product</b></label>
+                    <input type="text" class="form-control border border-dark" id="txtProName" name="ProName"  value="${product.proName}">
                 </div>
                 <div class="form-group">
-                    <label for="txtTinyDes">TinyDes</label>
-                    <input type="text" class="form-control" id="txtTinyDes" name="TinyDes"  value="${product.tinyDes}">
+                    <label for="txtTinyDes"><b>TinyDes</b></label>
+                    <input type="text" class="form-control border border-dark" id="txtTinyDes" name="TinyDes"  value="${product.tinyDes}">
                 </div>
                 <div class="form-group">
-                    <label for="txtFullDes">FullDes</label>
-                    <input type="text" class="form-control" id="txtFullDes" name="FullDes"  value="${product.fullDes}">
+                    <label for="txtFullDes"><b>FullDes</b></label>
+                    <input type="text" class="form-control border border-dark" id="txtFullDes" name="FullDes"  value="${product.fullDes}">
                 </div>
                 <div class="form-group">
-                    <label for="txtPrice">Start Price</label>
-                    <input type="number" class="form-control" id="txtPrice" name="Price"  value="${product.price}">
+                    <label for="txtPrice"><b>Start Price</b>></label>
+                    <input type="number" class="form-control border border-dark" id="txtPrice" name="Price"  value="${product.price}">
                 </div>
                 <div class="form-group">
-                    <label for="txtCurrentPrice">CurrentPrice </label>
-                    <input type="number" class="form-control" id="txtCurrentPrice" name="CurrentPrice"  value="${product.currentPrice}">
+                    <label for="txtCurrentPrice"><b>CurrentPrice</b> </label>
+                    <input type="number" class="form-control border border-dark" id="txtCurrentPrice" name="CurrentPrice"  value="${product.currentPrice}">
                 </div>
                 <div class="form-group">
-                    <label for="txtPriceDifference">Difference Price</label>
-                    <input type="number" class="form-control" id="txtPriceDifference" name="PriceDifference"  value="${product.priceDifference}">
+                    <label for="txtPriceDifference"><b>Difference Price</b></label>
+                    <input type="number" class="form-control border border-dark" id="txtPriceDifference" name="PriceDifference"  value="${product.priceDifference}">
                 </div>
                 <div class="form-group">
-                    <label for="txtStartDay">Start Day</label>
-                    <input type="text" class="form-control" id="txtStartDay" name="StartDay" value="${product.startDay}">
+                    <label for="txtStartDay"><b>Start Day</b></label>
+                    <input type="text" class="form-control border border-dark" id="txtStartDay" name="StartDay" value="${product.startDay}">
                 </div>
                 <div class="form-group">
-                    <label for="txtEndDay">End Day</label>
-                    <input type="text" class="form-control" id="txtEndDay" name="EndDay" value="${product.endDay}">
+                    <label for="txtEndDay"><b>End Day</b></label>
+                    <input type="text" class="form-control border border-dark" id="txtEndDay" name="EndDay" value="${product.endDay}">
                 </div>
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
+                    <input type="hidden" class="form-control border border-dark" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/product" role="button">

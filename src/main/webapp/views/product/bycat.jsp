@@ -11,9 +11,6 @@
 <t:main>
   <jsp:body>
     <div class="card-body">
-      <h4 class="card-header">
-        Products
-      </h4>
       <c:choose>
         <c:when test="${product.size() == 0}">
           <div class="card-body">
@@ -30,7 +27,7 @@
                         href="#list-Top" role="tab" aria-controls="list-home">Top 5 Highest Price</h4>
                     <c:forEach items="${HighestPriceByCat}" var="c">
                       <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list"
-                         href="${pageContext.request.contextPath}/admin/prcoduct/byProID?ProId=${c.proID}" role="tab"
+                         href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="tab"
                          aria-controls="list-profile">${c.proName}</a>
                     </c:forEach>
                   </div>
@@ -66,15 +63,15 @@
                 </div>
               </div>
             </div>
-
+            <br/>
             <div class="row ">
               <c:forEach items="${product}" var="c">
                 <div class="col-sm-4 mb-3 ">
-                  <div class="card h-100">
+                  <div class="card bg-light border border-dark">
                     <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}"
                          title="${c.proName}" class="card-img-top">
                     <div class="card-body">
-                      <h5 class="card-title">${c.proName}</h5>
+                      <a href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" class="text-dark" style="font-size:25px; ">${c.proName}</a>
                       <c:set var = "Max" scope = "session" value = "${0}"/>
                       <c:forEach items="${bidding}" var="b">
                         <c:if test="${b.proID == c.proID}">
@@ -83,10 +80,10 @@
                           </c:if>
                         </c:if>
                       </c:forEach>
-                      <h6 class="card-subtitle mb-2 text-muted">${Max}</h6>
+                      <h6 class="card-subtitle mb-2 text-dark" style="font-size:40px;">$ ${Max}</h6>
                       <c:choose>
                         <c:when test="${c.currentPrice != 0}">
-                      <p class="card-text">Current Price: ${c.currentPrice}</p>
+                          <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${c.currentPrice}</p></p>
                         </c:when>
                       </c:choose>
                       <c:set var = "Number" scope = "session" value = "${-1}"/>
@@ -97,13 +94,13 @@
                       </c:forEach>
                       <c:choose>
                         <c:when test="${Number != 0}">
-                          <p class="card-text">Number Of Bids: ${Number}</p>
+                          <p class="card-text"><b>Number Of Bids:</b> ${Number}</p>
                           <c:forEach items="${bidding}" var="b">
                             <c:forEach items="${user}" var="u">
                               <c:if test="${b.price == Max}">
                                 <c:if test="${b.proID == c.proID}" >
                                   <c:if test="${u.id == b.userID}">
-                                    <p>Name Bidder With The Highest Bid: ${u.userName}</p>
+                                    <p><b>Name Bidder:</b> ${u.userName}</p>
                                   </c:if>
                                 </c:if>
                               </c:if>
@@ -111,14 +108,11 @@
                           </c:forEach>
                         </c:when>
                         <c:otherwise>
-                          <p class="card-text">No One Bid Yet</p>
+                          <p class="card-text"><b>No One Bid Yet</b></p>
                         </c:otherwise>
                       </c:choose>
-                      <p class="card-text">Start Day: ${c.startDay}</p>
+                      <p class="card-text"><b>Start Day:</b> ${c.startDay}</p>
                       <p class="card-text">${c.tinyDes}</p>
-                      <a class="btn btn-primary"
-                         href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" role="button"><i
-                              class="fa fa-eye" aria-hidden="true"></i>&nbsp;Detail</a>
                     </div>
                   </div>
                 </div>
@@ -128,5 +122,22 @@
         </c:otherwise>
       </c:choose>
     </div>
+    <nav aria-label="Page navigation example a">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </jsp:body>
 </t:main>

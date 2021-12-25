@@ -8,13 +8,10 @@
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <t:main>
     <jsp:body>
-        <div class="card-body">
-            <div class="card">
-                <div class="card-body">
-                    <h4>${product.proName}</h4>
-                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="${product.proName}" title="${product.proName}" >
-                    <p>Description: ${product.fullDes}</p>
-                    <p>Starting Price: ${product.price} (${product.priceDifference})</p>
+        <div class="card-body ">
+            <div class="card border border-dark">
+        <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="${product.proName}" title="${product.proName}" >
+                <div class="card-body bg-light">
                     <form action="" method="post">
                         <c:set var = "Max" scope = "session" value = "${0}"/>
                         <c:forEach items="${listbidding}" var="b">
@@ -24,9 +21,19 @@
                             </c:if>
                             </c:if>
                         </c:forEach>
-                        <p>Current Price: ${Max}</p>
-                        <p class="card-text">Start Day: ${product.startDay}</p>
-                        <p class="card-text">End Day: ${product.endDay}</p>
+                        <h4 class="text-dark" style="font-size:25px; ">${product.proName}</h4>
+                        <h6 class="card-subtitle mb-2 text-dark" style="font-size:40px;">$ ${Max}</h6>
+                        <c:choose>
+                            <c:when test="${product.currentPrice != 0}">
+                                <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${product.currentPrice}</p></p>
+                            </c:when>
+                        </c:choose>
+                        <label for="NewPrice"><b>Enter Price for Bidding ($ ${product.priceDifference})</b></label>
+                        <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
+                        <button type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
+
+                        <p class="card-text"><b>Start Day:</b> ${product.startDay}</p>
+                        <p class="card-text"><b>End Day:</b> ${product.endDay}</p>
                         <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
                         <c:set var = "Number" scope = "session" value = "${-1}"/>
                         <c:forEach items="${listbidding}" var="b">
@@ -34,6 +41,22 @@
                                 <c:set var = "Number" scope = "session" value ="${Number+1}"/>
                             </c:if>
                         </c:forEach>
+
+                        <c:set var = "InSeller" scope = "session" value = "${0}"/>
+                        <c:forEach items="${listbidding}" var="b">
+                                <c:forEach items="${user}" var="u">
+                                    <c:if test="${b.proID == product.proID}">
+                                        <c:if test="${u.id == b.sellerID}">
+                                            <c:if test="${InSeller == 0}">
+                                                <p><b>Name Seller:</b> ${u.userName}</p>
+                                                <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
+                                                <c:set var = "InSeller" scope = "session" value = "${1}"/>
+                                            </c:if>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                        </c:forEach>
+
                         <c:choose>
                             <c:when test="${Number != 0}">
                                 <c:forEach items="${listbidding}" var="b">
@@ -41,7 +64,7 @@
                                         <c:if test="${b.price == Max}">
                                             <c:if test="${b.proID == product.proID}">
                                                 <c:if test="${u.id == b.userID}">
-                                                    <p>Name Bidder With The Highest Bid: ${u.userName}</p>
+                                                    <p><b>Name Bidder:</b> ${u.userName}</p>
                                                 </c:if>
                                             </c:if>
                                         </c:if>
@@ -49,32 +72,36 @@
                                 </c:forEach>
                             </c:when>
                         </c:choose>
-
-                        <c:set var = "InSeller" scope = "session" value = "${0}"/>
-                        <c:forEach items="${listbidding}" var="b">
-                            <c:forEach items="${user}" var="u">
-                                <c:if test="${b.proID == product.proID}">
-                                    <c:if test="${u.id == b.sellerID}">
-                                        <c:if test="${InSeller == 0}">
-                                        <p>Name Seller: ${u.userName}</p>
-                                            <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
-                                        <c:set var = "InSeller" scope = "session" value = "${1}"/>
-                                        </c:if>
-                                    </c:if>
-                                </c:if>
-                            </c:forEach>
-                        </c:forEach>
+                        <p><b>Description:</b> ${product.fullDes}</p>
+                        <br/>
                         <c:set var = "BienThu" scope = "session" value = "${0}"/>
-                        <p>Auction History</p>
-                        <c:choose>
-                            <c:when test="${Number != 0}">
-                                <c:forEach items="${listbidding}" var="b">
+                        <p class=" text-center" style="font-size:20px;"><b>Auction History</b></p>
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">DateTime</th>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:set var = "STT" scope = "session" value = "${1}"/>
+                            <c:choose>
+                                <c:when test="${Number != 0}">
+                                    <c:forEach items="${listbidding}" var="b">
                                         <c:forEach items="${user}" var="u">
                                             <c:if test="${b.proID == product.proID}">
                                                 <c:if test="${u.id == b.userID}">
                                                     <c:choose>
                                                         <c:when test="${BienThu != 0}">
-                                                            <p>Name Bidder: ${u.userName} - Price: ${b.price}</p>
+                                                            <tr>
+                                                                <th scope="row">${STT}</th>
+                                                                <td>dd/mm/yyyy hh:hh:hh</td>
+                                                                <td>${u.userName}</td>
+                                                                <td>$ ${b.price}</td>
+                                                                <c:set var = "STT" scope = "session" value = "${STT+1}"/>
+                                                            </tr>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <c:set var = "BienThu" scope = "session" value = "${1}"/>
@@ -84,46 +111,40 @@
                                             </c:if>
                                         </c:forEach>
                                     </c:forEach>
-                            </c:when>
-                            <c:otherwise>
-                                <p class="card-text">No One Bid Yet</p>
-                            </c:otherwise>
-                        </c:choose>
+                                </c:when>
+                            </c:choose>
+                            </tbody>
+                        </table>
+
 
                         <input type="hidden" class="form-control" id="ProID" name="ProID" readonly value="${product.proID}">
                         <input type="hidden" class="form-control" id="UserID" name="UserID" readonly value="${AuthUser.id}">
                         <input type="hidden" class="form-control" id="PriceDifference" name="PriceDifference" readonly value="${product.priceDifference}">
-                        <label for="NewPrice">Enter Price for Bidding</label>
-                        <input type="number" class="form-inline" id="NewPrice" name="NewPrice"  >
-                        <button type="submit" class="btn btn-outline-success btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
+
                         <br>
                         <br>
-                        <label for="CommentID">Comment</label>
-                        <input type="text" class="form-control" id="CommentID" name="comment">
-                        <button type="submit" class="btn btn-outline-primary btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addCommentPro" role="button">Comment</button>
-                        <div class="card">
-                            <div class="card-body">
-                                <c:forEach items="${comment}" var="c">
-                                <c:forEach items="${user}" var="u">
-                                    <c:choose>
-                                        <c:when test="${c.userID == u.id}">
-                                    <p>User Name:${u.userName}</p>
-                                    <p>Comment:${c.text}</p>
-                                    </br>
-                                        </c:when>
-                                    </c:choose>
-                                </c:forEach>
-                                </c:forEach>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-
-            <form action="" method="post">
+<%--                        <label for="CommentID">Comment</label>--%>
+<%--                        <input type="text" class="form-control" id="CommentID" name="comment">--%>
+<%--                        <button type="submit" class="btn btn-outline-primary btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addCommentPro" role="button">Comment</button>--%>
+<%--                        <div class="card">--%>
+<%--                            <div class="card-body">--%>
+<%--                                <c:forEach items="${comment}" var="c">--%>
+<%--                                <c:forEach items="${user}" var="u">--%>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${c.userID == u.id}">--%>
+<%--                                    <p>User Name:${u.userName}</p>--%>
+<%--                                    <p>Comment:${c.text}</p>--%>
+<%--                                    </br>--%>
+<%--                                        </c:when>--%>
+<%--                                    </c:choose>--%>
+<%--                                </c:forEach>--%>
+<%--                                </c:forEach>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             </form>
         </div>
     </jsp:body>
-
 </t:main>

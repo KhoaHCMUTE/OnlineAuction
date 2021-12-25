@@ -4,8 +4,9 @@
 <jsp:useBean id="categories" scope="request" type="java.util.List<com.ute.onlineauction.beans.Category>"/>
 <t:main>
   <jsp:body>
-    <div class="card-body">
-      <table class="table table-hover">
+    <div class="card-body ">
+      <c:set var="STT" scope="session" value="${1}"/>
+      <table class="table table-striped table-light">
         <thead>
         <tr>
           <th scope="col">#</th>
@@ -20,13 +21,14 @@
         <tbody>
         <c:forEach items="${categories}" var="c">
           <tr>
-            <th scope="row">${c.catID}</th>
+            <th scope="row">${STT}</th>
             <td>${c.catName}</td>
             <td>
               <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/category/edit?id=${c.catID}" role="button">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
             </td>
+            <c:set var="STT" scope="session" value="${STT+1}"/>
           </tr>
         </c:forEach>
         </tbody>

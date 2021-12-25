@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow border border-dark ">
     <div class="container-fluid">
         <a  class="navbar-brand" href="${pageContext.request.contextPath}/home/index">
             <i class= "fa fa-shopping-bag fa-2x" aria-hidden="true"></i>
