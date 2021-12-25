@@ -21,6 +21,20 @@ public class UserModel {
             return list.get(0);
         }
     }
+    public static class PassModel {
+        public static User findByPassWord(String PassWord) {
+            final String query = "select * from users where PassWord = :PassWord";
+            try (Connection con = DbUtils.getConnection()) {
+                List<User> list = con.createQuery(query)
+                        .addParameter("PassWord", PassWord)
+                        .executeAndFetch(User.class);
+                if (list.size() == 0) {
+                    return null;
+                }
+                return list.get(0);
+            }
+        }
+    }
     public static void add(User c) {
         String Sql = "INSERT INTO users (UserName, PassWord, Name, Email, Dob, Permission) VALUES (:UserName,:PassWord,:Name,:Email,:Dob,:Permission)";
         try (Connection con = DbUtils.getConnection()) {
@@ -39,6 +53,15 @@ public class UserModel {
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(User.class);
+        }
+    }
+    public static void update(User c) {
+        String sql = "update users set PassWord = :PassWord where UserName = :UserName";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("UserName",c.getUserName())
+                    .addParameter("PassWord",c.getPassWord())
+                    .executeUpdate();
         }
     }
 }

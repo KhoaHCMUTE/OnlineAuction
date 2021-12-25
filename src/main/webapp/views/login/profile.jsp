@@ -185,7 +185,7 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Password</p>
-                                                <h6 type="password" class="text-muted f-w-400">${AuthUser.passWord}</h6>
+                                                <input type="password" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.passWord}">
                                             </div>
                                             <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
                                                 <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>
@@ -229,7 +229,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Password</p>
-                                            <h6 type="password" class="text-muted f-w-400">${AuthUser.passWord}</h6>
+                                            <input type="password" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.passWord}">
                                         </div>
                                         <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
                                             <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>

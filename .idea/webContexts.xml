@@ -11,6 +11,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/login/cpassword.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/login" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/login/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/login" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/login/profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/login" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/login/register.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/login" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/partials/left.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/partials/nav.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/product/ByCat.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/product" />

@@ -124,19 +124,19 @@
 </head>
 <body>
 <div id="logreg-forms">
-    <c:if test="${HasError}">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Change Failed!</strong> ${ErrorMessage}
+    <c:if test="${HError}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Change Failed!</strong> ${Error}
         </div>
     </c:if>
     <form action="" method="post" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Password</h1>
-        <p class="form-control" autofocus="">${AuthUser.userName}</p>
-        <input type="password" id="txtPassword" class="form-control" placeholder="OldPassword" name="PassWord" required="" autofocus>
-        <input type="password" id="txtNewPassword" class="form-control" placeholder="NewPassword" name="NewPassWord" required="">
-        <input type="password" id="txtConfirmNewPassword" class="form-control" placeholder="NewConfirmPassword" name="NewPassWord" required="">
+<%--        <input type="text" id="txtUsername" class="form-control"  name="UserName" readonly value="${AuthUser.userName}">--%>
+        <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
+        <input type="password" id="txtPassword" class="form-control" placeholder="Old Password" name="PassWord" required="">
+        <input type="password" id="txtNewPassword" class="form-control" placeholder="New Password" name="rawpwd" autofocus>
         <br><br>
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>Change Password</button><br>
+        <button class="btn btn-outline-success btn-block" type="submit" href="${pageContext.request.contextPath}/account/changepw"><i class="fas fa-sign-in-alt"></i>Change Password</button><br>
         <hr>
         <a href="${pageContext.request.contextPath}/account/profile" id="cancel_signup"><i class="fas fa-angle-left"></i>Profile</a>
     </form>
@@ -145,5 +145,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $('#logreg-forms').on('submit', function (e) {
+        if(${HError}) {
+            alert('Successful Change');
+            return;
+        }
+    });
+</script>
+
 </body>
 </html>

@@ -17,6 +17,10 @@ public class User {
         this.Dob = Dob;
         this.Permission = Permission;
     }
+    public User(String UserName, String PassWord) {
+        this.UserName = UserName;
+        this.PassWord = PassWord;
+    }
 
     public User() {
 

@@ -71,7 +71,10 @@ public class Account extends HttpServlet {
                 login(request, response);
                 break;
             case "/logout":
-                Logout(request, response);
+                logout(request, response);
+                break;
+            case "/changepw":
+                changepw(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -125,15 +128,45 @@ public class Account extends HttpServlet {
                         ServletUtils.forward("/views/login/login.jsp",request,response);
                     }
     }
-    private void Logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 HttpSession Session = request.getSession();
                 Session.setAttribute("Auth", false);
                 Session.setAttribute("AuthUser", new User());
 
                 String url = request.getHeader("referer");
-                if(url == null)
+                if (url == null)
                     url = "/home/index";
                 ServletUtils.redirect(url,request,response);
+    }
+    private void changepw(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String UserName = request.getParameter("UserName");
+        String PassWord = request.getParameter("PassWord");
+
+        User User = UserModel.findByUserName(UserName);
+        if(User != null) {
+            BCrypt.Result result = BCrypt.verifyer().verify(PassWord.toCharArray(), User.getPassWord());
+            if(result.verified) {
+                HttpSession Session = request.getSession();
+                Session.setAttribute("Auth", true);
+                Session.setAttribute("AuthUser", User);
+
+                String rawpwd = request.getParameter("rawpwd");
+                String bcryptHashString = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());
+                User c = new User(UserName,bcryptHashString);
+                UserModel.update(c);
+                ServletUtils.redirect("/account/profile", request, response);
+
+            } else {
+                request.setAttribute("HError", true);
+                request.setAttribute("Error","Please re-enter ");
+                ServletUtils.forward("/views/login/cpassword.jsp",request,response);
+            }
+        } else {
+            request.setAttribute("HError", true);
+            request.setAttribute("Error","Please re-enter ");
+            ServletUtils.forward("/views/login/cpassword.jsp",request,response);
+        }
     }
 
 }

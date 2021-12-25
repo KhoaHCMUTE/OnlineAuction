@@ -17,8 +17,7 @@ public class ServletUtils {
         int idx = url.indexOf(contextPath);
         if (idx < 0) {
             response.sendRedirect(contextPath + url);
-        }
-        else {
+        } else {
             response.sendRedirect(url);
         }
     }

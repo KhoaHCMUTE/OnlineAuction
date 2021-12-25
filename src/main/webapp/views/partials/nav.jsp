@@ -39,7 +39,7 @@
                                             Profile
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript: $('#flogout').submit()">
+                                        <a class="dropdown-item"  href="javascript: $('#flogout').submit()">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Sign Out
                                         </a>
