@@ -1,7 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <jsp:useBean id="product" scope="request" type="com.ute.onlineauction.beans.Product"/>
+
+
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <t:main>
     <jsp:body>
@@ -62,6 +65,8 @@
                     <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/admin/product/Delete" role="button">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Delete
+                        <fmt:parseDate  value="${product.endDay}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+                        <fmt:formatDate value="${parsedDate}" type="date" pattern="dd.MM.yyyy" var="stdDatum" />
                     </button>
                 </div>
 

@@ -5,7 +5,9 @@
 <jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="comment" scope="request" type="java.util.List<com.ute.onlineauction.beans.CommentPro>"/>
 <jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
+<%--<jsp:useBean id="localDate" scope="request" />--%>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
+
 <t:main>
     <jsp:body>
         <div class="card-body ">
@@ -49,6 +51,7 @@
                                         <c:if test="${u.id == b.sellerID}">
                                             <c:if test="${InSeller == 0}">
                                                 <p><b>Name Seller:</b> ${u.userName}</p>
+                                                <input type="hidden" class="form-control" id="localday" name="Day" readonly value="${localDate}">
                                                 <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
                                                 <c:set var = "InSeller" scope = "session" value = "${1}"/>
                                             </c:if>
@@ -97,9 +100,9 @@
                                                         <c:when test="${BienThu != 0}">
                                                             <tr>
                                                                 <th scope="row">${STT}</th>
-                                                                <td>dd/mm/yyyy hh:hh:hh</td>
+                                                                <td>${b.day}</td>
                                                                 <td>${u.userName}</td>
-                                                                <td>$ ${b.price}</td>
+                                                                <td>${b.price}</td>
                                                                 <c:set var = "STT" scope = "session" value = "${STT+1}"/>
                                                             </tr>
                                                         </c:when>

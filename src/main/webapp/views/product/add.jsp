@@ -72,7 +72,7 @@
     </div>
     <script>
         $('#txtStartDay').datetimepicker({
-            format: 'd/m/Y',
+            format: 'd/m/Y H:m:s',
             timepicker: false,
             mask: true
         });
@@ -83,6 +83,5 @@
             mask: true
         });
     </script>
-
   </jsp:body>
 </t:main>

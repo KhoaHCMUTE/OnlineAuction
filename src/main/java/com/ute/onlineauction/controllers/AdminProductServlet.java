@@ -81,10 +81,14 @@ public class AdminProductServlet extends HttpServlet {
                 List<Bidding> listbiddings = BiddingModel.findAll();
                 request.setAttribute("listbidding",listbiddings);
                 List<User> usersss = UserModel.findAll();
+                LocalDateTime localDateTime = LocalDateTime.now();
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                String localDate = localDateTime.format(df);
                 request.setAttribute("user",usersss);
                 if (c != null || m != null ) {
                     request.setAttribute("product", c);
                     request.setAttribute("comment", m);
+                    request.setAttribute("localDate", localDate);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
                     ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
@@ -133,13 +137,15 @@ public class AdminProductServlet extends HttpServlet {
 
         String strSD = request.getParameter("StartDay");
         String strED = request.getParameter("EndDay");
+        String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime startDay = LocalDateTime.parse(strSD, df);
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
+        LocalDateTime day = LocalDateTime.parse(strD, df);
 
         Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,curretnPrice);
         ProductModel.add(p);
-        Bidding b = new Bidding(proID,sellerID,price,sellerID);
+        Bidding b = new Bidding(proID,sellerID,price,sellerID, startDay);
         BiddingModel.addBid(b);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -149,7 +155,7 @@ public class AdminProductServlet extends HttpServlet {
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int curretnPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        int currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
@@ -160,7 +166,7 @@ public class AdminProductServlet extends HttpServlet {
         LocalDateTime startDay = LocalDateTime.parse(strSD, df);
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
 
-        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,curretnPrice);
+        Product p = new Product(id,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,currentPrice);
         ProductModel.update(p);
         ServletUtils.redirect("/admin/product/index", request, response);
     }
@@ -176,11 +182,15 @@ public class AdminProductServlet extends HttpServlet {
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int price = Integer.parseInt(request.getParameter("Price"));
         int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
         if ((price + priceDifference) > newPrice ){
             ServletUtils.redirect("/views/ErrorPrice.jsp",request,response);
         }
         else {
-            Bidding b = new Bidding(proID, userID, newPrice, sellerID);
+            Bidding b = new Bidding(proID, newPrice, userID, sellerID, day);
             BiddingModel.addBid(b);
             ServletUtils.redirect("/admin/product/vwAll", request, response);
         }
@@ -194,7 +204,7 @@ public class AdminProductServlet extends HttpServlet {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime day = LocalDateTime.parse(strD, df);
 
-        CommentPro c = new CommentPro(proID, userID, text);
+        CommentPro c = new CommentPro(proID,text,userID, day);
         CommentProModel.addCommentPro(c);
         ServletUtils.redirect("/admin/product/vwAll", request, response);
     }

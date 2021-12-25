@@ -102,6 +102,7 @@ public class ProductModel {
                     .addParameter("ProID",p.getProID())
                     .addParameter("StartDay",p.getStartDay())
                     .addParameter("EndDay",p.getEndDay())
+                    .addParameter("CurrentPrice",p.getCurrentPrice())
                     .executeUpdate();
         }
 
