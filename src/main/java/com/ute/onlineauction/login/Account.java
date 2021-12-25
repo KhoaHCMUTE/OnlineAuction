@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @WebServlet(name = "Account", value = "/account/*")
 public class Account extends HttpServlet {
@@ -41,6 +41,25 @@ public class Account extends HttpServlet {
                 break;
             case "/changepw":
                 ServletUtils.forward("/views/login/cpassword.jsp", request, response);
+                break;
+            case "/admin":
+                List<User> list = UserModel.findAll();
+                request.setAttribute("Users", list);
+                ServletUtils.forward("/views/admin/admin.jsp", request, response);
+                break;
+            case "/upgrade":
+                int id = 0;
+                try {
+                     id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                }
+                User c = UserModel.findById(id);
+                if(c != null) {
+                    request.setAttribute("user",c);
+                    ServletUtils.forward("/views/admin/upgrade.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/account/admin",request,response);
+                }
                 break;
             case "/isavailable":
                 String UserName = request.getParameter("User");
@@ -75,6 +94,9 @@ public class Account extends HttpServlet {
                 break;
             case "/changepw":
                 changepw(request, response);
+                break;
+            case "/update":
+                update(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -167,6 +189,13 @@ public class Account extends HttpServlet {
             request.setAttribute("Error","Please re-enter ");
             ServletUtils.forward("/views/login/cpassword.jsp",request,response);
         }
+    }
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String UserName = request.getParameter("UserName");
+        int Permission = Integer.parseInt(request.getParameter("Permission"));
+        User a = new User(UserName,Permission);
+        UserModel.update1(a);
+        ServletUtils.redirect("/account/admin", request, response);
     }
 
 }

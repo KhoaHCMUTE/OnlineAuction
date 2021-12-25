@@ -126,12 +126,12 @@
     <form method="post" class="form-signin" >
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Account</h1>
 
-        <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
-        <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="rawpwd" required autofocus="">
-        <input type="password" id="txtConfirm" class="form-control" placeholder="Repeat Password" required autofocus="">
-        <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" required autofocus="">
-        <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" required autofocus="">
-        <input type="text" id="txtDOB" class="form-control" placeholder="Date Of Birth" name="Dob" required autofocus="">
+        <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName"  autofocus="">
+        <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="rawpwd" >
+        <input type="password" id="txtConfirm" class="form-control" placeholder="Repeat Password" >
+        <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" >
+        <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" >
+        <input type="text" id="txtDOB" class="form-control" placeholder="Date Of Birth" name="Dob" >
 
         <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
         <hr>

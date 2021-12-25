@@ -21,7 +21,15 @@ public class User {
         this.UserName = UserName;
         this.PassWord = PassWord;
     }
-
+    public User(int ID, String UserName, int Permission) {
+        this.ID = ID;
+        this.UserName = UserName;
+        this.Permission = Permission;
+    }
+    public User(String UserName, int Permission) {
+        this.UserName = UserName;
+        this.Permission = Permission;
+    }
     public User() {
 
     }

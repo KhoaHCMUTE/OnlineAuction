@@ -18,6 +18,11 @@
                 <li class="nav-item ">
                     <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home/category/index">Category</a>
                 </li>
+                <c:if test="${AuthUser.permission == 1}">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/account/admin">Admin</a>
+                    </li>
+                </c:if>
             </ul>
 
             <form class="form-inline mt-2 mr-4 mb-4 ml-auto">

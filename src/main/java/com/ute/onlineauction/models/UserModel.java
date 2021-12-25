@@ -55,12 +55,33 @@ public class UserModel {
                     .executeAndFetch(User.class);
         }
     }
+    public static User findById(int id) {
+        final String query = "select * from users where ID = :ID";
+        try (Connection con = DbUtils.getConnection()) {
+            List<User> list = con.createQuery(query)
+                    .addParameter("ID", id)
+                    .executeAndFetch(User.class);
+            if (list.size() == 0) {
+                return null;
+            }
+            return list.get(0);
+        }
+    }
     public static void update(User c) {
         String sql = "update users set PassWord = :PassWord where UserName = :UserName";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("UserName",c.getUserName())
                     .addParameter("PassWord",c.getPassWord())
+                    .executeUpdate();
+        }
+    }
+    public static void update1(User a) {
+        String sql = "update users set Permission = :Permission where UserName = :UserName";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("UserName",a.getUserName())
+                    .addParameter("Permission",a.getPermission())
                     .executeUpdate();
         }
     }

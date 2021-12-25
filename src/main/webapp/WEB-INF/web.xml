@@ -16,6 +16,14 @@
         <url-pattern>/account/changepw</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/account/admin</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/account/upgrade</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>LayoutFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
