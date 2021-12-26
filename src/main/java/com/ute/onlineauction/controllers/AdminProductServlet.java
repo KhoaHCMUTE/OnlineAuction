@@ -16,7 +16,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -69,6 +68,17 @@ public class AdminProductServlet extends HttpServlet {
                 List<User> users3 = UserModel.findAll();
                 request.setAttribute("user",users3);
                 ServletUtils.forward("/views/product/vwAll.jsp",request,response);
+
+                break;
+            case "/ProSearch":
+                String txtSr = request.getParameter("txtSr");
+                List<Product> SrPro = ProductModel.findByTextSearch(txtSr);
+                request.setAttribute("product",SrPro);
+                List<Bidding> listbidding3 = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbidding3);
+                List<User> users4 = UserModel.findAll();
+                request.setAttribute("user",users4);
+                ServletUtils.forward("/views/product/ProSearch.jsp", request, response);
                 break;
             case "/byProID":
                 int ProId = 0;
@@ -121,6 +131,7 @@ public class AdminProductServlet extends HttpServlet {
             case "/addCommentPro":
                 addCommentPro(request,response);
                 break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;

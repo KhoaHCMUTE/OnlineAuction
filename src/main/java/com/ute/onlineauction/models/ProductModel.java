@@ -31,6 +31,15 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
+    public static List<Product> findByTextSearch (String txtSr) {
+        final String query = "SELECT * FROM products WHERE MATCH(ProName) AGAINST(:txtSr)";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("txtSr",txtSr)
+                    .executeAndFetch(Product.class);
+        }
+    }
     public static Product findById (int id) {
         final String query = "select * from products where ProID = :ProID";
         try (Connection con = DbUtils.getConnection()) {

@@ -7,6 +7,7 @@ public class User {
     private String UserName, PassWord, Name, Email;
     private LocalDate Dob;
     private int Permission;
+    private int Notify;
 
     public User(int ID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission) {
         this.ID = ID;

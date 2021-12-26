@@ -28,8 +28,8 @@
             <form class="form-inline mt-2 mr-4 mb-4 ml-auto">
                 <i class= "fa fa-shopping-cart car2x fa-2x" aria-hidden="true"></i>
                 &nbsp;&nbsp;&nbsp;
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input id="txtSr" class="form-control mr-sm-2" type="text" placeholder="Search" name="txtSr">
+                <button onclick="SearchFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button">Search</button>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <c:choose>
                         <c:when test="${Auth}">
@@ -65,3 +65,10 @@
         </div>
     </div>
 </nav>
+<script>
+function SearchFunction(){
+    let txtSr = document.getElementById("txtSr").value;
+    window.location.href="${pageContext.request.contextPath}/admin/product/ProSearch?txtSr="+txtSr;
+}
+</script>
+
