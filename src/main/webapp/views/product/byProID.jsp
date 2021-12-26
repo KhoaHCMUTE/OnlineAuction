@@ -2,6 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="product" scope="request" type="com.ute.onlineauction.beans.Product"/>
+<jsp:useBean id="listproduct" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="comment" scope="request" type="java.util.List<com.ute.onlineauction.beans.CommentPro>"/>
 <jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
@@ -14,6 +15,9 @@
             <div class="card border border-dark">
         <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="${product.proName}" title="${product.proName}" >
                 <div class="card-body bg-light">
+                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/sub1.jpg" class="rounded border border-info" alt="sub1" width="320" height="320">
+                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/sub2.jpg" class="rounded-top border border-info" alt="sub2" width="320" height="320">
+                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/sub3.jpg" class="rounded-right border border-info" alt="sub3" width="320" height="320">
                     <form action="" method="post">
                         <c:set var = "Max" scope = "session" value = "${0}"/>
                         <c:forEach items="${listbidding}" var="b">
@@ -126,6 +130,67 @@
 
                         <br>
                         <br>
+                        <c:set var = "GIOIHAN" scope = "session" value = "${1}"/>
+                        <div class="card-body">
+                            <div class="row ">
+                                <c:forEach items="${listproduct}" var="c">
+                                    <c:if test="${GIOIHAN <= 5}">
+                                    <c:if test="${c.proID != product.proID}">
+                                        <c:set var = "5SP" scope = "session" value = "${GIOIHAN+1}"/>
+                                    <div class="col-sm-4 mb-3 ">
+                                        <div class="card bg-light border border-dark">
+                                            <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">
+                                            <div class="card-body">
+                                                <a href="${pageContext.request.contextPath}/admin/product/byProID?ProId=${c.proID}" class="text-dark" style="font-size:25px; ">${c.proName}</a>
+                                                <c:set var = "Max" scope = "session" value = "${0}"/>
+                                                <c:forEach items="${listbidding}" var="b">
+                                                    <c:if test="${b.proID == c.proID}">
+                                                        <c:if test="${Max < b.price}">
+                                                            <c:set var = "Max" scope = "session" value = "${b.price}"/>
+                                                        </c:if>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <h6 class="card-subtitle mb-2 text-dark" style="font-size:40px;">$ ${Max}</h6>
+                                                <c:choose>
+                                                    <c:when test="${c.currentPrice != 0}">
+                                                        <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${c.currentPrice}</p></p>
+                                                    </c:when>
+                                                </c:choose>
+                                                <c:set var = "Number" scope = "session" value = "${-1}"/>
+                                                <c:forEach items="${listbidding}" var="b">
+                                                    <c:if test="${b.proID == c.proID}">
+                                                        <c:set var = "Number" scope = "session" value ="${Number+1}"/>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${Number != 0}">
+                                                        <p class="card-text"><b>Number Of Bids:</b> ${Number}</p>
+                                                        <c:forEach items="${listbidding}" var="b">
+                                                            <c:forEach items="${user}" var="u">
+                                                                <c:if test="${b.price == Max}">
+                                                                    <c:if test="${b.proID == c.proID}" >
+                                                                        <c:if test="${u.id == b.userID}">
+                                                                            <p><b>Name Bidder:</b> ${u.userName}</p>
+                                                                        </c:if>
+                                                                    </c:if>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="card-text"><b>No One Bid Yet</b></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <p class="card-text"><b>Start Day:</b> ${c.startDay}</p>
+                                                <p class="card-text">${c.tinyDes}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                        </div>
 <%--                        <label for="CommentID">Comment</label>--%>
 <%--                        <input type="text" class="form-control" id="CommentID" name="comment">--%>
 <%--                        <button type="submit" class="btn btn-outline-primary btn-sm w-25" formaction="${pageContext.request.contextPath}/admin/product/addCommentPro" role="button">Comment</button>--%>

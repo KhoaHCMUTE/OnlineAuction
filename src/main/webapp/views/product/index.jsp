@@ -39,6 +39,7 @@
                                         <c:set var = "Number" scope = "session" value ="${Number+1}"/>
                                     </c:if>
                                 </c:forEach>
+                                <c:set var = "Bienthu" scope = "session" value = "${0}"/>
                                 <c:choose>
                                     <c:when test="${Number != 0}">
                                         <p class="card-text"><b>Number Of Bids:</b> ${Number}</p>
@@ -47,7 +48,10 @@
                                                 <c:if test="${b.price == Max}">
                                                     <c:if test="${b.proID == c.proID}" >
                                                         <c:if test="${u.id == b.userID}">
-                                                            <p><b>Name Bidder:</b> ${u.userName}</p>
+                                                            <c:if test="${Bienthu==0}">
+                                                                <p><b>Name Bidder:</b> ${u.userName}</p>
+                                                                <c:set var = "Bienthu" scope = "session" value = "${1}"/>
+                                                            </c:if>
                                                         </c:if>
                                                     </c:if>
                                                 </c:if>

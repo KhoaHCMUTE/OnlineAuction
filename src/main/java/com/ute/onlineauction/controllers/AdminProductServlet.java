@@ -80,6 +80,8 @@ public class AdminProductServlet extends HttpServlet {
                 List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
                 List<Bidding> listbiddings = BiddingModel.findAll();
                 request.setAttribute("listbidding",listbiddings);
+                List<Product> listproduct = ProductModel.findAll();
+                request.setAttribute("listproduct",listproduct);
                 List<User> usersss = UserModel.findAll();
                 LocalDateTime localDateTime = LocalDateTime.now();
                 DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -128,12 +130,12 @@ public class AdminProductServlet extends HttpServlet {
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        int price = Integer.parseInt(request.getParameter("Price"));
-        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        float price = Integer.parseInt(request.getParameter("Price"));
+        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
-        int curretnPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        float currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
 
         String strSD = request.getParameter("StartDay");
         String strED = request.getParameter("EndDay");
@@ -143,7 +145,7 @@ public class AdminProductServlet extends HttpServlet {
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
         LocalDateTime day = LocalDateTime.parse(strD, df);
 
-        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,curretnPrice);
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,currentPrice);
         ProductModel.add(p);
         Bidding b = new Bidding(proID,sellerID,price,sellerID, startDay);
         BiddingModel.addBid(b);
@@ -151,11 +153,11 @@ public class AdminProductServlet extends HttpServlet {
     }
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));
-        int price = Integer.parseInt(request.getParameter("Price"));
-        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        float price = Integer.parseInt(request.getParameter("Price"));
+        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        float currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
@@ -180,8 +182,8 @@ public class AdminProductServlet extends HttpServlet {
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int price = Integer.parseInt(request.getParameter("Price"));
-        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        float price = Integer.parseInt(request.getParameter("Price"));
+        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime day = LocalDateTime.parse(strD, df);

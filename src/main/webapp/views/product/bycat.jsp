@@ -23,7 +23,7 @@
               <div class="col-sm-3">
                 <div class="card">
                   <div class="list-group" id="list-tab1" role="tablist">
-                    <h4 class="list-group-item list-group-item-action active" id="list-Top-list1" data-bs-toggle="list"
+                    <h4 class="list-group-item list-group-item-action active list-group-item-info" id="list-Top-list1" data-bs-toggle="list"
                         href="#list-Top" role="tab" aria-controls="list-home">Top 5 Highest Price</h4>
                     <c:forEach items="${HighestPriceByCat}" var="c">
                       <a class="list-group-item list-group-item-action" id="list-A-list1" data-bs-toggle="list"
@@ -36,7 +36,7 @@
               <div class="col-sm-3">
                 <div class="card">
                   <div class="list-group" id="list-tab2" role="tablist">
-                    <h4 class="list-group-item list-group-item-action active" id="list-Top-list2" data-bs-toggle="list"
+                    <h4 class="list-group-item list-group-item-action active list-group-item-info" id="list-Top-list2" data-bs-toggle="list"
                         href="#list-Top" role="tab" aria-controls="list-home">Top 5 Famous Bid</h4>
                     <c:forEach items="${HighestBidCountByCat}" var="b">
                     <c:forEach items="${HighestPriceByCat}" var="c">
@@ -53,7 +53,7 @@
               <div class="col-sm-3">
                 <div class="card">
                   <div class="list-group" id="list-tab3" role="tablist">
-                    <h4 class="list-group-item list-group-item-action active" id="list-Top-list3" data-bs-toggle="list" href="#list-Top" role="tab" aria-controls="list-home">Top 5 Upcoming End</h4>
+                    <h4 class="list-group-item list-group-item-action active list-group-item-info" id="list-Top-list3" data-bs-toggle="list" href="#list-Top" role="tab" aria-controls="list-home">Top 5 Upcoming End</h4>
                     <a class="list-group-item list-group-item-action" id="list-A-list3" data-bs-toggle="list" href="#list-A" role="tab" aria-controls="list-profile">A</a>
                     <a class="list-group-item list-group-item-action" id="list-B-list3" data-bs-toggle="list" href="#list-B" role="tab" aria-controls="list-messages">B</a>
                     <a class="list-group-item list-group-item-action" id="list-C-list3" data-bs-toggle="list" href="#list-C" role="tab" aria-controls="list-settings">C</a>
@@ -92,6 +92,7 @@
                           <c:set var = "Number" scope = "session" value ="${Number+1}"/>
                         </c:if>
                       </c:forEach>
+                      <c:set var = "Bienthu" scope = "session" value = "${0}"/>
                       <c:choose>
                         <c:when test="${Number != 0}">
                           <p class="card-text"><b>Number Of Bids:</b> ${Number}</p>
@@ -100,7 +101,10 @@
                               <c:if test="${b.price == Max}">
                                 <c:if test="${b.proID == c.proID}" >
                                   <c:if test="${u.id == b.userID}">
-                                    <p><b>Name Bidder:</b> ${u.userName}</p>
+                                    <c:if test="${Bienthu==0}">
+                                      <p><b>Name Bidder:</b> ${u.userName}</p>
+                                      <c:set var = "Bienthu" scope = "session" value = "${1}"/>
+                                    </c:if>
                                   </c:if>
                                 </c:if>
                               </c:if>

@@ -4,9 +4,9 @@
 <jsp:useBean id="categories" scope="request" type="java.util.List<com.ute.onlineauction.beans.Category>"/>
 <t:main>
   <jsp:body>
-    <div class="card-body ">
+    <div class="card-body">
       <c:set var="STT" scope="session" value="${1}"/>
-      <table class="table table-striped table-light">
+      <table class="table table-striped table-info">
         <thead>
         <tr>
           <th scope="col">#</th>
