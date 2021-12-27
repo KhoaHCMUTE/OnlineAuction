@@ -2,14 +2,14 @@ package com.ute.onlineauction.beans;
 
 import java.time.LocalDate;
 
-public class User {
+public class User1 {
     private int ID;
     private String UserName, PassWord, Name, Email;
     private LocalDate Dob;
     private int Permission;
     private int Notify;
 
-    public User(int ID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission, int Notify) {
+    public User1(int ID, String UserName, String PassWord, String Name, String Email, LocalDate Dob, int Permission, int Notify) {
         this.ID = ID;
         this.UserName = UserName;
         this.PassWord = PassWord;
@@ -19,26 +19,15 @@ public class User {
         this.Permission = Permission;
         this.Notify = Notify;
     }
-    public User(String UserName, String PassWord) {
+    public User1(String Name, String UserName) {
+        this.Name = Name;
         this.UserName = UserName;
-        this.PassWord = PassWord;
     }
-    public User(int ID, String UserName, int Permission) {
-        this.ID = ID;
+    public User1(String UserName, int Notify) {
         this.UserName = UserName;
-        this.Permission = Permission;
-    }
-    public User(String UserName, int Permission) {
-        this.UserName = UserName;
-        this.Permission = Permission;
-    }
-    public User(int ID, int Notify) {
-        this.ID = ID;
         this.Notify = Notify;
     }
-    public User() {
 
-    }
     public int getId() {
         return ID;
     }

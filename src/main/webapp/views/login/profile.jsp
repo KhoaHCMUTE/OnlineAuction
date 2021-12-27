@@ -152,12 +152,13 @@
     <title>Profile</title>
 </head>
 <body>
-<form class="page-content page-container" id="page-content">
+<form class="page-content page-container" method="post" id="page-content">
         <div class="row container d-flex justify-content-center">
             <div class="col-xl-9 col-md-15">
                 <div class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
                         <div class="col-sm-3 bg-c-lite-green user-profile">
+                        <c:forEach items="${Users}" var="c">
                         <c:choose>
                             <c:when test="${AuthUser.permission == 1}">
                                 <div class="card-block text-center text-white">
@@ -172,8 +173,8 @@
                                         <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h5>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Name</p>
-                                                <h6 class="text-muted f-w-400">${AuthUser.userName}</h6>
+                                                <p class="m-b-10 f-w-600">UserName</p>
+                                                <input type="text" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.userName}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="col-sm-15">
@@ -196,6 +197,9 @@
                                                 <p class="m-b-10 f-w-600">Day Of Birth</p>
                                                 <h6 class="text-muted f-w-400">${AuthUser.dob}</h6>
                                             </div>
+                                            <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
+                                                <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
+                                            </div>
                                         </div>
                                         <div class="row1">
                                             <a style="color: black; font-weight: bold; padding-left: 250px; padding-top: 15px" href="${pageContext.request.contextPath}/home/index">Home</a>
@@ -216,8 +220,8 @@
                                     <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h5>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Name</p>
-                                            <h6 class="text-muted f-w-400">${AuthUser.userName}</h6>
+                                            <p class="m-b-10 f-w-600">UserName</p>
+                                            <input type="text" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.userName}">
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="col-sm-17">
@@ -240,25 +244,47 @@
                                             <p class="m-b-10 f-w-600">Day Of Birth</p>
                                             <h6 class="text-muted f-w-400">${AuthUser.dob}</h6>
                                         </div>
-                                    </div>
-                                    <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Permission</h5>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Bidder</p>
-                                            <h6 class="text-muted f-w-400">Available</h6>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p style="padding-left: 20px" class="m-b-10 f-w-600 ">Seller</p>
-                                            <button class="btn btn-info small" type="submit">Upgrage</button>
+                                        <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
+                                            <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
                                         </div>
                                     </div>
-                                    <div class="row1">
-                                        <a style="color: black; font-weight: bold; padding-left: 250px" href="${pageContext.request.contextPath}/home/index">Home</a>
-                                    </div>
+                                    <c:if test="${AuthUser.permission == 0}">
+                                        <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Permission</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Bidder</p>
+                                                <h6 class="text-muted f-w-400">Available</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p style="padding-left: 20px" class="m-b-10 f-w-600 ">Seller</p>
+                                                <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/notify">Upgrage</a>
+                                            </div>
+                                        </div>
+                                        <div class="row1">
+                                            <a style="color: black; font-weight: bold; padding-left: 250px" href="${pageContext.request.contextPath}/home/index">Home</a>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${AuthUser.permission == 2}">
+                                        <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Permission</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Bidder</p>
+                                                <h6 class="text-muted f-w-400">Available</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600 ">Seller</p>
+                                                <h6 class="text-muted f-w-400">Available</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row1">
+                                            <a style="color: black; font-weight: bold; padding-left: 250px" href="${pageContext.request.contextPath}/home/index">Home</a>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:otherwise>
                         </c:choose>
+                    </c:forEach>
                     </div>
                 </div>
             </div>

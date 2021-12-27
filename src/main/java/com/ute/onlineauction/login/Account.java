@@ -2,6 +2,7 @@ package com.ute.onlineauction.login;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ute.onlineauction.beans.User;
+import com.ute.onlineauction.beans.User1;
 import com.ute.onlineauction.models.UserModel;
 import com.ute.onlineauction.utils.ServletUtils;
 
@@ -41,6 +42,12 @@ public class Account extends HttpServlet {
                 break;
             case "/changepw":
                 ServletUtils.forward("/views/login/cpassword.jsp", request, response);
+                break;
+            case "/changeun":
+                ServletUtils.forward("/views/login/cusername.jsp", request, response);
+                break;
+            case "/notify":
+                ServletUtils.forward("/views/login/notify.jsp", request, response);
                 break;
             case "/admin":
                 List<User> list = UserModel.findAll();
@@ -95,8 +102,14 @@ public class Account extends HttpServlet {
             case "/changepw":
                 changepw(request, response);
                 break;
+            case "/changeun":
+                changeun(request, response);
+                break;
             case "/update":
                 update(request, response);
+                break;
+            case "/editnotify":
+                editnotify(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -118,8 +131,9 @@ public class Account extends HttpServlet {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());
 
         int Permission = 0;
+        int Notify = 0;
 
-        User c = new User(0, UserName, bcryptHashString, Name, Email, Dob, Permission);
+        User c = new User(0, UserName, bcryptHashString, Name, Email, Dob, Permission, Notify);
         UserModel.add(c);
         ServletUtils.forward("/views/login/register.jsp", request, response);
     }
@@ -150,7 +164,6 @@ public class Account extends HttpServlet {
                         ServletUtils.forward("/views/login/login.jsp",request,response);
                     }
     }
-
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 HttpSession Session = request.getSession();
                 Session.setAttribute("Auth", false);
@@ -197,5 +210,18 @@ public class Account extends HttpServlet {
         UserModel.update1(a);
         ServletUtils.redirect("/account/admin", request, response);
     }
-
+    private void editnotify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int ID = Integer.parseInt(request.getParameter("ID"));
+        int Notify = Integer.parseInt(request.getParameter("Notify"));
+        User c = new User(ID,Notify);
+        UserModel.notify(c);
+        ServletUtils.redirect("/account/profile", request, response);
+    }
+    private void changeun(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String Name = request.getParameter("Name");
+        String UserName = request.getParameter("UserName");
+        User1 c = new User1(Name,UserName);
+        UserModel.update2(c);
+        ServletUtils.redirect("/account/profile", request, response);
+    }
 }

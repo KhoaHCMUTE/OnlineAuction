@@ -25,7 +25,7 @@
                 </c:if>
             </ul>
 
-            <form class="form-inline mt-2 mr-4 mb-4 ml-auto">
+            <form  method="post" class="form-inline mt-2 mr-4 mb-4 ml-auto">
                 <i class= "fa fa-shopping-cart car2x fa-2x" aria-hidden="true"></i>
                 &nbsp;&nbsp;&nbsp;
                 <input id="txtSr" class="form-control mr-sm-2" type="text" placeholder="Search" name="txtSr">
@@ -33,7 +33,7 @@
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <c:choose>
                         <c:when test="${Auth}">
-                            <form id="flogout" method="post" action="${pageContext.request.contextPath}/account/logout"></form>
+                            <form id="flogout" method="post" action="${pageContext.request.contextPath}/account/logout">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown">
                                         <b>${AuthUser.userName}</b>
@@ -44,12 +44,13 @@
                                             Profile
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item"  href="javascript: $('#flogout').submit()">
+                                        <button class="dropdown-item"  href="javascript: $('#flogout').submit()">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Sign Out
-                                        </a>
+                                        </button>
                                     </div>
                                 </li>
+                            </form>
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item">
