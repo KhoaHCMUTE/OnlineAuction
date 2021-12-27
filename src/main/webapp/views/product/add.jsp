@@ -26,6 +26,22 @@
           <input type="number" class="form-control" id="ProID" name="ProID" readonly value="${MaxProID+1}">
         </div>
         <div class="form-group">
+          <label for="txtImageMain">Image Main:</label>
+          <input type="file" id="txtImageMain" name="ImageMain" >
+        </div>
+        <div class="form-group">
+          <label for="txtImageSub1">Image Sub 1:</label>
+          <input type="file" id="txtImageSub1" name="ImageSub1" >
+        </div>
+        <div class="form-group">
+          <label for="txtImageSub2">Image Sub 2:</label>
+          <input type="file" id="txtImageSub2" name="ImageSub2" >
+        </div>
+        <div class="form-group">
+          <label for="txtImageSub3">Image Sub 3:</label>
+          <input type="file" id="txtImageSub3" name="ImageSub3">
+        </div>
+        <div class="form-group">
           <label for="txtProName">Product</label>
           <input type="text" class="form-control" id="txtProName" name="ProName" >
         </div>
@@ -71,17 +87,16 @@
       </form>
     </div>
     <script>
-        $('#txtStartDay').datetimepicker({
-            format: 'd/m/Y H:m:s',
-            timepicker: false,
-            mask: true
-        });
-
-        $('#txtEndDay').datetimepicker({
-            format: 'd/m/Y',
-            timepicker: false,
-            mask: true
-        });
+      $('#txtStartDay').datetimepicker({
+        format: 'd/m/Y H:m:s',
+        timepicker: false,
+        mask: true
+      });
+      $('#txtEndDay').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true
+      });
     </script>
   </jsp:body>
 </t:main>

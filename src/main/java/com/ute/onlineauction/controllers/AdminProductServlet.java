@@ -16,6 +16,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -141,12 +143,12 @@ public class AdminProductServlet extends HttpServlet {
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        float price = Integer.parseInt(request.getParameter("Price"));
-        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        int price = Integer.parseInt(request.getParameter("Price"));
+        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
-        float currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        int currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
 
         String strSD = request.getParameter("StartDay");
         String strED = request.getParameter("EndDay");
@@ -156,6 +158,24 @@ public class AdminProductServlet extends HttpServlet {
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
         LocalDateTime day = LocalDateTime.parse(strD, df);
 
+        try{
+            Part partmain = request.getPart("ImageMain");
+            Part partsub1 = request.getPart("ImageSub1");
+            Part partsub2 = request.getPart("ImageSub2");
+            Part partsub3 = request.getPart("ImageSub3");
+            String realPath = request.getServletContext().getRealPath("/public/imgs/sp");
+   //         String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+            if(!Files.exists(Path.of(realPath))) {
+                Files.createDirectory(Path.of(realPath));
+            }
+            partmain.write(realPath + "/" + proID + "/main" );
+            partsub1.write(realPath + "/" + proID + "/sub1" );
+            partsub2.write(realPath + "/" + proID + "/sub2" );
+            partsub3.write(realPath + "/" + proID + "/sub3" );
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,currentPrice);
         ProductModel.add(p);
         Bidding b = new Bidding(proID,sellerID,price,sellerID, startDay);
@@ -164,11 +184,11 @@ public class AdminProductServlet extends HttpServlet {
     }
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));
-        float price = Integer.parseInt(request.getParameter("Price"));
-        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        int price = Integer.parseInt(request.getParameter("Price"));
+        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        float currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        int currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
@@ -193,8 +213,8 @@ public class AdminProductServlet extends HttpServlet {
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        float price = Integer.parseInt(request.getParameter("Price"));
-        float priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        int price = Integer.parseInt(request.getParameter("Price"));
+        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime day = LocalDateTime.parse(strD, df);

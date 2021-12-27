@@ -1,7 +1,6 @@
 package com.ute.onlineauction.models;
 
 import com.ute.onlineauction.beans.Bidding;
-import com.ute.onlineauction.beans.Product;
 import com.ute.onlineauction.utils.DbUtils;
 import org.sql2o.Connection;
 
