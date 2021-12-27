@@ -10,6 +10,8 @@ import com.ute.onlineauction.models.UserModel;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebFilter(filterName = "LayoutFilter")
@@ -21,13 +23,18 @@ public class LayoutFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         List<Category> list = CategoryModel.findAll();
-        req.setAttribute("categoriesWithDetails",list);
+        request.setAttribute("categoriesWithDetails",list);
         List<Bidding> biddings = BiddingModel.findAll();
-        req.setAttribute("bindding",biddings);
+        request.setAttribute("bindding",biddings);
         List<User> users = UserModel.findAll();
-        req.setAttribute("user",users);
-        chain.doFilter(req, res);
+        request.setAttribute("user",users);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String localDate = localDateTime.format(df);
+        request.setAttribute("localDate",localDate);
+        request.setAttribute("localDateNotFormatted",localDateTime);
+        chain.doFilter(request, response);
     }
 }
