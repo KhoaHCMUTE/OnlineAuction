@@ -62,6 +62,13 @@
                 <p class="card-text"><b>Start Day:</b> ${product.startDay}</p>
                 <p class="card-text"><b>End Day:</b> ${product.endDay}</p>
                 <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
+                <c:if test="${localDateNotFormatted gt product.endDay}">
+                    <p>End</p>
+                </c:if>
+                <c:if test="${product.endDay gt localDateNotFormatted }">
+                    <p>Not End</p>
+                </c:if>
+
                 <c:set var = "Number" scope = "session" value = "${-1}"/>
                 <c:forEach items="${listbidding}" var="b">
                     <c:if test="${b.proID == product.proID}">
@@ -106,6 +113,7 @@
                 <p><b>Description:</b> ${product.fullDes}</p>
                 <br/>
                 <c:set var = "BienThu" scope = "session" value = "${0}"/>
+                <button onclick="CheckDayFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button">Check</button>
                 <p class=" text-center" style="font-size:20px;"><b>Auction History</b></p>
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -131,6 +139,7 @@
                                                         <td>${b.day}</td>
                                                         <td>${u.userName}</td>
                                                         <td>${b.price}</td>
+
                                                         <c:set var = "STT" scope = "session" value = "${STT+1}"/>
                                                     </tr>
                                                 </c:when>
@@ -210,6 +219,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </c:if>
                             </c:if>
                         </c:forEach>
@@ -238,5 +249,11 @@
                     <%--            </div>--%>
             </form>
         </div>
+        <script>
+
+
+
+        </script>
+
     </jsp:body>
 </t:main>

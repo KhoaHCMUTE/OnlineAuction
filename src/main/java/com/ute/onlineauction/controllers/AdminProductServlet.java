@@ -103,6 +103,7 @@ public class AdminProductServlet extends HttpServlet {
                     request.setAttribute("product", c);
                     request.setAttribute("comment", m);
                     request.setAttribute("localDate", localDate);
+                    request.setAttribute("localDateNotFormatted", localDateTime);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
                     ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
@@ -143,20 +144,24 @@ public class AdminProductServlet extends HttpServlet {
         String name = request.getParameter("ProName");
         String tiny = request.getParameter("TinyDes");
         String full = request.getParameter("FullDes");
-        int price = Integer.parseInt(request.getParameter("Price"));
-        int priceDifference = Integer.parseInt(request.getParameter("PriceDifference"));
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        float price = Float.parseFloat(request.getParameter("Price"));
+        float priceDifference =Float.parseFloat(request.getParameter("PriceDifference"));
         int catID = Integer.parseInt(request.getParameter("CatID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int proID = Integer.parseInt(request.getParameter("ProID"));
-        int currentPrice = Integer.parseInt(request.getParameter("CurrentPrice"));
+        float currentPrice = Float.parseFloat(request.getParameter("CurrentPrice"));
 
         String strSD = request.getParameter("StartDay");
         String strED = request.getParameter("EndDay");
-        String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime startDay = LocalDateTime.parse(strSD, df);
         LocalDateTime endDay = LocalDateTime.parse(strED, df);
-        LocalDateTime day = LocalDateTime.parse(strD, df);
+
+        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,currentPrice);
+        ProductModel.add(p);
+        Bidding b = new Bidding(proID,sellerID,price,sellerID, startDay);
+        BiddingModel.addBid(b);
+        ServletUtils.redirect("/admin/product/index", request, response);
 
         try{
             Part partmain = request.getPart("ImageMain");
@@ -176,11 +181,7 @@ public class AdminProductServlet extends HttpServlet {
         } catch (Exception e){
             e.printStackTrace();
         }
-        Product p = new Product(proID,name,tiny,full,price,priceDifference,catID,sellerID,startDay,endDay,currentPrice);
-        ProductModel.add(p);
-        Bidding b = new Bidding(proID,sellerID,price,sellerID, startDay);
-        BiddingModel.addBid(b);
-        ServletUtils.redirect("/admin/product/index", request, response);
+
     }
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));

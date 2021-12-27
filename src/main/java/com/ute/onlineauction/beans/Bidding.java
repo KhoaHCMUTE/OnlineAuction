@@ -4,10 +4,11 @@ package com.ute.onlineauction.beans;
 import java.time.LocalDateTime;
 
 public class Bidding {
-    private int ProID,ID,UserID,SellerID,Price ;
+    private int ProID,ID,UserID,SellerID ;
+    private float Price;
     LocalDateTime Day;
 
-    public Bidding  (int iD,int proID,int price,int userID, int sellerID, LocalDateTime day){
+    public Bidding  (int iD,int proID,float price,int userID, int sellerID, LocalDateTime day){
         this.ID = iD;
         this.ProID = proID;
         this.UserID = userID;
@@ -16,7 +17,7 @@ public class Bidding {
         this.Day = day;
     }
 
-    public Bidding  (int proID,int userID,int price, int sellerID, LocalDateTime day){
+    public Bidding  (int proID,int userID,float price, int sellerID, LocalDateTime day){
         this.ID = -1;
         this.ProID = proID;
         this.UserID = userID;
@@ -32,7 +33,7 @@ public class Bidding {
     public int getID() {return ID;}
     public int getSellerID() {return SellerID;}
     public int getProID() {return ProID;}
-    public int getPrice() {return Price;}
+    public float getPrice() {return Price;}
     public int getUserID() {return UserID;}
     public LocalDateTime getDay() {return Day;}
 }

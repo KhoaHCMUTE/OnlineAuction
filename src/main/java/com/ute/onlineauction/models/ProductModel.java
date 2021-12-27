@@ -83,6 +83,7 @@ public class ProductModel {
         String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay,CurrentPrice) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay,:CurrentPrice)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
+                    .addParameter("ProID", p.getProID())
                     .addParameter("ProName", p.getProName())
                     .addParameter("TinyDes", p.getTinyDes())
                     .addParameter("FullDes", p.getFullDes())
@@ -90,7 +91,6 @@ public class ProductModel {
                     .addParameter("PriceDifference", p.getPriceDifference())
                     .addParameter("CatID", p.getCatID())
                     .addParameter("UserID", p.getUserID())
-                    .addParameter("ProID", p.getProID())
                     .addParameter("StartDay", p.getStartDay())
                     .addParameter("EndDay", p.getEndDay())
                     .addParameter("CurrentPrice", p.getCurrentPrice())

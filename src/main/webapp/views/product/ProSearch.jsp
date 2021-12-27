@@ -5,6 +5,8 @@
 <jsp:useBean id="product" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
 <jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
+<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
+
 <t:main>
     <jsp:body>
         <a  id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/add" role="button">

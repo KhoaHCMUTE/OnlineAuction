@@ -3,9 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <jsp:useBean id="product" scope="request" type="com.ute.onlineauction.beans.Product"/>
-
-
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
+
 <t:main>
     <jsp:body>
         <div class="card-body">
