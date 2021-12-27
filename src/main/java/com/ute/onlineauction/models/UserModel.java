@@ -90,4 +90,12 @@ public class UserModel {
                     .executeUpdate();
         }
     }
+    public static void delete(String name) {
+        String sql = "delete from users where UserName = :UserName";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("UserName",name)
+                    .executeUpdate();
+        }
+    }
 }

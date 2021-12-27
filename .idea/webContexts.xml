@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags/main.tag" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/partials/left.jsp" value="file://$PROJECT_DIR$/src/main/webapp/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/partials/nav.jsp" value="file://$PROJECT_DIR$/src/main/webapp/partials" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/delete.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/category/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/category" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/home/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/home" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/login/cpassword.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/login" />

@@ -14,8 +14,6 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">UserName</th>
-                <th scope="col">Email</th>
-                <th scope="col">Dob</th>
                 <th scope="col">Permission</th>
                 <th scope="col">Upgrade</th>
             </tr>
@@ -25,8 +23,6 @@
             <tr>
                 <th scope="row">${c.id}</th>
                 <td>${c.userName}</td>
-                <td>${c.email}</td>
-                <td>${c.dob}</td>
                 <td style="padding-left: 20px">
                     ${c.permission}
                         <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/account/upgrade?id=${c.id}" role="button">

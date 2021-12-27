@@ -68,6 +68,7 @@ public class Account extends HttpServlet {
                     ServletUtils.redirect("/account/admin",request,response);
                 }
                 break;
+
             case "/isavailable":
                 String UserName = request.getParameter("User");
                 User User = UserModel.findByUserName(UserName);
@@ -107,6 +108,9 @@ public class Account extends HttpServlet {
                 break;
             case "/update":
                 update(request, response);
+                break;
+            case "/delete":
+                delete(request, response);
                 break;
             case "/editnotify":
                 editnotify(request, response);
@@ -223,5 +227,10 @@ public class Account extends HttpServlet {
         User1 c = new User1(Name,UserName);
         UserModel.update2(c);
         ServletUtils.redirect("/account/profile", request, response);
+    }
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("UserName");
+        UserModel.delete(name);
+        ServletUtils.redirect("/account/admin", request, response);
     }
 }

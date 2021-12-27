@@ -123,7 +123,7 @@
 
     }
   </style>
-  <title>Upgrade Account</title>
+  <title>Option</title>
 </head>
 <body>
 <c:if test="${AuthUser.permission == 1}">
@@ -132,8 +132,11 @@
     <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Upgrade Account</h1>
     <input type="text" id="txtUsername" class="form-control"  name="UserName" readonly value="${user.userName}">
     <input type="text" id="txtPassword" class="form-control"  name="Permission" value="${user.permission}" autofocus>
-    <br><br>
+    <br>
     <button class="btn btn-outline-success btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/update" role="button"><i class="fas fa-sign-in-alt"></i>Change</button><br>
+    <hr>
+    <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Delete Account</h2>
+    <button class="btn btn-outline-danger btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/delete" role="button"><i class="fas fa-sign-in-alt"></i>Delete</button><br>
     <hr>
     <a href="${pageContext.request.contextPath}/account/admin" id="cancel_signup"><i class="fas fa-angle-left"></i>Back</a>
   </form>
