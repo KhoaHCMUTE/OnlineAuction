@@ -2,14 +2,8 @@ package com.ute.onlineauction.controllers;
 
 
 
-import com.ute.onlineauction.beans.Bidding;
-import com.ute.onlineauction.beans.CommentPro;
-import com.ute.onlineauction.beans.Product;
-import com.ute.onlineauction.beans.User;
-import com.ute.onlineauction.models.BiddingModel;
-import com.ute.onlineauction.models.CommentProModel;
-import com.ute.onlineauction.models.ProductModel;
-import com.ute.onlineauction.models.UserModel;
+import com.ute.onlineauction.beans.*;
+import com.ute.onlineauction.models.*;
 import com.ute.onlineauction.utils.ServletUtils;
 
 import javax.servlet.*;
@@ -105,6 +99,47 @@ public class AdminProductServlet extends HttpServlet {
                     ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
                 }
                 break;
+            case "/resultProID":
+                int resultId = 0;
+                try {
+                    resultId = Integer.parseInt(request.getParameter("ProId"));
+                } catch (NumberFormatException e) {
+                }
+                Product pro = ProductModel.findById(resultId);
+                List<CommentPro> com = CommentProModel.getCommentByProID(resultId);
+                List<Bidding> listbiddings1 = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbiddings1);
+                List<Product> listproduct1 = ProductModel.findAll();
+                request.setAttribute("listproduct",listproduct1);
+                List<User> usersss1 = UserModel.findAll();
+                request.setAttribute("user",usersss1);
+                List<Bidding> top3bid = BiddingModel.findtop3byProID(resultId);
+                request.setAttribute("top3bid",top3bid);
+                if (pro != null || com != null ) {
+                    request.setAttribute("product", pro);
+                    request.setAttribute("comment", com);
+                    ServletUtils.forward("/views/product/resultProID.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/views/product/vwAll.jsp", request, response);
+                }
+                break;
+            case "/Notify":
+                int UserID = 0;
+                try {
+                    UserID = Integer.parseInt(request.getParameter("UserID"));
+                } catch (NumberFormatException e) {
+                }
+                List<AuctionNotify> Not = NotificationModel.findByUserId(UserID);
+                request.setAttribute("NotifyByUser",Not);
+                List<Product> Prolist = ProductModel.findAll();
+                request.setAttribute("product",Prolist);
+                List<Bidding> listbidding1 = BiddingModel.findAll();
+                request.setAttribute("listbidding",listbidding1);
+                List<User> users1 = UserModel.findAll();
+                request.setAttribute("user",users1);
+                ServletUtils.forward("/views/product/Notify.jsp",request,response);
+                break;
+
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;
@@ -130,7 +165,8 @@ public class AdminProductServlet extends HttpServlet {
             case "/addCommentPro":
                 addCommentPro(request,response);
                 break;
-
+            case "/sendNotify":
+                SendNotify(request,response);
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -222,7 +258,7 @@ public class AdminProductServlet extends HttpServlet {
         else {
             Bidding b = new Bidding(proID , userID,newPrice, sellerID, day);
             BiddingModel.addBid(b);
-            ServletUtils.redirect("/admin/product/vwAll", request, response);
+            ServletUtils.redirect("/admin/product/index", request, response);
         }
     }
     private void addCommentPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -236,6 +272,23 @@ public class AdminProductServlet extends HttpServlet {
 
         CommentPro c = new CommentPro(proID,text,userID, day);
         CommentProModel.addCommentPro(c);
-        ServletUtils.redirect("/admin/product/vwAll", request, response);
+        ServletUtils.redirect("/admin/product/index", request, response);
+    }
+    private void SendNotify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        int userID = Integer.parseInt(request.getParameter("UserID"));
+        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        int status = 1;
+        int confirm = 0;
+
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
+        AuctionNotify a = new AuctionNotify(sellerID,userID,proID,status,confirm,day);
+        NotificationModel.addNotify(a);
+
+        ServletUtils.redirect("/admin/product/index", request, response);
+
     }
 }

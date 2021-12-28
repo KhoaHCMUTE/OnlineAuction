@@ -55,9 +55,17 @@
                         <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${product.currentPrice}</p></p>
                     </c:when>
                 </c:choose>
-                <label for="NewPrice"><b>Enter Price for Bidding ($ ${Max+product.priceDifference})</b></label>
-                <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
-                <button type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
+                <c:choose>
+                    <c:when test="${Auth == true}">
+                        <label for="NewPrice"><b>Enter Price for Bidding ($ ${Max+product.priceDifference})</b></label>
+                        <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
+                        <button type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
+                    </c:when>
+                    <c:otherwise>
+                        <div>&nbsp;</div>
+                    </c:otherwise>
+                </c:choose>
+
 
                 <p class="card-text"><b>Start Day:</b> ${product.startDay}</p>
                 <p class="card-text"><b>End Day:</b> ${product.endDay}</p>

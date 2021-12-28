@@ -34,6 +34,14 @@ public class BiddingModel {
                     .executeAndFetch(Bidding.class);
         }
     }
+    public static List<Bidding> findtop3byProID (int proID) {
+        final String query = "select * from auctionhistory where ProID = :ProID order by Price desc limit 3";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("ProID",proID)
+                    .executeAndFetch(Bidding.class);
+        }
+    }
     public static List<Bidding> findByHighestBidCountByCat (int id ) {
         final String query = "select a.* FROM auctionhistory as a,products as b where a.ProID = b.ProID and b.CatID = :CatID group by a.ProID order by count(a.ProID) desc limit 5\n";
         try (Connection con = DbUtils.getConnection()) {

@@ -64,8 +64,8 @@
                     <button type="submit" class="btn btn-outline-danger" formaction="${pageContext.request.contextPath}/admin/product/Delete" role="button">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Delete
-                        <fmt:parseDate  value="${product.endDay}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
-                        <fmt:formatDate value="${parsedDate}" type="date" pattern="dd.MM.yyyy" var="stdDatum" />
+<%--                        <fmt:parseDate  value="${product.endDay}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />--%>
+<%--                        <fmt:formatDate value="${parsedDate}" type="date" pattern="dd.MM.yyyy" var="stdDatum" />--%>
                     </button>
                 </div>
 
