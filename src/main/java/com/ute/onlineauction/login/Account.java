@@ -81,6 +81,18 @@ public class Account extends HttpServlet {
                 out.print(false1);
                 out.flush();
                 break;
+            case "/isavailablea":
+                String Email = request.getParameter("User1");
+                User1 User1 = UserModel.findByEmail(Email);
+                boolean false2 = (User1 == null);
+                PrintWriter out1 = response.getWriter();
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                out1.print(false2);
+                out1.flush();
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;

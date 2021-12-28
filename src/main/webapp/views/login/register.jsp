@@ -41,7 +41,6 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
-
         #logreg-forms .social-login{
             width:390px;
             margin:0 auto;
@@ -53,43 +52,30 @@
             width:190px;
             font-size: 0.9rem;
         }
-
         #logreg-forms a{
             display: block;
             padding-top:10px;
             color:lightseagreen;
         }
-
         #logreg-form .lines{
             width:200px;
             border:1px solid red;
         }
-
-
         #logreg-forms button[type="submit"]{ margin-top:10px; }
-
         #logreg-forms .facebook-btn{  background-color:#3C589C; }
-
         #logreg-forms .google-btn{ background-color: #DF4B3B; }
-
         #logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
-
         #logreg-forms .form-signup .social-btn{ width:210px; }
-
         #logreg-forms .form-signup input { margin-bottom: 2px;}
-
         .form-signup .social-login{
             width:210px !important;
             margin: 0 auto;
         }
-
         /* Mobile */
-
         @media screen and (max-width:500px){
             #logreg-forms{
                 width:300px;
             }
-
             #logreg-forms  .social-login{
                 width:200px;
                 margin:0 auto;
@@ -101,7 +87,6 @@
                 color:white;
                 width:200px;
                 height: 56px;
-
             }
             #logreg-forms .social-btn:nth-child(1){
                 margin-bottom: 5px;
@@ -112,11 +97,9 @@
             #logreg-forms  .facebook-btn:after{
                 content:'Facebook';
             }
-
             #logreg-forms  .google-btn:after{
                 content:'Google+';
             }
-
         }
     </style>
     <title>Account</title>
@@ -128,7 +111,6 @@
 
         <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName"  autofocus="">
         <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="rawpwd" >
-        <input type="password" id="txtConfirm" class="form-control" placeholder="Repeat Password" >
         <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" >
         <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" >
         <input type="text" id="txtDOB" class="form-control" placeholder="Date Of Birth" name="Dob" >
@@ -145,19 +127,44 @@
 <script>
     $('#logreg-forms').on('submit', function (e) {
         e.preventDefault();
-
         const UserName = $('#txtUsername').val();
         if (UserName.length === 0) {
             alert('Invalid username.');
             return;
         }
-
+        const PassWord = $('#txtPassword').val();
+        if (PassWord.length === 0) {
+            alert('Invalid password.');
+            return;
+        }
+        const Name = $('#txtName').val();
+        if (Name.length === 0) {
+            alert('Invalid name.');
+            return;
+        }
+        const Email = $('#txtEmail').val();
+        if (Email.length === 0) {
+            alert('Invalid email.');
+            return;
+        }
+        const Dob = $('#txtDOB').val();
+        if (Dob.length === 0) {
+            alert('Invalid Date Of Birth.');
+            return;
+        }
         $.getJSON('${pageContext.request.contextPath}/account/isavailable?User=' + UserName,function (data){
-          if(data === true){
-              $('#logreg-forms').off('submit').submit();
-          } else {
-              alert('Username is not available');
-          }
+            if(data === true){
+                $('#logreg-forms').off('submit').submit();
+            } else {
+                alert('Username is registered');
+            }
+        });
+        $.getJSON('${pageContext.request.contextPath}/account/isavailablea?User1=' + Email,function (data1){
+            if(data1 === true){
+                $('#logreg-forms').off('submit').submit();
+            } else {
+                alert('This email is registered');
+            }
         });
     });
     $('#txtDOB').datetimepicker({

@@ -8,17 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <style>
         body {
             background-color: #f9f9fa;
             background-image: url(https://axisinteriors.net/wp-content/uploads/2018/08/company-profile-background.jpg);
+        }
+        .fa-thumbs-up{
+            color: green;
+        }
+        .fa-thumbs-down{
+            color: navy;
+        }
+        .row4{
+            padding-left: 5px;
+            padding-top: 30px;
         }
         .row1{
             padding-left: 230px;
             padding-top: 20px;
         }
         .page-content {
-            padding-top: 100px;
+            padding-top: 50px;
             padding-left: 110px;
         }
         .user-card-full {
@@ -182,6 +193,14 @@
                         <h5 class="f-w-600">User</h5>
                         <p>${AuthUser.name}</p>
                         <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                        <div class="row4">
+                            <a href="#">
+                                <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+                            </a> &emsp; &emsp;
+                            <a href="#">
+                                <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-9">
