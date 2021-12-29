@@ -27,11 +27,11 @@
 
                          <td>${c.proID}</td>
                          <td>
-                             <c:if test="${AuthUser.permission == 1}">
-                                 <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/category/edit?id=${c.proID}" role="button">
+
+                                 <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/admin/product/PayOrNot?ProID=${c.proID}&UserID=${AuthUser.id}&NotifyID=${c.ID}" role="button">
                                      <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;See Detail
                                  </a>
-                             </c:if>
+
                          </td>
 
                      </tr>

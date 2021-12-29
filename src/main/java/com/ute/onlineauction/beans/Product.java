@@ -3,13 +3,13 @@ package com.ute.onlineauction.beans;
 import java.time.LocalDateTime;
 
 public class Product {
-    private int ProID, UserID,CatID;
+    private int ProID, UserID,CatID,Status;
     private String ProName, TinyDes, FullDes;
     private float Price,PriceDifference,CurrentPrice;;
     private LocalDateTime StartDay, EndDay;
 
 
-    public Product(int proID, String proName, String tinyDes, String fullDes, float price, float priceDifference, int catID, int userID, LocalDateTime startDay, LocalDateTime endDay,float currentPrice) {
+    public Product(int proID, String proName, String tinyDes, String fullDes, float price, float priceDifference, int catID, int userID, LocalDateTime startDay, LocalDateTime endDay,float currentPrice,int status) {
         this.ProID = proID;
         this.ProName = proName;
         this.TinyDes = tinyDes;
@@ -21,6 +21,7 @@ public class Product {
         this.StartDay = startDay;
         this.EndDay = endDay;
         this.CurrentPrice = currentPrice;
+        this.Status = status;
     }
 
 
@@ -66,4 +67,6 @@ public class Product {
     public float getCurrentPrice() {
         return CurrentPrice;
     }
+
+    public int getStatus() { return Status;}
 }

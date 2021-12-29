@@ -72,6 +72,11 @@
                 <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
                 <c:if test="${localDateNotFormatted gt product.endDay}">
                     <p>End</p>
+                            <c:if test="${AuthUser.id == product.proID}">
+                                <a id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/resultProID?ProID=${product.proID}" role="button">
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                </a>
+                            </c:if>
                 </c:if>
                 <c:if test="${product.endDay gt localDateNotFormatted }">
                     <p>Not End</p>

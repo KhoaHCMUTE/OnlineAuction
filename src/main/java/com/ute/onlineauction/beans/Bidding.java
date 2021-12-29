@@ -17,7 +17,7 @@ public class Bidding {
         this.Day = day;
     }
 
-    public Bidding  (int proID,int userID,float price, int sellerID, LocalDateTime day){
+    public Bidding  (int proID,float price,int userID, int sellerID, LocalDateTime day){
         this.ID = -1;
         this.ProID = proID;
         this.UserID = userID;

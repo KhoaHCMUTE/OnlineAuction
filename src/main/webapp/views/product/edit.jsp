@@ -52,6 +52,9 @@
                 <div class="form-group">
                     <input type="hidden" class="form-control border border-dark" id="txtSellerID" name="SellerID" readonly value="${AuthUser.id}">
                 </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control border border-dark" id="txtStatus" name="Status" readonly value="${AuthUser.id}">
+                </div>
                 <div class="card-footer">
                     <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/admin/product" role="button">
                         <i class="fa fa-backward" aria-hidden="true"></i>

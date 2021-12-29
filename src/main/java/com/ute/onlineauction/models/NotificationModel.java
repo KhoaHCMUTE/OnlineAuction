@@ -22,11 +22,35 @@ public class NotificationModel {
                     .executeUpdate();
         }
     }
+    public static void updateNot(AuctionNotify p) {
+        String sql = "update auctionnotify set SellerID = :SellerID , UserID = :UserID , ProID = :ProID , Status = :Status , Confirm = :Confirm , Day = :Day WHERE ID = :ID  ";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ID", p.getID())
+                    .addParameter("SellerID", p.getSellerID())
+                    .addParameter("UserID", p.getUserID())
+                    .addParameter("ProID", p.getProID())
+                    .addParameter("Status", p.getStatus())
+                    .addParameter("Confirm", p.getConfirm())
+                    .addParameter("Day", p.getDay())
+                    .executeUpdate();
+        }
+
+    }
+
     public static List<AuctionNotify> findByUserId (int id) {
         final String query = "select * from auctionnotify where UserID = :UserID order by Day desc";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("UserID",id)
+                    .executeAndFetch(AuctionNotify.class);
+        }
+    }
+    public static List<AuctionNotify> findByID (int id) {
+        final String query = "select * from auctionnotify where ID = :ID order by Day desc";
+        try (Connection con = DbUtils.getConnection()) {
+            return  con.createQuery(query)
+                    .addParameter("ID",id)
                     .executeAndFetch(AuctionNotify.class);
         }
     }

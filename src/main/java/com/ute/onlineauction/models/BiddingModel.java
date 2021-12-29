@@ -67,4 +67,13 @@ public class BiddingModel {
                     .executeAndFetch(Bidding.class);
         }
     }
+    public static List<Bidding> findByProIDandUserID (int userid, int pro ) {
+        final String query = "select * from auctionhistory where ProID = :ProID and UserID = :UserID and Price = (select max(Price) from auctionhistory where UserID = :UserID and ProID = :ProID) limit 1";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("ProID",pro)
+                    .addParameter("UserID",userid)
+                    .executeAndFetch(Bidding.class);
+        }
+    }
 }
