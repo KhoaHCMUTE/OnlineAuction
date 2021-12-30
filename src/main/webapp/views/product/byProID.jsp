@@ -41,6 +41,7 @@
         <div class="card-body bg-light">
             <form action="" method="post">
                 <c:set var = "Max" scope = "session" value = "${0}"/>
+                <c:set var = "Value" scope = "session" value = "${0}"/>
                 <c:forEach items="${listbidding}" var="b">
                     <c:if test="${b.proID == product.proID}">
                         <c:if test="${Max < b.price}">
@@ -57,9 +58,9 @@
                 </c:choose>
                 <c:choose>
                     <c:when test="${Auth == true}">
-                        <label for="NewPrice"><b>Enter Price for Bidding ($ ${Max+product.priceDifference})</b></label>
+                        <label for="NewPrice"><b>Enter Price for Bidding (Minimum valid price offer: $ ${Max+product.priceDifference})</b></label>
                         <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
-                        <button type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid" role="button">Bid</button>
+                        <button onclick="return myFunction()" type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid"  role="button">Bid</button>
                     </c:when>
                     <c:otherwise>
                         <div>&nbsp;</div>
@@ -70,7 +71,7 @@
                 <p class="card-text"><b>Start Day:</b> ${product.startDay}</p>
                 <p class="card-text"><b>End Day:</b> ${product.endDay}</p>
                 <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
-                <c:if test="${localDateNotFormatted gt product.endDay}">
+                <c:if test="${localDateNotFormatted gt product.endDay || product.status != 0 }">
                     <p>End</p>
                             <c:if test="${AuthUser.id == product.proID}">
                                 <a id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/resultProID?ProID=${product.proID}" role="button">
@@ -88,21 +89,12 @@
                         <c:set var = "Number" scope = "session" value ="${Number+1}"/>
                     </c:if>
                 </c:forEach>
-
-                <c:set var = "InSeller" scope = "session" value = "${0}"/>
-                <c:forEach items="${listbidding}" var="b">
-                    <c:forEach items="${user}" var="u">
-                        <c:if test="${b.proID == product.proID}">
-                            <c:if test="${u.id == b.sellerID}">
-                                <c:if test="${InSeller == 0}">
-                                    <p><b>Name Seller:</b> ${u.userName}</p>
-                                    <input type="hidden" class="form-control" id="localday" name="Day" readonly value="${localDate}">
-                                    <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
-                                    <c:set var = "InSeller" scope = "session" value = "${1}"/>
-                                </c:if>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+                <c:forEach items="${user}" var="u">
+                    <c:if test="${u.id == product.userID}">
+                        <p><b>Name Seller:</b> ${u.name}</p>
+                        <input type="hidden" class="form-control" id="localday" name="Day" readonly value="${localDate}">
+                        <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
+                    </c:if>
                 </c:forEach>
                 <c:set var = "Bienthu" scope = "session" value = "${0}"/>
                 <c:choose>
@@ -113,7 +105,7 @@
                                     <c:if test="${b.proID == product.proID}">
                                         <c:if test="${u.id == b.userID}">
                                             <c:if test="${Bienthu==0}">
-                                                <p><b>Name Bidder:</b> ${u.userName}</p>
+                                                <p><b>Name Bidder:</b> ${u.name}</p>
                                                 <c:set var = "Bienthu" scope = "session" value = "${1}"/>
                                             </c:if>
                                         </c:if>
@@ -123,7 +115,10 @@
                         </c:forEach>
                     </c:when>
                 </c:choose>
-                <p><b>Description:</b> ${product.fullDes}</p>
+                <p><b>Description:</b></p>
+                <div class="card border border-dark">
+                <p>${product.fullDes}</p>
+                </div>
                 <br/>
                 <c:set var = "BienThu" scope = "session" value = "${0}"/>
                 <button onclick="CheckDayFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button">Check</button>
@@ -133,7 +128,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">DateTime</th>
-                        <th scope="col">UserName</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Price</th>
                     </tr>
                     </thead>
@@ -150,7 +145,7 @@
                                                     <tr>
                                                         <th scope="row">${STT}</th>
                                                         <td>${b.day}</td>
-                                                        <td>${u.userName}</td>
+                                                        <td>${u.name}</td>
                                                         <td>${b.price}</td>
 
                                                         <c:set var = "STT" scope = "session" value = "${STT+1}"/>
@@ -182,7 +177,7 @@
                         <c:forEach items="${listproduct}" var="c">
                             <c:if test="${GIOIHAN <= 5}">
                                 <c:if test="${c.proID != product.proID}">
-                                    <c:set var = "5SP" scope = "session" value = "${GIOIHAN+1}"/>
+                                    <c:set var = "GIOIHAN" scope = "session" value = "${GIOIHAN+1}"/>
                                     <div class="col-sm-4 mb-3 ">
                                         <div class="card bg-light border border-dark">
                                             <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}" title="${c.proName}" class="card-img-top">
@@ -216,7 +211,7 @@
                                                                 <c:if test="${b.price == Max}">
                                                                     <c:if test="${b.proID == c.proID}" >
                                                                         <c:if test="${u.id == b.userID}">
-                                                                            <p><b>Name Bidder:</b> ${u.userName}</p>
+                                                                            <p><b>Name Bidder:</b> ${u.name}</p>
                                                                         </c:if>
                                                                     </c:if>
                                                                 </c:if>
@@ -263,9 +258,14 @@
             </form>
         </div>
         <script>
-
-
-
+            function myFunction(){
+            var result = confirm("Are you sure you want to bid?");
+            if (result == true) {
+                return true;
+            }else {
+                return false;
+            }
+            }
         </script>
 
     </jsp:body>

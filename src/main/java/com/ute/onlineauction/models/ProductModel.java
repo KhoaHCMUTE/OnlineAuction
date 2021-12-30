@@ -80,7 +80,7 @@ public class ProductModel {
     }
 
     public static void add(Product p) {
-        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay,CurrentPrice) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay,:CurrentPrice)";
+        String Sql = " INSERT INTO products (ProID , ProName, TinyDes, FullDes, Price, PriceDifference, CatID,UserID,StartDay,EndDay,CurrentPrice,Status) VALUES (:ProID,:ProName,:TinyDes,:FullDes,:Price,:PriceDifference,:CatID,:UserID,:StartDay,:EndDay,:CurrentPrice,:Status)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(Sql)
                     .addParameter("ProID", p.getProID())
@@ -94,12 +94,13 @@ public class ProductModel {
                     .addParameter("StartDay", p.getStartDay())
                     .addParameter("EndDay", p.getEndDay())
                     .addParameter("CurrentPrice", p.getCurrentPrice())
+                    .addParameter("Status", p.getStatus())
                     .executeUpdate();
         }
     }
 
     public static void update(Product p) {
-        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID ,StartDay = :StartDay,EndDay = :EndDay,CurrentPrice = :CurrentPrice WHERE ProID = :ProID  ";
+        String sql = "update products set  ProName = :ProName, TinyDes = :TinyDes, FullDes = :FullDes, Price = :Price, PriceDifference = :PriceDifference, CatID = :CatID ,StartDay = :StartDay,EndDay = :EndDay,CurrentPrice = :CurrentPrice,Status = :Status WHERE ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ProName", p.getProName())
@@ -112,6 +113,7 @@ public class ProductModel {
                     .addParameter("StartDay",p.getStartDay())
                     .addParameter("EndDay",p.getEndDay())
                     .addParameter("CurrentPrice",p.getCurrentPrice())
+                    .addParameter("Status",p.getStatus())
                     .executeUpdate();
         }
 

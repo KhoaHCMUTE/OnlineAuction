@@ -102,7 +102,7 @@
                                 <c:if test="${b.proID == c.proID}" >
                                   <c:if test="${u.id == b.userID}">
                                     <c:if test="${Bienthu==0}">
-                                      <p><b>Name Bidder:</b> ${u.userName}</p>
+                                      <p><b>Name Bidder:</b> ${u.name}</p>
                                       <c:set var = "Bienthu" scope = "session" value = "${1}"/>
                                     </c:if>
                                   </c:if>

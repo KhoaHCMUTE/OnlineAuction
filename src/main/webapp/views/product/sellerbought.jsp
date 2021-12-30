@@ -74,6 +74,8 @@
                                     <br/>
                                     <div class="row ">
                                         <c:forEach items="${product}" var="c">
+                                            <c:if test="${c.status == 0}">
+                                            <c:if test="${c.endDay gt localDateNotFormatted}">
                                             <div class="col-sm-4 mb-3 ">
                                                 <div class="card bg-light border border-dark">
                                                     <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.proID}/main.jpg" alt="${c.proName}"
@@ -129,6 +131,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </c:if>
+                                            </c:if>
                                         </c:forEach>
                                     </div>
                                 </div>
