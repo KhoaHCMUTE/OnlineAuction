@@ -1,9 +1,6 @@
 package com.ute.onlineauction.models;
 
-import com.ute.onlineauction.beans.Product;
-import com.ute.onlineauction.beans.Score;
-import com.ute.onlineauction.beans.User;
-import com.ute.onlineauction.beans.User1;
+import com.ute.onlineauction.beans.*;
 import com.ute.onlineauction.utils.DbUtils;
 import org.sql2o.Connection;
 
@@ -21,6 +18,14 @@ public class ScoreModel {
                     .addParameter("Day", p.getDay())
                     .addParameter("Text", p.getText())
                     .executeUpdate();
+        }
+    }
+
+    public static List<Score> findAll () {
+        final String query = "select * from userscore";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Score.class);
         }
     }
 

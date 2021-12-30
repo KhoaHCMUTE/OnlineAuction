@@ -1,28 +1,35 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
-<jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
-<jsp:useBean id="assess" scope="request" type="java.util.List<com.ute.onlineauction.beans.Assess>"/>
+<jsp:useBean id="user" scope="request" type="com.ute.onlineauction.beans.User"/>
+<jsp:useBean id="listuser" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
+<jsp:useBean id="score" scope="request" type="java.util.List<com.ute.onlineauction.beans.Score>"/>
 
 <t:main>
     <jsp:body>
         <div class="card-body border border-dark">
-               <c:forEach items="${assess}" var="a">
-               <c:forEach items="${user}" var="u">
-                   <c:if test="${a.assessorID == u.id}">
+            <c:set var="diem" value="${0}"> </c:set>
+            <c:set var="allscore" value="${0}"> </c:set>
+               <c:forEach items="${score}" var="s">
+               <c:forEach items="${listuser}" var="u">
+                   <c:if test="${s.userIDgive == u.id && s.userIDget == user.id}">
                        <c:choose>
-                           <c:when test="${a.type==1}">
-                               <p> ${u.userName} (good)</p>
+                           <c:when test="${s.score==1}">
+                               <p> ${u.name} (good)</p>
+                               <c:set var="diem" value="${diem + 1}"> </c:set>
+                               <c:set var="allscore" value="${allscore + 1}"> </c:set>
                            </c:when>
                            <c:otherwise>
-                               <p>${u.userName} (bad)</p>
+                               <p>${u.name} (bad)</p>
+                               <c:set var="allscore" value="${allscore + 1}"> </c:set>
                            </c:otherwise>
                        </c:choose>
-                       <p>${a.comment}</p>
+                       <p>${s.text}</p>
                    </c:if>
                </c:forEach>
                </c:forEach>
+            <c:set  var="ketqua" value="${(diem / allscore)*100 }"> </c:set>
+            <p>score: ${ketqua} %</p>
         </div>
     </jsp:body>
 </t:main>

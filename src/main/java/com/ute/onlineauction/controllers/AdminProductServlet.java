@@ -95,7 +95,6 @@ public class AdminProductServlet extends HttpServlet {
                 List<Product> listproduct = ProductModel.findAll();
                 request.setAttribute("listproduct", listproduct);
                 List<User> usersss = UserModel.findAll();
-
                 request.setAttribute("user", usersss);
                 if (c1 != null || m != null) {
                     request.setAttribute("product", c1);
@@ -475,4 +474,3 @@ public class AdminProductServlet extends HttpServlet {
 
     }
 }
-

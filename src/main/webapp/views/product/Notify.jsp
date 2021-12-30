@@ -19,7 +19,11 @@
                <tbody>
                <c:forEach items="${NotifyBySeller}" var="t">
                   <tr>
-                     <td>${t.proID}</td>
+                     <c:forEach items="${product}" var="p">
+                        <c:if test="${p.proID == t.proID}">
+                           <td>${p.proName}</td>
+                        </c:if>
+                     </c:forEach>
                      <td>
                         <c:if test="${t.status eq 2}">
                            <c:choose>
@@ -38,7 +42,11 @@
                </c:forEach>
                <c:forEach items="${NotifyByUser}" var="c">
                   <tr>
-                     <td>${c.proID}</td>
+                     <c:forEach items="${product}" var="p">
+                        <c:if test="${p.proID == c.proID}">
+                     <td>${p.proName}</td>
+                        </c:if>
+                     </c:forEach>
                      <td>
                         <c:if test="${c.status eq 1}">
                            <p>You have win this Product and the Seller asks you to pay</p>

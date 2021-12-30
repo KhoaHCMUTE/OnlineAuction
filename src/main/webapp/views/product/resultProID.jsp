@@ -75,10 +75,14 @@
                   </thead>
                   <tbody>
                   <c:forEach items="${top3bid}" var="t">
-
+                   <c:if test="${AuthUser.id != t.userID}">
                      <tr>
                         <th scope="row">${t.ID}</th>
-                        <td>${t.userID}</td>
+                        <c:forEach items="${user}" var="u">
+                           <c:if test="${t.userID == u.id}">
+                        <td>${u.name}</td>
+                           </c:if>
+                        </c:forEach>
                         <td>${t.price}</td>
                         <td>
                            <input type="hidden" class="form-control" id="UserID" name="UserID" readonly value="${t.userID}">
@@ -90,6 +94,7 @@
                            </button>
                         </td>
                      </tr>
+                   </c:if>
                   </c:forEach>
 
                   </tbody>

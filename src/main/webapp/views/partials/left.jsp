@@ -25,6 +25,11 @@
       <i class="fa fa-caret-right" aria-hidden="true"></i>
       Product is purchased
     </a>
+      <a href="${pageContext.request.contextPath}/seller/byUserid?userid=${AuthUser.id}"
+         class="list-group-item list-group-item-action">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        Product is end
+      </a>
     <a href="${pageContext.request.contextPath}/seller/byUserID?userid=${AuthUser.id}"
        class="list-group-item list-group-item-action">
       <i class="fa fa-caret-right" aria-hidden="true"></i>

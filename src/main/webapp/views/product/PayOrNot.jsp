@@ -71,7 +71,11 @@
                         <td>&nbsp;</td>
                      </tr>
                      <tr>
-                        <td>Do you like the seller ${product.userID}</td>
+                        <c:forEach items="${user}" var="u">
+                           <c:if test="${u.id == product.userID}">
+                        <td>Do you like the seller: ${u.name}</td>
+                           </c:if>
+                        </c:forEach>
                         <td class="align-items-center">
                            <div>
                               <input type="radio" id="Like" name="LikeOrNot" value="1">

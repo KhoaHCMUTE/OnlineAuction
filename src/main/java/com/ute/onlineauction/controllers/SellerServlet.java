@@ -36,6 +36,17 @@ public class SellerServlet extends HttpServlet {
 
                 ServletUtils.forward("/views/product/sellerbought.jsp",request,response);
                 break;
+            case "/byUserid":
+                List<User> users = UserModel.findAll();
+                request.setAttribute("user",users);
+                List<Bidding> bidding = BiddingModel.findAll();
+                request.setAttribute("bidding",bidding);
+                int userid1 = Integer.parseInt(request.getParameter("userid"));
+                List<Product> listuser1 = ProductModel.findByUserId(userid1);
+                request.setAttribute("product",listuser1);
+
+                ServletUtils.forward("/views/product/ProductEnd.jsp",request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp",request,response);
                 break;

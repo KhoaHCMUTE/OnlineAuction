@@ -99,7 +99,7 @@
                 </c:forEach>
                 <c:forEach items="${user}" var="u">
                     <c:if test="${u.id == product.userID}">
-                        <p><b>Name Seller:</b> ${u.name}</p>
+                        <p><b>Name Seller:</b> <a href="${pageContext.request.contextPath}/assess/index?UserId=${u.id}"> ${u.name} </a></p>
                         <input type="hidden" class="form-control" id="localday" name="Day" readonly value="${localDate}">
                         <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${u.id}">
                     </c:if>
@@ -113,7 +113,7 @@
                                     <c:if test="${b.proID == product.proID}">
                                         <c:if test="${u.id == b.userID}">
                                             <c:if test="${Bienthu==0}">
-                                                <p><b>Name Bidder:</b> ${u.name}</p>
+                                                <p><b>Name Bidder:</b> <a href="${pageContext.request.contextPath}/assess/index?UserId=${u.id}"> ${u.name} </a></p>
                                                 <c:set var = "Bienthu" scope = "session" value = "${1}"/>
                                             </c:if>
                                         </c:if>
@@ -129,7 +129,6 @@
                 </div>
                 <br/>
                 <c:set var = "BienThu" scope = "session" value = "${0}"/>
-                <button onclick="CheckDayFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button">Check</button>
                 <p class=" text-center" style="font-size:20px;"><b>Auction History</b></p>
                 <table class="table table-hover">
                     <thead class="thead-dark">
