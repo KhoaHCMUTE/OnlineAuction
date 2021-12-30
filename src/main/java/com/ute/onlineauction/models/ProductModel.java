@@ -119,6 +119,17 @@ public class ProductModel {
 
     }
 
+    public static void updateStatus(Product p) {
+        String sql = "update products set  Status = :Status WHERE ProID = :ProID  ";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ProID",p.getProID())
+                    .addParameter("Status",p.getStatus())
+                    .executeUpdate();
+        }
+
+    }
+
     public static void delete(int id) {
         String sql = "delete from products where ProID = :ProID  ";
         try (Connection con = DbUtils.getConnection()) {

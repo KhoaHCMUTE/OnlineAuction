@@ -177,6 +177,40 @@ public class AdminProductServlet extends HttpServlet {
                 }
                 break;
 
+            case "/LikeOrNot":
+                int ProID1 = 0;
+                int UserId1 = 0;
+                int NotifyID1 = 0;
+
+                try {
+                    ProID1 = Integer.parseInt(request.getParameter("ProID"));
+                    UserId1 = Integer.parseInt(request.getParameter("UserID"));
+                    NotifyID1 = Integer.parseInt(request.getParameter("NotifyID"));
+
+                } catch (NumberFormatException e) {
+                }
+                Product c2 = ProductModel.findById(ProID1);
+                List<CommentPro> m2 = CommentProModel.getCommentByProID(ProID1);
+                List<Bidding> listbiddings3 = BiddingModel.findAll();
+                request.setAttribute("listbidding", listbiddings3);
+                List<Product> listproduct3 = ProductModel.findAll();
+                request.setAttribute("listproduct", listproduct3);
+                List<User> usersss3 = UserModel.findAll();
+                request.setAttribute("user", usersss3);
+                List<Bidding> b2 = BiddingModel.findByProIDandUserID(UserId1, ProID1);
+                request.setAttribute("bid", b2);
+                List<AuctionNotify> NotifyByID1 = NotificationModel.findByID(NotifyID1);
+                request.setAttribute("NotifyByID", NotifyByID1);
+
+                if (c2 != null || m2 != null) {
+                    request.setAttribute("product", c2);
+                    request.setAttribute("comment", m2);
+                    ServletUtils.forward("/views/product/LikeOrNot.jsp", request, response);
+                } else {
+                    ServletUtils.redirect("/views/product/index.jsp", request, response);
+                }
+                break;
+
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
@@ -204,11 +238,19 @@ public class AdminProductServlet extends HttpServlet {
                 break;
             case "/sendNotify":
                 SendNotify(request, response);
-            case "/Yes":
-                Yes(request, response);
-                break;
-            case "/No":
-                No(request,response);
+            case "/LikeOrNot":
+                int PayOrNot = Integer.parseInt(request.getParameter("PayOrNot"));
+                if (PayOrNot == 1) {
+                    updateProductStatus(request, response);
+                }
+                if (PayOrNot == 2) {
+                    NoPay(request, response);
+                }
+                PayOrNot(request, response);
+                ToSeller(request, response);
+                ResToSeller(request,response);
+//                ServletUtils.redirect("/admin/product/index", request, response);
+
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -285,6 +327,14 @@ public class AdminProductServlet extends HttpServlet {
         ServletUtils.redirect("/admin/product/index", request, response);
     }
 
+    private void updateProductStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("ProID"));
+        int status = Integer.parseInt(request.getParameter("UserID"));
+
+        Product p = new Product(id, status);
+        ProductModel.updateStatus(p);
+    }
+
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("ProID"));
         ProductModel.delete(id);
@@ -342,14 +392,54 @@ public class AdminProductServlet extends HttpServlet {
         ServletUtils.redirect("/admin/product/index", request, response);
     }
 
-    private void Yes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void PayOrNot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int NotID = Integer.parseInt(request.getParameter("NotifyID"));
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        int confirm = Integer.parseInt(request.getParameter("PayOrNot"));
         int status = 1;
-        int confirm = 1;
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
 
+        AuctionNotify a = new AuctionNotify(NotID, sellerID, userID, proID, status, confirm, day);
+        NotificationModel.updateNot(a);
+    }
+
+    private void NoPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int get = Integer.parseInt(request.getParameter("UserID"));
+        int give = Integer.parseInt(request.getParameter("SellerID"));
+        int score = 0;
+        String text = "Bidder don't pay for winning product";
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
+        Score a = new Score(get, give, score, day, text);
+        ScoreModel.add(a);
+    }
+
+    private void ToSeller(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int give = Integer.parseInt(request.getParameter("UserID"));
+        int get = Integer.parseInt(request.getParameter("SellerID"));
+        int score = Integer.parseInt(request.getParameter("LikeOrNot"));
+        String text = request.getParameter("Comment");
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
+        Score a = new Score(get, give, score, day, text);
+        ScoreModel.add(a);
+    }
+
+    private void ResToSeller(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int NotID = Integer.parseInt(request.getParameter("NotifyID"));
+        int proID = Integer.parseInt(request.getParameter("ProID"));
+        int userID = Integer.parseInt(request.getParameter("UserID"));
+        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
+        int confirm = Integer.parseInt(request.getParameter("PayOrNot"));
+        int status = 2;
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime day = LocalDateTime.parse(strD, df);
@@ -357,27 +447,7 @@ public class AdminProductServlet extends HttpServlet {
         AuctionNotify a = new AuctionNotify(NotID, sellerID, userID, proID, status, confirm, day);
         NotificationModel.updateNot(a);
 
-//        ServletUtils.redirect("/admin/product/index", request, response);
 
     }
-
-    private void No(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int NotID = Integer.parseInt(request.getParameter("NotifyID"));
-        int proID = Integer.parseInt(request.getParameter("ProID"));
-        int userID = Integer.parseInt(request.getParameter("UserID"));
-        int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int status = 1;
-        int confirm = 2;
-
-        String strD = request.getParameter("Day");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime day = LocalDateTime.parse(strD, df);
-
-        AuctionNotify a = new AuctionNotify(NotID, sellerID, userID, proID, status, confirm, day);
-        NotificationModel.updateNot(a);
-
-//        ServletUtils.redirect("/admin/product/index", request, response);
-    }
-
 }
 

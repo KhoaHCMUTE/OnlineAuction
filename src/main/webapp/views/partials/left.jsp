@@ -30,7 +30,7 @@
     <a href="${pageContext.request.contextPath}/seller/byUserID?userid=${AuthUser.id}"
        class="list-group-item list-group-item-action">
       <i class="fa fa-caret-right" aria-hidden="true"></i>
-      My Product is bought ${AuthUser.id}
+      Products I have purchased
     </a>
   </div>
 </div>

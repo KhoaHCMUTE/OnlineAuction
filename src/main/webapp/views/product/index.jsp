@@ -11,12 +11,14 @@
     <jsp:body>
         <c:choose>
             <c:when test="${Auth}">
-                <div class="card-header">
-                    <a  id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/add" role="button">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Add Product
-                    </a>
-                </div>
+                <c:if test="${AuthUser.permission eq 1 || AuthUser.permission eq 2}">
+                    <div class="card-header">
+                        <a  id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/add" role="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Product
+                        </a>
+                    </div>
+                </c:if>
                 <div class="card-body">
                     <div class="row ">
                         <c:forEach items="${product}" var="c">

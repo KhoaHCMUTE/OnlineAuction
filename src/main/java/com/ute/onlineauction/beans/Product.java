@@ -23,6 +23,10 @@ public class Product {
         this.CurrentPrice = currentPrice;
         this.Status = status;
     }
+    public Product(int proID,int status) {
+        this.ProID = proID;
+        this.Status = status;
+    }
 
 
 
