@@ -72,15 +72,15 @@
                 <p class="card-text"><b>End Day:</b> ${product.endDay}</p>
                 <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
                 <c:if test="${localDateNotFormatted gt product.endDay || product.status != 0 }">
-                    <p>End</p>
-                            <c:if test="${AuthUser.id == product.proID}">
+                    <div>This Product cannot be auctioned any more</div>
+                            <c:if test="${AuthUser.id eq product.userID}">
                                 <a id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/resultProID?ProID=${product.proID}" role="button">
-                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <i class="fa fa-check" aria-hidden="true"></i> Check result
                                 </a>
                             </c:if>
                 </c:if>
                 <c:if test="${product.endDay gt localDateNotFormatted }">
-                    <p>Not End</p>
+                    <p>This Product can be auctioned any more</p>
                 </c:if>
 
                 <c:set var = "Number" scope = "session" value = "${-1}"/>
