@@ -9,6 +9,7 @@ import org.sql2o.Connection;
 
 import java.util.List;
 
+
 public class ScoreModel {
     public static void add(Score p) {
         String Sql = " insert into userscore (UserIDget, UserIDgive, Score, Day, Text) VALUES (:UserIDget, :UserIDgive, :Score, :Day, :Text)";

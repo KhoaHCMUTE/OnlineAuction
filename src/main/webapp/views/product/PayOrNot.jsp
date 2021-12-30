@@ -49,6 +49,7 @@
 <%--         <input type="hidden" class="form-control" id="ProID" name="ProID" readonly value="${product.proID}">--%>
 <%--         <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${product.userID}">--%>
 <%--         <input type="hidden" class="form-control" id="Day" name="Day" readonly value="${localDate}">--%>
+
          <form method="post" action="">
             <input type="hidden" class="form-control" id="ProID" name="ProID" readonly value="${product.proID}">
             <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${product.userID}">

@@ -25,13 +25,11 @@
                <tbody>
                <c:forEach items="${NotifyByUser}" var="c">
                   <tr>
-
                      <td>${c.proID}</td>
                      <td>
                         <c:if test="${c.status eq 1}">
                            <p>You have win this Product and the Seller asks you to pay</p>
                         </c:if>
-
                         <c:if test="${c.status eq 2}">
                            <c:choose>
                               <c:when test="${AuthUser.permission eq 1 || AuthUser.permission eq 2}">

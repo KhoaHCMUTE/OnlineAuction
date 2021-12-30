@@ -22,6 +22,7 @@ public class NotificationModel {
                     .executeUpdate();
         }
     }
+
     public static void updateNot(AuctionNotify p) {
         String sql = "update auctionnotify set SellerID = :SellerID , UserID = :UserID , ProID = :ProID , Status = :Status , Confirm = :Confirm , Day = :Day WHERE ID = :ID  ";
         try (Connection con = DbUtils.getConnection()) {
@@ -35,7 +36,6 @@ public class NotificationModel {
                     .addParameter("Day", p.getDay())
                     .executeUpdate();
         }
-
     }
 
     public static List<AuctionNotify> findByUserId (int id) {
@@ -46,6 +46,7 @@ public class NotificationModel {
                     .executeAndFetch(AuctionNotify.class);
         }
     }
+
     public static List<AuctionNotify> findByID (int id) {
         final String query = "select * from auctionnotify where ID = :ID order by Day desc";
         try (Connection con = DbUtils.getConnection()) {

@@ -53,12 +53,12 @@
 
 
             <p class=" text-center" style="font-size:20px;"><b>Auction History</b></p>
+
             <form method="post" action="">
                <input type="hidden" class="form-control" id="ProID" name="ProID" readonly value="${product.proID}">
                <input type="hidden" class="form-control" id="SellerID" name="SellerID" readonly value="${product.userID}">
                <input type="hidden" class="form-control" id="Day" name="Day" readonly value="${localDate}">
                <input type="hidden" class="form-control" id="Confirm" name="Confirm" readonly value="0">
-
                <table class="table table-hover">
                   <thead class="thead-dark">
                   <tr>

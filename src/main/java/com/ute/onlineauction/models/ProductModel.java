@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 
 import java.util.List;
 
+
 public class ProductModel {
     public static List<Product> findAll () {
         final String query = "select * from products";
@@ -14,6 +15,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static List<Product> findByCatId (int catId) {
         final String query = "select * from products where CatID = :CatID";
         try (Connection con = DbUtils.getConnection()) {
@@ -70,6 +72,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static List<Product> findTop5HighestPriceByUser (int UserID) {
         final String query = "SELECT * FROM products where UserID = :UserID order by Price desc limit 5";
         try (Connection con = DbUtils.getConnection()) {
@@ -116,7 +119,6 @@ public class ProductModel {
                     .addParameter("Status",p.getStatus())
                     .executeUpdate();
         }
-
     }
 
     public static void updateStatus(Product p) {
@@ -127,7 +129,6 @@ public class ProductModel {
                     .addParameter("Status",p.getStatus())
                     .executeUpdate();
         }
-
     }
 
     public static void delete(int id) {
@@ -137,7 +138,6 @@ public class ProductModel {
                     .addParameter("ProID",id)
                     .executeUpdate();
         }
-
     }
 
 }
