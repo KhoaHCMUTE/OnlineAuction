@@ -45,29 +45,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3">
-                  <div class="card">
-                     <div class="list-group" id="list-tab3" role="tablist">
-                        <h4 class="list-group-item list-group-item-action list-group-item-info active " id="list-Top-list3"
-                            data-bs-toggle="list"
-                            href="#list-Top" role="tab" aria-controls="list-home">Top 5 Upcoming End</h4>
-                        <a class="list-group-item list-group-item-action" id="list-A-list3" data-bs-toggle="list"
-                           href="#list-A"
-                           role="tab" aria-controls="list-profile">A</a>
-                        <a class="list-group-item list-group-item-action" id="list-B-list3" data-bs-toggle="list"
-                           href="#list-B"
-                           role="tab" aria-controls="list-messages">B</a>
-                        <a class="list-group-item list-group-item-action" id="list-C-list3" data-bs-toggle="list"
-                           href="#list-C"
-                           role="tab" aria-controls="list-settings">C</a>
-                        <a class="list-group-item list-group-item-action" id="list-D-list3" data-bs-toggle="list"
-                           href="#list-D"
-                           role="tab" aria-controls="list-settings">D</a>
-                        <a class="list-group-item list-group-item-action" id="list-E-list3" data-bs-toggle="list"
-                           href="#list-E"
-                           role="tab" aria-controls="list-settings">E</a>
-                     </div>
-                  </div>
+                               </div>
                </div>
             </div>
          </div>

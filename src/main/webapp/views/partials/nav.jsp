@@ -16,9 +16,6 @@
            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home/index">Home</a>
            </li>
-           <li class="nav-item ">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home/category/index">Category</a>
-           </li>
            <c:if test="${AuthUser.permission == 1}">
               <li class="nav-item ">
                  <a class="nav-link active" aria-current="page"
@@ -48,7 +45,7 @@
                  <c:when test="${Auth}">
                        <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown">
-                             <b>${AuthUser.userName}</b>
+                             <b>${AuthUser.name}</b>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDrop">
                              <a class="dropdown-item" href="${pageContext.request.contextPath}/account/profile">
