@@ -58,9 +58,17 @@
                 </c:choose>
                 <c:choose>
                     <c:when test="${Auth == true}">
-                        <label for="NewPrice"><b>Enter Price for Bidding (Minimum valid price offer: $ ${Max+product.priceDifference})</b></label>
-                        <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
-                        <button onclick="return myFunction()" type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid"  role="button">Bid</button>
+                        <c:choose>
+                            <c:when test="${localDateNotFormatted gt product.endDay || product.status != 0 }">
+                                <div>&nbsp;</div>
+                            </c:when>
+                            <c:otherwise>
+                                <label for="NewPrice"><b>Enter Price for Bidding (Minimum valid price offer: $ ${Max+product.priceDifference})</b></label>
+                                <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
+                                <button onclick="return myFunction()" type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid"  role="button">Bid</button>
+                            </c:otherwise>
+                        </c:choose>
+
                     </c:when>
                     <c:otherwise>
                         <div>&nbsp;</div>

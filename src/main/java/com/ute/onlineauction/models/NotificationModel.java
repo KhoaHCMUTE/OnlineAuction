@@ -47,6 +47,15 @@ public class NotificationModel {
         }
     }
 
+    public static List<AuctionNotify> findBySellerId (int id) {
+        final String query = "select * from auctionnotify where SellerID = :SellerID order by Day desc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("SellerID",id)
+                    .executeAndFetch(AuctionNotify.class);
+        }
+    }
+
     public static List<AuctionNotify> findByID (int id) {
         final String query = "select * from auctionnotify where ID = :ID order by Day desc";
         try (Connection con = DbUtils.getConnection()) {

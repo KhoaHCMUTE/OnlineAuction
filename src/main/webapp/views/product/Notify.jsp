@@ -7,6 +7,7 @@
 <jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 <jsp:useBean id="NotifyByUser" scope="request" type="java.util.List<com.ute.onlineauction.beans.AuctionNotify>"/>
+<jsp:useBean id="NotifyBySeller" scope="request" type="java.util.List<com.ute.onlineauction.beans.AuctionNotify>"/>
 
 
 <t:main>
@@ -14,15 +15,27 @@
       <div class="card-body ">
          <div class="row ">
             <table class="table table-striped table-info">
-               <thead>
-               <tr>
 
-                  <th scope="col">Product</th>
-                  <th scope="col">&nbsp;</th>
-                  <th scope="col">&nbsp;</th>
-               </tr>
-               </thead>
                <tbody>
+               <c:forEach items="${NotifyBySeller}" var="t">
+                  <tr>
+                     <td>${t.proID}</td>
+                     <td>
+                        <c:if test="${t.status eq 2}">
+                           <c:choose>
+                              <c:when test="${AuthUser.permission eq 1 || AuthUser.permission eq 2}">
+                                 <c:if test="${t.confirm eq 1}">
+                                    <p>Bidder agree to pay</p>
+                                 </c:if>
+                                 <c:if test="${t.confirm eq 2}">
+                                    <p>Bidder decline to pay</p>
+                                 </c:if>
+                              </c:when>
+                           </c:choose>
+                        </c:if>
+                     </td>
+                  </tr>
+               </c:forEach>
                <c:forEach items="${NotifyByUser}" var="c">
                   <tr>
                      <td>${c.proID}</td>
@@ -33,11 +46,16 @@
                         <c:if test="${c.status eq 2}">
                            <c:choose>
                               <c:when test="${AuthUser.permission eq 1 || AuthUser.permission eq 2}">
-                                 <p>You receiced the responce from bidder</p>
+                                 <c:if test="${c.confirm eq 1}">
+                                    <p>Bidder agree to pay</p>
+                                 </c:if>
+                                 <c:if test="${c.confirm eq 2}">
+                                    <p>Bidder decline to pay</p>
+                                 </c:if>
                               </c:when>
                               <c:otherwise>
                                  <c:if test="${c.confirm eq 1}">
-                                    You Argee to pay for this product
+                                    You Agree to pay for this product
                                  </c:if>
                                  <c:if test="${c.confirm eq 2}">
                                     You decline to pay for this product
@@ -47,15 +65,19 @@
                         </c:if>
                      </td>
                      <td>
-
-                        <a class="btn btn-sm btn-outline-primary"
-                           href="${pageContext.request.contextPath}/admin/product/PayOrNot?ProID=${c.proID}&UserID=${AuthUser.id}&NotifyID=${c.ID}"
-                           role="button">
-                           <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;See Detail
-                        </a>
-
+                        <c:choose>
+                           <c:when test="${c.status eq 2}">
+                              <div>&nbsp;</div>
+                           </c:when>
+                           <c:otherwise>
+                              <a class="btn btn-sm btn-outline-primary"
+                                 href="${pageContext.request.contextPath}/admin/product/PayOrNot?ProID=${c.proID}&UserID=${AuthUser.id}&NotifyID=${c.ID}"
+                                 role="button">
+                                 <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;See Detail
+                              </a>
+                           </c:otherwise>
+                        </c:choose>
                      </td>
-
                   </tr>
                </c:forEach>
                </tbody>

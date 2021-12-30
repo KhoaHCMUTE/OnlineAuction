@@ -39,6 +39,7 @@ public class AdminProductServlet extends HttpServlet {
                 ServletUtils.forward("/views/product/index.jsp", request, response);
                 break;
             case "/add":
+
                 List<User> users2 = UserModel.findAll();
                 request.setAttribute("user", users2);
                 List<Product> products = ProductModel.findAll();
@@ -51,9 +52,10 @@ public class AdminProductServlet extends HttpServlet {
                     id = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException e) {
                 }
-
+                List<Category> c = CategoryModel.findAll();
+                request.setAttribute("categories", c);
                 Product p = ProductModel.findById(id);
-                if (p != null) {
+                if (p != null || c != null) {
                     request.setAttribute("product", p);
                     ServletUtils.forward("/views/product/edit.jsp", request, response);
                 } else {
@@ -86,7 +88,7 @@ public class AdminProductServlet extends HttpServlet {
                     ProId = Integer.parseInt(request.getParameter("ProId"));
                 } catch (NumberFormatException e) {
                 }
-                Product c = ProductModel.findById(ProId);
+                Product c1 = ProductModel.findById(ProId);
                 List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
                 List<Bidding> listbiddings = BiddingModel.findAll();
                 request.setAttribute("listbidding", listbiddings);
@@ -95,8 +97,8 @@ public class AdminProductServlet extends HttpServlet {
                 List<User> usersss = UserModel.findAll();
 
                 request.setAttribute("user", usersss);
-                if (c != null || m != null) {
-                    request.setAttribute("product", c);
+                if (c1 != null || m != null) {
+                    request.setAttribute("product", c1);
                     request.setAttribute("comment", m);
                     ServletUtils.forward("/views/product/byProID.jsp", request, response);
                 } else {
@@ -109,6 +111,11 @@ public class AdminProductServlet extends HttpServlet {
                     resultId = Integer.parseInt(request.getParameter("ProID"));
                 } catch (NumberFormatException e) {
                 }
+                LocalDateTime localDateTime = LocalDateTime.now();
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                String localDate = localDateTime.format(df);
+                request.setAttribute("localDate",localDate);
+                request.setAttribute("localDateNotFormatted",localDateTime);
                 Product pro = ProductModel.findById(resultId);
                 List<CommentPro> com = CommentProModel.getCommentByProID(resultId);
                 List<Bidding> listbiddings1 = BiddingModel.findAll();
@@ -135,6 +142,8 @@ public class AdminProductServlet extends HttpServlet {
                 }
                 List<AuctionNotify> Not = NotificationModel.findByUserId(UserID);
                 request.setAttribute("NotifyByUser", Not);
+                List<AuctionNotify> NotSeller = NotificationModel.findBySellerId(UserID);
+                request.setAttribute("NotifyBySeller", NotSeller);
                 List<Product> Prolist = ProductModel.findAll();
                 request.setAttribute("product", Prolist);
                 List<Bidding> listbidding1 = BiddingModel.findAll();
@@ -155,7 +164,7 @@ public class AdminProductServlet extends HttpServlet {
 
                 } catch (NumberFormatException e) {
                 }
-                Product c1 = ProductModel.findById(ProID);
+                Product c2 = ProductModel.findById(ProID);
                 List<CommentPro> m1 = CommentProModel.getCommentByProID(ProID);
                 List<Bidding> listbiddings2 = BiddingModel.findAll();
                 request.setAttribute("listbidding", listbiddings2);
@@ -168,8 +177,8 @@ public class AdminProductServlet extends HttpServlet {
                 List<AuctionNotify> NotifyByID = NotificationModel.findByID(NotifyID);
                 request.setAttribute("NotifyByID", NotifyByID);
 
-                if (c1 != null || m1 != null) {
-                    request.setAttribute("product", c1);
+                if (c2 != null || m1 != null) {
+                    request.setAttribute("product", c2);
                     request.setAttribute("comment", m1);
                     ServletUtils.forward("/views/product/PayOrNot.jsp", request, response);
                 } else {
@@ -189,7 +198,7 @@ public class AdminProductServlet extends HttpServlet {
 
                 } catch (NumberFormatException e) {
                 }
-                Product c2 = ProductModel.findById(ProID1);
+                Product c3 = ProductModel.findById(ProID1);
                 List<CommentPro> m2 = CommentProModel.getCommentByProID(ProID1);
                 List<Bidding> listbiddings3 = BiddingModel.findAll();
                 request.setAttribute("listbidding", listbiddings3);
@@ -202,8 +211,8 @@ public class AdminProductServlet extends HttpServlet {
                 List<AuctionNotify> NotifyByID1 = NotificationModel.findByID(NotifyID1);
                 request.setAttribute("NotifyByID", NotifyByID1);
 
-                if (c2 != null || m2 != null) {
-                    request.setAttribute("product", c2);
+                if (c3 != null || m2 != null) {
+                    request.setAttribute("product", c3);
                     request.setAttribute("comment", m2);
                     ServletUtils.forward("/views/product/LikeOrNot.jsp", request, response);
                 } else {
@@ -243,6 +252,7 @@ public class AdminProductServlet extends HttpServlet {
                 int PayOrNot = Integer.parseInt(request.getParameter("PayOrNot"));
                 if (PayOrNot == 1) {
                     updateProductStatus(request, response);
+                    YesPay(request,response);
                 }
                 if (PayOrNot == 2) {
                     NoPay(request, response);
@@ -250,7 +260,7 @@ public class AdminProductServlet extends HttpServlet {
                 PayOrNot(request, response);
                 ToSeller(request, response);
                 ResToSeller(request,response);
-//                ServletUtils.redirect("/admin/product/index", request, response);
+                ServletUtils.redirect("/admin/product/index", request, response);
 
                 break;
             default:
@@ -380,8 +390,8 @@ public class AdminProductServlet extends HttpServlet {
         int proID = Integer.parseInt(request.getParameter("ProID"));
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
-        int status = 1;
-        int confirm = 0;
+        int status = Integer.parseInt(request.getParameter("Confirm"));
+        int confirm = Integer.parseInt(request.getParameter("Status"));
 
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -413,6 +423,19 @@ public class AdminProductServlet extends HttpServlet {
         int give = Integer.parseInt(request.getParameter("SellerID"));
         int score = 0;
         String text = "Bidder don't pay for winning product";
+        String strD = request.getParameter("Day");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime day = LocalDateTime.parse(strD, df);
+
+        Score a = new Score(get, give, score, day, text);
+        ScoreModel.add(a);
+    }
+
+    private void YesPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int get = Integer.parseInt(request.getParameter("UserID"));
+        int give = Integer.parseInt(request.getParameter("SellerID"));
+        int score = 1;
+        String text = "Bidder pay for winning product";
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime day = LocalDateTime.parse(strD, df);

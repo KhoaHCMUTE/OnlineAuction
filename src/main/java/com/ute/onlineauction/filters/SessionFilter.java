@@ -24,7 +24,6 @@ public class SessionFilter implements Filter {
             Session.setAttribute("Auth", false);
             Session.setAttribute("AuthUser", new User());
         }
-
         chain.doFilter(req, res);
     }
 }
