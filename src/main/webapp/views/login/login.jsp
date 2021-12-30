@@ -8,13 +8,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <style>
+        html {
+            height:100%;
+        }
         body{
-            background-image: url("https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            margin:0;
+        }
+        .bg {
+            animation:slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+            bottom:0;
+            left:-50%;
+            opacity:.5;
+            position:fixed;
+            right:-50%;
+            top:0;
+            z-index:-1;
+        }
+
+        .bg2 {
+            animation-direction:alternate-reverse;
+            animation-duration:4s;
+        }
+
+        .bg3 {
+            animation-duration:5s;
+        }
+
+
+        h1 {
+            font-family:monospace;
+        }
+
+        @keyframes slide {
+            0% {
+                transform:translateX(-25%);
+            }
+            100% {
+                transform:translateX(25%);
+            }
         }
         #logreg-forms{
             width:412px;
             margin:10vh auto;
-            background-color:#f3f3f3;
+            background-color: paleturquoise;
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         }
@@ -68,12 +105,6 @@
 
         #logreg-forms button[type="submit"]{ margin-top:10px; }
 
-        #logreg-forms .facebook-btn{  background-color:#3C589C; }
-
-        #logreg-forms .google-btn{ background-color: #DF4B3B; }
-
-        #logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
-
         #logreg-forms .form-signup .social-btn{ width:210px; }
 
         #logreg-forms .form-signup input { margin-bottom: 2px;}
@@ -83,7 +114,6 @@
             margin: 0 auto;
         }
 
-        /* Mobile */
 
         @media screen and (max-width:500px){
             #logreg-forms{
@@ -109,40 +139,36 @@
             #logreg-forms .social-btn span{
                 display: none;
             }
-            #logreg-forms  .facebook-btn:after{
-                content:'Facebook';
-            }
-
-            #logreg-forms  .google-btn:after{
-                content:'Google+';
-            }
 
         }
     </style>
     <title>Login</title>
 </head>
 <body>
-<div id="logreg-forms">
-    <c:if test="${HasError}">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Login Failed!</strong> ${ErrorMessage}
-        </div>
-    </c:if>
-    <form action="" method="post" class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-        <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
-        <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="PassWord" required="">
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+    <div id="logreg-forms">
+        <c:if test="${HasError}">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Login Failed!</strong> ${ErrorMessage}
+            </div>
+        </c:if>
+        <form action="" method="post" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center; font-weight: bold"> Sign in</h1>
+            <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
+            <input type="password" id="txtPassword" class="form-control" placeholder="Password" name="PassWord" required="">
 
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button><br>
-        <hr>
-        <a class="btn btn-success btn-block" style="color: white" type="submit" href="${pageContext.request.contextPath}/account/register" role="button">
-            <i class="fas fa-user-plus" style="color: white"></i>
-            Sign up New Account
-        </a>
-        <a href="${pageContext.request.contextPath}/home/index" id="cancel_signup"><i class="fas fa-angle-left"></i> Home</a>
-    </form>
-    <br>
-</div>
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button><br>
+            <hr>
+            <a class="btn btn-success btn-block" style="color: white" type="submit" href="${pageContext.request.contextPath}/account/register" role="button">
+                <i class="fas fa-user-plus" style="color: white"></i>
+                Sign up New Account
+            </a>
+            <a style="color: black;" href="${pageContext.request.contextPath}/home/index" id="cancel_signup"><i class="fas fa-angle-left"></i> Home</a>
+        </form>
+        <br>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
