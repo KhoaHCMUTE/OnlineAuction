@@ -131,7 +131,6 @@
     </c:if>
     <form action="" method="post" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">New Password</h1>
-<%--        <input type="text" id="txtUsername" class="form-control"  name="UserName" readonly value="${AuthUser.userName}">--%>
         <input type="text" id="txtUsername" class="form-control" placeholder="User Name" name="UserName" required="" autofocus="">
         <input type="password" id="txtPassword" class="form-control" placeholder="Old Password" name="PassWord" required="">
         <input type="password" id="txtNewPassword" class="form-control" placeholder="New Password" name="rawpwd" autofocus>

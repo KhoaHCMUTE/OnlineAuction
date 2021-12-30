@@ -12,13 +12,60 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <style>
-    body{
-      background-image: url(https://www.iei.edu.vn/wp-content/uploads/2020/03/user-profile-bg.jpg);
+    @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200');
+
+    body  {
+      background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
+      background-size:cover;
+      -webkit-animation: slidein 100s;
+      animation: slidein 100s;
+
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+
+      -webkit-animation-direction: alternate;
+      animation-direction: alternate;
+    }
+
+    @-webkit-keyframes slidein {
+      from {background-position: top; background-size:3000px; }
+      to {background-position: -100px 0px;background-size:2750px;}
+    }
+
+    @keyframes slidein {
+      from {background-position: top;background-size:3000px; }
+      to {background-position: -100px 0px;background-size:2750px;}
+
+    }
+
+
+
+    .center
+    {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(75, 75, 250, 0.3);
+      border-radius: 3px;
     }
     #logreg-forms{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      background: rgba(175, 175, 250, 0.3);
+      border-radius: 3px;
       width:412px;
       margin:10vh auto;
-      background-color:#f3f3f3;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
@@ -127,21 +174,23 @@
 </head>
 <body>
 <c:if test="${AuthUser.permission == 1}">
-<div id="logreg-forms">
-  <form action="" method="post" class="form-signin">
-    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Upgrade Account</h1>
-    <input type="text" id="txtUsername" class="form-control"  name="UserName" readonly value="${user.userName}">
-    <input type="text" id="txtPassword" class="form-control"  name="Permission" value="${user.permission}" autofocus>
-    <br>
-    <button class="btn btn-outline-success btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/update" role="button"><i class="fas fa-sign-in-alt"></i>Change</button><br>
-    <hr>
-    <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Delete Account</h2>
-    <button class="btn btn-outline-danger btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/delete" role="button"><i class="fas fa-sign-in-alt"></i>Delete</button><br>
-    <hr>
-    <a href="${pageContext.request.contextPath}/account/admin" id="cancel_signup"><i class="fas fa-angle-left"></i>Back</a>
-  </form>
-  <br>
-</div>
+  <div class="center">
+      <div id="logreg-forms">
+        <form action="" method="post" class="form-signin">
+          <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">Upgrade Account</h1><br>
+          <input type="text" id="txtUsername" class="form-control"  name="UserName" readonly value="${user.userName}">
+          <input type="text" id="txtPassword" class="form-control"  name="Permission" value="${user.permission}" autofocus>
+          <br>
+          <button class="btn btn-outline-success btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/update" role="button"><i class="fas fa-sign-in-alt"></i>Change</button><br>
+          <hr>
+          <h2 class="h3 mb-3 font-weight-normal" style="text-align: center">Delete Account</h2>
+          <button class="btn btn-outline-danger btn-block" type="submit" formaction="${pageContext.request.contextPath}/account/delete" role="button"><i class="fas fa-sign-in-alt"></i>Delete</button><br>
+
+          <a style="color: white" href="${pageContext.request.contextPath}/account/admin" id="cancel_signup"><i class="fas fa-angle-left"></i>Back</a>
+        </form>
+        <br>
+      </div>
+  </div>
 </c:if>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
