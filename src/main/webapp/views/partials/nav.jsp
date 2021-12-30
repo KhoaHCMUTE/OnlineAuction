@@ -26,7 +26,7 @@
               </li>
            </c:if>
         </ul>
-
+        <form id="flogout" method="post" action="${pageContext.request.contextPath}/account/logout"></form>
         <form method="post" class="form-inline mt-2 mr-4 mb-4 ml-auto">
         <c:choose>
             <c:when test="${Auth}">
@@ -46,7 +46,6 @@
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
               <c:choose>
                  <c:when test="${Auth}">
-                    <form id="flogout" method="post" action="${pageContext.request.contextPath}/account/logout">
                        <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown">
                              <b>${AuthUser.userName}</b>
@@ -57,13 +56,14 @@
                                 Profile
                              </a>
                              <div class="dropdown-divider"></div>
-                             <button class="dropdown-item" href="javascript: $('#flogout').submit()">
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                Sign Out
-                             </button>
+
+                              <a class="dropdown-item" href="javascript: $('#flogout').submit()">
+                                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                  Logout
+                              </a>
+
                           </div>
                        </li>
-                    </form>
                  </c:when>
                  <c:otherwise>
                     <li class="nav-item">
