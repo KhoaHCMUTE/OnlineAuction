@@ -191,10 +191,10 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Password</p>
-                                        <input type="password" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.passWord}">
+                                        <input type="password" style="outline: none; border: white;" class="text-muted f-w-400" readonly value="${AuthUser.passWord}">
                                     </div>
                                     <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
-                                        <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>
+                                        <a class="btn btn-outline-warning small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -203,7 +203,7 @@
                                         <h6 class="text-muted f-w-400">${AuthUser.dob}</h6>
                                     </div>
                                     <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
-                                        <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
+                                        <a class="btn btn-outline-warning small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
                                     </div>
                                 </div>
                                 <div class="row1">
@@ -218,14 +218,6 @@
                             <h5 class="f-w-600">User</h5>
                             <p>${AuthUser.name}</p>
                             <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                            <div class="row4">
-                                <a href="#">
-                                    <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
-                                </a> &emsp; &emsp;
-                                <a href="#">
-                                    <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -249,7 +241,7 @@
                                     <input type="password" style="outline: none; border: white" class="text-muted f-w-400" readonly value="${AuthUser.passWord}">
                                 </div>
                                 <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
-                                    <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>
+                                    <a class="btn btn-outline-warning small" type="submit" href="${pageContext.request.contextPath}/account/changepw"> Change Password</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -258,7 +250,7 @@
                                     <h6 class="text-muted f-w-400">${AuthUser.dob}</h6>
                                 </div>
                                 <div style="padding-top: 25px; padding-right: 10px"  class="col-sm-6">
-                                    <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
+                                    <a class="btn btn-outline-warning small" type="submit" href="${pageContext.request.contextPath}/account/changeun"> Change Username</a>
                                 </div>
                             </div>
                             <c:if test="${AuthUser.permission == 0}">
@@ -270,7 +262,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p style="padding-left: 20px" class="m-b-10 f-w-600 ">Seller</p>
-                                        <a class="btn btn-light small" type="submit" href="${pageContext.request.contextPath}/account/notify">Upgrage</a>
+                                        <a class="btn btn-outline-secondary small" type="submit" href="${pageContext.request.contextPath}/account/notify">Upgrage</a>
                                     </div>
                                 </div>
                                 <div class="row1">

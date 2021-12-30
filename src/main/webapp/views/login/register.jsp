@@ -113,9 +113,7 @@
     <title>Account</title>
 </head>
 <body>
-<div class="d-flex flex-column justify-content-center w-100 ">
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <div id="logreg-forms">
+<div id="logreg-forms">
             <form method="post" class="form-signin" >
                 <h1 class="h2 mb-3 font-weight-normal" style="text-align: center">New Account</h1><br>
 
@@ -124,20 +122,13 @@
                 <input type="text" id="txtName" class="form-control" placeholder="Name" name="Name" >
                 <input type="email" id="txtEmail" class="form-control" placeholder="Email" name="Email" >
                 <input type="text" id="txtDOB" class="form-control" placeholder="Date Of Birth" name="Dob" >
-
-
+                <br>
                 <button style="color: #f3f3f3" class="btn btn-outline-success btn-block" type="submit" ><i class="fas fa-user-plus"></i> Sign Up</button>
                 <hr>
                 <a style="color: white" href="${pageContext.request.contextPath}/account/login" id="cancel_signup"><i class="fas fa-angle-left"></i> Login</a>
             </form>
             <br>
         </div>
-    </div>
-</div>
-</div>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -164,11 +155,6 @@
             alert('Invalid email.');
             return;
         }
-        const captcha = $('#entered-captcha').val();
-        if (captcha.length === 0) {
-            alert('Invalid captcha.');
-            return;
-        }
         const Dob = $('#txtDOB').val();
         if (Dob.length === 0) {
             alert('Invalid Date Of Birth.');
@@ -189,27 +175,12 @@
                 alert('This email is registered');
             }
         });
-        let alphabets = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
-        console.log(alphabets.length);
-        let status = document.getElementById('status');
-            let userValue = document.getElementById("entered-captcha").value;
-            console.log(captcha);
-            console.log(userValue);
-            if(userValue === captcha){
-                alert('Correct!!');
-            }else{
-                alert('Try Again!!');
-                document.getElementById("entered-captcha").value = '';
-            }
     });
     $('#txtDOB').datetimepicker({
         format: 'd/m/Y',
         timepicker: false,
         mask: true
     });
-</script>
-<script>
-
 </script>
 </body>
 </html>

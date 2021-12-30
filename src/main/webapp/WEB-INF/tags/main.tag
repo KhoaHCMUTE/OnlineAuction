@@ -6,7 +6,7 @@
 <head>
     <style>
         body {
-            background-image: url("${pageContext.request.contextPath}/public/imgs/sp/Background/background.jpg");
+            background-image: url("${pageContext.request.contextPath}/public/imgs/sp/Background/1.jpg");
         }
     </style>
     <meta charset="UTF-8">
