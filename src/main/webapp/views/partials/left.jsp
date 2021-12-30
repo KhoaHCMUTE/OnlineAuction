@@ -22,15 +22,27 @@
           ${c.catName}
       </a>
     </c:forEach>
+    <c:if test="${AuthUser.permission == 2 || AuthUser.permission == 1}">
     <a href="${pageContext.request.contextPath}/product/byUserID?userid=${AuthUser.id}"
        class="list-group-item list-group-item-action">
       <i class="fa fa-caret-right" aria-hidden="true"></i>
-      My Product ${AuthUser.id}
+      Product is purchased
     </a>
     <a href="${pageContext.request.contextPath}/seller/byUserID?userid=${AuthUser.id}"
        class="list-group-item list-group-item-action">
       <i class="fa fa-caret-right" aria-hidden="true"></i>
-      Products I have purchased
+      Products still on auction
+    </a>
+    </c:if>
+    <a href="${pageContext.request.contextPath}/bider/byUserID?userid=${AuthUser.id}"
+       class="list-group-item list-group-item-action">
+      <i class="fa fa-caret-right" aria-hidden="true"></i>
+      BidingList
+    </a>
+    <a href="${pageContext.request.contextPath}/bider/byuserID?userid=${AuthUser.id}"
+       class="list-group-item list-group-item-action">
+      <i class="fa fa-caret-right" aria-hidden="true"></i>
+      WonList
     </a>
   </div>
 </div>

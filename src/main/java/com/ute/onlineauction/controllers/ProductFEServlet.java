@@ -45,11 +45,6 @@ public class ProductFEServlet extends HttpServlet {
                 int userid = Integer.parseInt(request.getParameter("userid"));
                 List<Product> listuser = ProductModel.findByUserId(userid);
                 request.setAttribute("product",listuser);
-                List<Product> PriceByUser = ProductModel.findTop5HighestPriceByUser(userid);
-                request.setAttribute("HighestPriceByUser",PriceByUser);
-                List<Bidding> BidCountByUser = BiddingModel.findByHighestBidCountByUser(userid);
-                request.setAttribute("HighestBidCountByUser",BidCountByUser);
-
                 ServletUtils.forward("/views/product/byUserID.jsp",request,response);
                 break;
             case "/edit":
