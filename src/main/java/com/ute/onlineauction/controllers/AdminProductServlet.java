@@ -439,6 +439,7 @@ public class AdminProductServlet extends HttpServlet {
         int userID = Integer.parseInt(request.getParameter("UserID"));
         int sellerID = Integer.parseInt(request.getParameter("SellerID"));
         int confirm = Integer.parseInt(request.getParameter("PayOrNot"));
+
         int status = 2;
         String strD = request.getParameter("Day");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
