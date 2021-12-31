@@ -5,8 +5,9 @@
 <jsp:useBean id="listproduct" scope="request" type="java.util.List<com.ute.onlineauction.beans.Product>"/>
 <jsp:useBean id="listbidding" scope="request" type="java.util.List<com.ute.onlineauction.beans.Bidding>"/>
 <jsp:useBean id="comment" scope="request" type="java.util.List<com.ute.onlineauction.beans.CommentPro>"/>
-<jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
+<jsp:useBean id="user" scope="request" type="java.util.List<com.ute.onlineauction.beans.User>"/>
+<jsp:useBean id="score" scope="request" type="java.util.List<com.ute.onlineauction.beans.Score>"/>
 
 
 <t:main>
@@ -51,6 +52,34 @@
                 </c:forEach>
                 <h4 class="text-dark" style="font-size:25px; ">${product.proName}</h4>
                 <h6 class="card-subtitle mb-2 text-dark" style="font-size:40px;">$ ${Max}</h6>
+
+                <c:set var="diem" value="${0}"> </c:set>
+                <c:set var="allscore" value="${0}"> </c:set>
+                <c:forEach items="${score}" var="s">
+                <c:forEach items="${user}" var="u">
+                        <c:if test="${s.userIDgive == u.id && s.userIDget == AuthUser.id}">
+                            <c:choose>
+                                <c:when test="${s.score==1}">
+                                    <c:set var="diem" value="${diem + 1}"> </c:set>
+                                    <c:set var="allscore" value="${allscore + 1}"> </c:set>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="allscore" value="${allscore + 1}"> </c:set>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
+                </c:forEach>
+                </c:forEach>
+                <c:choose>
+                    <c:when test="${allscore != 0 }">
+                         <c:set  var="ketqua" value="${(diem / allscore)*100 }"> </c:set>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="ketqua" value="${-1}"> </c:set>
+                    </c:otherwise>
+                </c:choose>
+                <p>score: ${ketqua} %</p>
+
                 <c:choose>
                     <c:when test="${product.currentPrice != 0}">
                         <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${product.currentPrice}</p></p>
@@ -63,9 +92,16 @@
                                 <div>&nbsp;</div>
                             </c:when>
                             <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${ketqua >= 80 || ketqua == -1}">
                                 <label for="NewPrice"><b>Enter Price for Bidding (Minimum valid price offer: $ ${Max+product.priceDifference})</b></label>
                                 <input type="number" class="form-inline w-25" id="NewPrice" name="NewPrice">
                                 <button onclick="return myFunction()" type="submit" class="btn btn-outline-success btn-sm w-25"  formaction="${pageContext.request.contextPath}/admin/product/addBid"  role="button">Bid</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p>You are not good enough</p>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:otherwise>
                         </c:choose>
 

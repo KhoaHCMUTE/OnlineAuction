@@ -88,6 +88,8 @@ public class AdminProductServlet extends HttpServlet {
                     ProId = Integer.parseInt(request.getParameter("ProId"));
                 } catch (NumberFormatException e) {
                 }
+                List<Score> scores = ScoreModel.findAll();
+                request.setAttribute("score",scores);
                 Product c1 = ProductModel.findById(ProId);
                 List<CommentPro> m = CommentProModel.getCommentByProID(ProId);
                 List<Bidding> listbiddings = BiddingModel.findAll();
