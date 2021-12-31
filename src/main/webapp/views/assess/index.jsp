@@ -15,12 +15,12 @@
                    <c:if test="${s.userIDgive == u.id && s.userIDget == user.id}">
                        <c:choose>
                            <c:when test="${s.score==1}">
-                               <p> ${u.name} (good)</p>
+                               <p> ${u.name} <i class="fa fa-thumbs-up" aria-hidden="true"></i></p>
                                <c:set var="diem" value="${diem + 1}"> </c:set>
                                <c:set var="allscore" value="${allscore + 1}"> </c:set>
                            </c:when>
                            <c:otherwise>
-                               <p>${u.name} (bad)</p>
+                               <p>${u.name} <i class="fa fa-thumbs-down" aria-hidden="true"></i></p>
                                <c:set var="allscore" value="${allscore + 1}"> </c:set>
                            </c:otherwise>
                        </c:choose>
@@ -29,7 +29,15 @@
                </c:forEach>
                </c:forEach>
             <c:set  var="ketqua" value="${(diem / allscore)*100 }"> </c:set>
-            <p>score: ${ketqua} %</p>
+            <c:choose>
+                <c:when test="${allscore != 0}">
+                    <p>score: ${ketqua} %</p>
+                </c:when>
+                <c:otherwise>
+                    <p>score: 100% </p>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </jsp:body>
 </t:main>

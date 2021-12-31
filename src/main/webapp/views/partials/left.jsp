@@ -4,13 +4,13 @@
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 
 <div class="card text-white bg-info border border-dark">
-  <h4 class="card-header">Category</h4>
+  <h4 class="card-header"><i class="fa fa-bars" aria-hidden="true"></i> Menu</h4>
   <div class="list-group">
     <a href="${pageContext.request.contextPath}/admin/category/index">
-      <button type="button" class="list-group-item list-group-item-action">Category</button>
+      <button type="button" class="list-group-item list-group-item-action"><i class="fa fa-list" aria-hidden="true"></i> Category</button>
     </a>
     <a href="${pageContext.request.contextPath}/admin/product/index">
-      <button type="button" class="list-group-item list-group-item-action">Product</button>
+      <button type="button" class="list-group-item list-group-item-action"><i class="fa fa-list" aria-hidden="true"></i> Product</button>
     </a>
     <c:forEach items="${categoriesWithDetails}" var="c">
       <a href="${pageContext.request.contextPath}/product/bycat?id=${c.catID}"

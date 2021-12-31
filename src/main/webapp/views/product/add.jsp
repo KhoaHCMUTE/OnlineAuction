@@ -79,7 +79,7 @@
                <input type="number" class="form-control" id="txtPrice" name="Price">
             </div>
             <div class="form-group">
-               <label for="txtCurrentPrice">CurrentPrice (optional)</label>
+               <label for="txtCurrentPrice">Buy Now Price (optional)</label>
                <input type="number" class="form-control" id="txtCurrentPrice" name="CurrentPrice">
             </div>
             <div class="form-group">
@@ -110,14 +110,12 @@
                <input type="text" class="form-control" id="txtEndDay" name="EndDay">
             </div>
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/index" role="button">
-               << List
+               <i class="fa fa-backward" aria-hidden="true"></i> List
             </a>
             <button type="submit" class="btn btn-outline-success">Submit</button>
          </form>
-        <button id="btn">h</button>
-      </div>
-      <script>
 
-      </script>
+      </div>
+
    </jsp:body>
 </t:main>

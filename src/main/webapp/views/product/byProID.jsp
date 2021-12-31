@@ -78,11 +78,10 @@
                         <c:set var="ketqua" value="${-1}"> </c:set>
                     </c:otherwise>
                 </c:choose>
-                <p>score: ${ketqua} %</p>
-
+<%--                <p>score: ${ketqua} %</p>--%>
                 <c:choose>
                     <c:when test="${product.currentPrice != 0}">
-                        <p class="card-text"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${product.currentPrice}</p></p>
+                        <p class="card-text text-primary"><b>Buy Now Price:</b><p class="card-subtitle mb-2 text-dark" style="font-size:20px;"> $ ${product.currentPrice}</p></p>
                     </c:when>
                 </c:choose>
                 <c:choose>
@@ -112,11 +111,11 @@
                 </c:choose>
 
 
-                <p class="card-text"><b>Start Day:</b> ${product.startDay}</p>
-                <p class="card-text"><b>End Day:</b> ${product.endDay}</p>
+                <p class="card-text text-success"><b><i class="fa fa-check" aria-hidden="true"></i> Start Day:</b> ${product.startDay}</p>
+                <p class="card-text text-danger"><b><i class="fa fa-times" aria-hidden="true"></i> End Day:</b> ${product.endDay}</p>
                 <input type="hidden" class="form-control" id="Price" name="Price" readonly value="${Max}">
                 <c:if test="${localDateNotFormatted gt product.endDay || product.status != 0 }">
-                    <div>This Product cannot be auctioned any more</div>
+                    <p><i class="fa fa-times" aria-hidden="true"></i> This Product cannot be auctioned any more</p>
                             <c:if test="${AuthUser.id eq product.userID}">
                                 <a id="" class="btn btn-outline-success " href="${pageContext.request.contextPath}/admin/product/resultProID?ProID=${product.proID}" role="button">
                                     <i class="fa fa-check" aria-hidden="true"></i> Check result
@@ -124,7 +123,7 @@
                             </c:if>
                 </c:if>
                 <c:if test="${product.endDay gt localDateNotFormatted }">
-                    <p>This Product can be auctioned any more</p>
+                    <p><i class="fa fa-check" aria-hidden="true"></i> This Product can be auctioned</p>
                 </c:if>
 
                 <c:set var = "Number" scope = "session" value = "${-1}"/>

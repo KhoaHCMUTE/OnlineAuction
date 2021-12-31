@@ -14,12 +14,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home/index">Home</a>
+              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home/index"><b>Online Auction</b></a>
            </li>
            <c:if test="${AuthUser.permission == 1}">
               <li class="nav-item ">
-                 <a class="nav-link active" aria-current="page"
-                    href="${pageContext.request.contextPath}/account/admin">Admin</a>
+                 <a class="nav-link active text-primary " aria-current="page"
+                    href="${pageContext.request.contextPath}/account/admin"><b>Admin</b></a>
               </li>
            </c:if>
         </ul>
@@ -39,7 +39,8 @@
 
 
               <input id="txtSr" class="form-control mr-sm-2" type="text" placeholder="Search" name="txtSr">
-              <button onclick="SearchFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button">Search</button>
+              <button onclick="SearchFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button"><i
+                      class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
               <c:choose>
                  <c:when test="${Auth}">
