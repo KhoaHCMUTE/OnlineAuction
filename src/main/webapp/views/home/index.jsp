@@ -6,7 +6,6 @@
 
 <t:main>
    <jsp:body>
-
          <div class="card-body">
             <div class="d-flex container-fluid">
                <div class="col-sm-3">

@@ -192,6 +192,7 @@
    </style>
    <title>Profile</title>
 </head>
+
 <body>
 <form class="page-content page-container" method="post" id="page-content">
    <div class="row container d-flex justify-content-center">

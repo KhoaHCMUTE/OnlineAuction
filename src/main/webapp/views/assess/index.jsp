@@ -37,7 +37,6 @@
                     <p>score: 100% </p>
                 </c:otherwise>
             </c:choose>
-
         </div>
     </jsp:body>
 </t:main>

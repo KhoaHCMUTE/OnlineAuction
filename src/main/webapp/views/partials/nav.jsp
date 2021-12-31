@@ -37,7 +37,6 @@
             </c:otherwise>
         </c:choose>
 
-
               <input id="txtSr" class="form-control mr-sm-2" type="text" placeholder="Search" name="txtSr">
               <button onclick="SearchFunction()" class="btn btn-outl ine-success my-2 my-sm-0" type="button"><i
                       class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>

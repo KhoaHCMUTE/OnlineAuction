@@ -15,7 +15,6 @@
         <div class="card-body ">
         <div class="card border border-dark">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.proID}/main.jpg" alt="${product.proName}" title="${product.proName}" class="d-block w-100" >

@@ -3,6 +3,7 @@
 <jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.ute.onlineauction.beans.Category>"/>
 <jsp:useBean id="AuthUser" scope="session" type="com.ute.onlineauction.beans.User"/>
 
+
 <div class="card text-white bg-info border border-dark">
   <h4 class="card-header"><i class="fa fa-bars" aria-hidden="true"></i> Menu</h4>
   <div class="list-group">
